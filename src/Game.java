@@ -20,7 +20,7 @@ public class Game {
         *   -   Prompting the user for the number of AI players they would like to play against
         *   -   Randomizing player order for the total number of players
         *   -   Initialize card deck
-        *   -   Deal cards
+        *   -   Deal cards to each player out of the total number of players
         *   etc.
         *   */
 
@@ -31,7 +31,8 @@ public class Game {
     }
 
     private void initializeDrawPile(){
-        /* initializes the Draw Pile -- should be called from the initialize() function  */
+        /* initializes the Draw Pile -- should be called from the initialize() function AFTER
+        * the cards of the deck has been dealt to each player */
         // TODO: implement initializeDrawPile() in Game AFTER Deck & Card Classes are defined
     }
 
@@ -75,6 +76,15 @@ public class Game {
         }
         else { return false; }
     }
+
+    public UNOCard getLastDiscardPileCard(){
+        /* returns the UNOCard object of the last card placed in the discard pile
+        which can be seen by everyone playing BUT does NOT remove the card from the pile
+         */
+        return discardPile.get(discardPile.size()-1);
+    }
+
+
 
 
 }
