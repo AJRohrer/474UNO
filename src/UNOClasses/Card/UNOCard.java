@@ -4,11 +4,6 @@ public class UNOCard {
 
     CardType _type;
     UNOColor _color;
-    boolean _isWild;
-    boolean _isWildDraw4;
-    boolean _isSkip;
-    boolean _isDraw2;
-    boolean _isReverse;
 
 
     /*UNOCard Values
@@ -31,23 +26,23 @@ public class UNOCard {
         return _color;
     }
 
-    public boolean is_isWild() {
+    public boolean isWild() {
         return this._type == CardType.WILD;
     }
 
-    public boolean is_isWildDraw4() {
+    public boolean isWildDraw4() {
         return this._type == CardType.WILDDRAW4;
     }
 
-    public boolean is_isSkip() {
+    public boolean isSkip() {
         return this._type == CardType.SKIP;
     }
 
-    public boolean is_isDraw2() {
+    public boolean isDraw2() {
         return this._type == CardType.DRAWTWO;
     }
 
-    public boolean is_isReverse() {
+    public boolean isReverse() {
         return this._type == CardType.REVERSE;
     }
 
