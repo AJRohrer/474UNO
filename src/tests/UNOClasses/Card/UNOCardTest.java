@@ -45,5 +45,5 @@ class UNOCardTest {
     void isReverse() {
         assertEquals(c.isReverse(), true);
     }
-    
+
 }
