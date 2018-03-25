@@ -1,6 +1,6 @@
-import UNOClasses.Card.CardType;
-import UNOClasses.Card.UNOCard;
-import UNOClasses.Card.UNOColor;
+import code.UNOClasses.Card.CardType;
+import code.UNOClasses.Card.UNOCard;
+import code.UNOClasses.Card.UNOColor;
 
 public class main {
 

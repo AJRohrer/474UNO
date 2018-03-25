@@ -1,17 +1,10 @@
-package UNOClasses.Card;
+package code.UNOClasses.Card;
 
 public class UNOCard {
 
     CardType _type;
     UNOColor _color;
 
-
-    /*UNOCard Values
-    Possible colors: Red, Green, Yellow, Blue
-    1Y = Yellow number 1 card.
-
-
-    */
     public UNOCard(CardType value, UNOColor color){
         this._color = color;
         this._type = value;

@@ -1,4 +1,4 @@
-package UNOClasses.Card;
+package code.UNOClasses.Card;
 
 public enum UNOColor {
     YELLOW,
