@@ -1,5 +1,5 @@
-
-/* The following class, Game, is responsible for uniting all classes for the unified,
+package code.UNOClasses;
+/* The following class, code.UNOClasses.Game, is responsible for uniting all classes for the unified,
  * coordinated functionality of what is expected from the game, UNO. */
 
 import code.UNOClasses.Card.UNOCard;
@@ -33,12 +33,12 @@ public class Game {
     private void initializeDrawPile(){
         /* initializes the Draw Pile -- should be called from the initialize() function AFTER
         * the cards of the deck has been dealt to each player */
-        // TODO: implement initializeDrawPile() in Game AFTER Deck & Card Classes are defined
+        // TODO: implement initializeDrawPile() in code.UNOClasses.Game AFTER Deck & Card Classes are defined
     }
 
     private void initializeDiscardPile(){
         /* initializes the Discard Pile -- should be called from the initialize() function  */
-        // TODO: implement initializeDiscardPile() in Game AFTER Deck & Card Classes are defined
+        // TODO: implement initializeDiscardPile() in code.UNOClasses.Game AFTER Deck & Card Classes are defined
     }
 
     public UNOCard drawCard(){
