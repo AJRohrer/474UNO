@@ -46,4 +46,11 @@ class UNOCardTest {
         assertEquals(c.isReverse(), true);
     }
 
+    @Test
+    void isNumberCard(){
+        assertEquals(c.isNumberCard(), false);
+        UNOCard numbercard = new UNOCard(CardType.FIVE, UNOColor.GREEN);
+        assertEquals(numbercard.isNumberCard(), true);
+    }
+
 }

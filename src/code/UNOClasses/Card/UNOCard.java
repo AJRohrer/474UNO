@@ -42,4 +42,18 @@ public class UNOCard {
     public String toString(){
         return this._color.toString() + " " + this._type.toString();
     }
+
+    public boolean isNumberCard() {
+        switch (_type){
+            case WILD:
+            case WILDDRAW4:
+            case REVERSE:
+            case SKIP:
+            case DRAWTWO:
+                return false;
+            default:
+                return true;
+
+        }
+    }
 }
