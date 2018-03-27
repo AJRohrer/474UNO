@@ -37,8 +37,13 @@ public class Game {
     }
 
     private void initializeDiscardPile(){
-        /* initializes the Discard Pile -- should be called from the initialize() function  */
-        // TODO: implement initializeDiscardPile() in code.UNOClasses.Game AFTER Deck & Card Classes are defined
+        /* initializes the Discard Pile -- should be called from the initialize() function AFTER
+          * initializeDrawPile() has been called.
+          * Obtains the top card (last in vector) from the drawPile & places
+          * it in discardPile
+          * */
+        UNOCard topCard = drawPile.get(drawPile.size()-1);
+        discardPile.add(topCard);
     }
 
     public UNOCard drawCard(){
