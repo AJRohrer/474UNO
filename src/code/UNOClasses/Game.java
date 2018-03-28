@@ -6,14 +6,11 @@ import code.UNOClasses.Card.UNOCard;
 
 import java.util.*;     // added for Vector type
 
-// TODO: Add Player class
-
 public class Game {
-    //private vector<Player> Players; /* TODO: need to decide how player order is to be decided and kept track of */
-        //TODO: uncomment when player class declared
+    private Vector<Player> Players; /* TODO: need to decide how player order is to be decided and kept track of */
     private Vector<UNOCard> drawPile;
     private Vector<UNOCard> discardPile;
-    //private Player currentPlayer; //TODO: uncomment when Player class declared
+    private Vector<Player> players;
 
     public void initialize(){
         /* the caller function from main() which will be responsible for initializing the game instance, by calling:
