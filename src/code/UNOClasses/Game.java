@@ -8,9 +8,9 @@ import java.util.*;     // added for Vector type
 
 public class Game {
     private Vector<Player> Players; /* TODO: need to decide how player order is to be decided and kept track of */
-    private Vector<UNOCard> drawPile;
     private Vector<UNOCard> discardPile;
     private Vector<Player> players;
+    Deck deck = new Deck();
 
     public void initialize(){
         /* the caller function from main() which will be responsible for initializing the game instance, by calling:
@@ -21,34 +21,26 @@ public class Game {
         *   etc.
         *   */
 
-        initializeDrawPile();
+
         initializeDiscardPile();
 
         // TODO: implement the initialize() class LAST (once all classes have been structured)
     }
 
-    private void initializeDrawPile(){
-        /* initializes the Draw Pile -- should be called from the initialize() function AFTER
-        * the cards of the deck has been dealt to each player */
-        // TODO: implement initializeDrawPile() in code.UNOClasses.Game AFTER Deck & Card Classes are defined
-    }
-
     private void initializeDiscardPile(){
-        /* initializes the Discard Pile -- should be called from the initialize() function AFTER
-          * initializeDrawPile() has been called.
-          * Obtains the top card (last in vector) from the drawPile & places
+        /* initializes the Discard Pile AFTER players have been dealt their hand
+          * Obtains the top card (last in vector) from the deck & places
           * it in discardPile
           * */
-        UNOCard topCard = drawPile.get(drawPile.size()-1);
+        UNOCard topCard = deck.deal();
         discardPile.add(topCard);
     }
 
     public UNOCard drawCard(){
-        /* returns an UNOCard from the top of the drawPile &
-        * removes that card from the drawPile*/
+        /* returns an UNOCard from the top of the deck &
+        * removes that card from the deck*/
 
-        UNOCard returnCard = drawPile.get(drawPile.size()-1);
-        drawPile.remove(drawPile.size()-1);
+        UNOCard returnCard = deck.deal();
         return returnCard;
     }
 

@@ -65,6 +65,15 @@ public class Deck {
         return deck.stream().map(b -> b.toString()).collect(Collectors.joining("\n"));
     }
 
+    public boolean isEmpty() {
+        return this.deck.isEmpty();
+    }
+
+    public void shuffleDiscardPile(Vector<UNOCard> cards) {
+        this.deck.addAll(cards);
+        shuffleDeck();
+    }
+
     public static void main(String[] args) {
         Deck deck = new Deck();
         System.out.println(deck);
