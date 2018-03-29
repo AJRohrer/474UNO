@@ -31,3 +31,4 @@ out/
 # ignore xml files
 
 *.xml
+.idea/workspace.xml

@@ -1,6 +1,6 @@
 package code.UNOClasses.Card;
 
-public class UNOCard {
+public class UNOCard implements Comparable<UNOCard>{
 
     CardType _type;
     UNOColor _color;
@@ -54,6 +54,19 @@ public class UNOCard {
             default:
                 return true;
 
+        }
+    }
+
+    @Override
+    public int compareTo(UNOCard unoCard2)
+    {
+        if(this.get_color().ordinal() > unoCard2.get_color().ordinal())
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
         }
     }
 }
