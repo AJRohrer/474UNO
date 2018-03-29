@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="928051f8-a6cb-4e63-a3bc-3764ea63af2a" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/tests/UNOClasses/PlayerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/UNOClasses/Card/UNOCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/UNOClasses/Card/UNOCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/UNOClasses/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/UNOClasses/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/UNOClasses/Card/UNOCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/UNOClasses/UNOCardTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,25 +27,36 @@
       <file leaf-file-name="UNOCard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Card/UNOCard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
+            <state relative-caret-position="493">
               <caret line="45" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+            <state relative-caret-position="174">
+              <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#268#269#0" expanded="true" />
-                <element signature="e#311#312#0" expanded="true" />
-                <element signature="e#181#182#0" expanded="true" />
-                <element signature="e#211#212#0" expanded="true" />
-                <element signature="e#416#417#0" expanded="true" />
-                <element signature="e#436#437#0" expanded="true" />
+                <element signature="e#451#452#0" expanded="true" />
+                <element signature="e#487#488#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/PlayerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="415">
+              <caret line="40" column="69" selection-start-line="40" selection-start-column="69" selection-end-line="40" selection-end-column="69" />
+              <folding>
+                <element signature="e#227#228#0" expanded="true" />
+                <element signature="e#257#258#0" expanded="true" />
+                <element signature="e#804#805#0" expanded="true" />
+                <element signature="e#834#835#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -54,16 +65,20 @@
       <file leaf-file-name="PlayerHand.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Hand/PlayerHand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="66" column="16" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
+            <state relative-caret-position="221">
+              <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
+              <folding>
+                <element signature="e#1307#1308#0" expanded="true" />
+                <element signature="e#1348#1349#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="UNOCardTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/Card/UNOCardTest.java">
+        <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/UNOCardTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="223">
               <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -74,19 +89,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CardType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Card/CardType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Deck.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Deck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
+            <state relative-caret-position="816">
               <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
             </state>
           </provider>
@@ -125,15 +131,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UNOColor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Card/UNOColor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -141,13 +138,18 @@
       <list>
         <option value="Enum" />
         <option value="Arquillian JUnit Test Class" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -162,13 +164,15 @@
         <option value="$PROJECT_DIR$/src/UNOClasses/Card/UNOCard.java" />
         <option value="$PROJECT_DIR$/src/UNOClasses/Card/UNOCardTest.java" />
         <option value="$PROJECT_DIR$/src/UNOClassesTests/UNOCardTest.java" />
-        <option value="$PROJECT_DIR$/src/tests/UNOClasses/UNOCardTest.java" />
         <option value="$PROJECT_DIR$/src/Game.java" />
         <option value="$PROJECT_DIR$/src/code/UNOClasses/Game.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/code/UNOClasses/Card/UNOCard.java" />
         <option value="$PROJECT_DIR$/src/tests/UNOClasses/Card/UNOCardTest.java" />
         <option value="$PROJECT_DIR$/src/code/UNOClasses/Player.java" />
+        <option value="$PROJECT_DIR$/src/UNOClassesTests/PlayerTest.java" />
+        <option value="$PROJECT_DIR$/src/tests/UNOClasses/UNOCardTest.java" />
+        <option value="$PROJECT_DIR$/src/tests/UNOClasses/PlayerTest.java" />
       </list>
     </option>
   </component>
@@ -188,8 +192,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -226,36 +228,43 @@
               <item name="COMP 474" type="b2602c69:ProjectViewProjectNode" />
               <item name="COMP 474" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Card" type="462c0819:PsiDirectoryNode" />
+              <item name="UNOClasses" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="create.test.in.the.same.root" value="true" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="full.screen.before.presentation.mode" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="full.screen.before.presentation.mode" value="true" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="tests.UNOClasses.Card" />
+      <recent name="tests.UNOClasses" />
       <recent name="UNOClassesTests" />
+      <recent name="tests.UNOClasses.Card" />
       <recent name="UNOClasses.Card" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="tests.UNOClasses" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -273,7 +282,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.main">
+  <component name="RunManager" selected="JUnit.PlayerTest.callUNO">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -367,18 +376,64 @@
       <setting name="launchBrowserUrl" value="" />
       <setting name="depsClasspath" value="false" />
     </configuration>
-    <configuration name="UNOCardTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlayerTest.addCardtoHand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="474UNO" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.UNOClasses.Card.*" />
+          <option name="PATTERN" value="tests.UNOClasses.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests.UNOClasses.Card" />
-      <option name="MAIN_CLASS_NAME" value="tests.UNOClasses.Card.UNOCardTest" />
+      <option name="PACKAGE_NAME" value="tests.UNOClasses" />
+      <option name="MAIN_CLASS_NAME" value="tests.UNOClasses.PlayerTest" />
+      <option name="METHOD_NAME" value="addCardtoHand" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="PlayerTest.callUNO" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="474UNO" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.UNOClasses.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tests.UNOClasses" />
+      <option name="MAIN_CLASS_NAME" value="tests.UNOClasses.PlayerTest" />
+      <option name="METHOD_NAME" value="callUNO" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="UNOCardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="474UNO" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.UNOClasses.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tests.UNOClasses" />
+      <option name="MAIN_CLASS_NAME" value="tests.UNOClasses.UNOCardTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -390,64 +445,18 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="UNOCardTest.isNumberCard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UNOCardTest.toString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="474UNO" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.UNOClasses.Card.*" />
+          <option name="PATTERN" value="tests.UNOClasses.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests.UNOClasses.Card" />
-      <option name="MAIN_CLASS_NAME" value="tests.UNOClasses.Card.UNOCardTest" />
-      <option name="METHOD_NAME" value="isNumberCard" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="UNOCardTest.isReverse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="474UNO" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.UNOClasses.Card.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="UNOClasses.Card" />
-      <option name="MAIN_CLASS_NAME" value="UNOClasses.Card.UNOCardTest" />
-      <option name="METHOD_NAME" value="isReverse" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="UNOCardTest.toString (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="474UNO" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.UNOClasses.Card.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests.UNOClasses.Card" />
-      <option name="MAIN_CLASS_NAME" value="tests.UNOClasses.Card.UNOCardTest" />
+      <option name="PACKAGE_NAME" value="tests.UNOClasses" />
+      <option name="MAIN_CLASS_NAME" value="tests.UNOClasses.UNOCardTest" />
       <option name="METHOD_NAME" value="toString" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -720,18 +729,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.main" />
-      <item itemvalue="JUnit.UNOCardTest.isReverse" />
       <item itemvalue="JUnit.UNOCardTest (1)" />
-      <item itemvalue="JUnit.UNOCardTest.isNumberCard" />
       <item itemvalue="JUnit.UNOCardTest.toString (1)" />
+      <item itemvalue="JUnit.PlayerTest.addCardtoHand" />
+      <item itemvalue="JUnit.PlayerTest.callUNO" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PlayerTest.callUNO" />
+        <item itemvalue="JUnit.PlayerTest.addCardtoHand" />
+        <item itemvalue="JUnit.UNOCardTest (1)" />
         <item itemvalue="Application.main" />
         <item itemvalue="JUnit.UNOCardTest.toString (1)" />
-        <item itemvalue="JUnit.UNOCardTest (1)" />
-        <item itemvalue="JUnit.UNOCardTest.isNumberCard" />
-        <item itemvalue="JUnit.UNOCardTest.isReverse" />
       </list>
     </recent_temporary>
   </component>
@@ -753,7 +762,8 @@
       <workItem from="1522247554388" duration="661000" />
       <workItem from="1522265328731" duration="1225000" />
       <workItem from="1522266955875" duration="45000" />
-      <workItem from="1522334342588" duration="1484000" />
+      <workItem from="1522334342588" duration="1857000" />
+      <workItem from="1522343145583" duration="1121000" />
     </task>
     <task id="LOCAL-00001" summary="Declared Game class&#10;Added Game class variables: drawPile, discardPile&#10;Added Game class method declarations: { ... }&#10;Added Game class method descriptions (comments)&#10;Added Game class TODOs">
       <created>1522018832859</created>
@@ -762,7 +772,21 @@
       <option name="project" value="LOCAL" />
       <updated>1522018832859</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add player functionality">
+      <created>1522339982123</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1522339982123</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add player functionality">
+      <created>1522340194435</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1522340194435</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -781,9 +805,18 @@
     <history-entry file="UNOCardTest_toString_(1) - 2018.03.27 at 13h 39m 56s.xml">
       <configuration name="UNOCardTest.toString (1)" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="UNOCardTest - 2018.03.29 at 12h 12m 48s.xml">
+      <configuration name="UNOCardTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlayerTest_addCardtoHand - 2018.03.29 at 12h 19m 03s.xml">
+      <configuration name="PlayerTest.addCardtoHand" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PlayerTest_callUNO - 2018.03.29 at 12h 23m 36s.xml">
+      <configuration name="PlayerTest.callUNO" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16935000" />
+    <option name="totallyTimeSpent" value="18429000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1672" y="-8" width="1696" height="1026" extended-state="6" />
@@ -791,6 +824,7 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32794458" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
@@ -798,19 +832,18 @@
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="right" id="Version Control" order="10" side_tool="true" visible="true" weight="0.3147922" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.328341" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32794458" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.150978" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15281174" />
       <window_info anchor="right" id="Database" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.328341" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3995381" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info id="Nl-Palette" order="2" />
@@ -824,32 +857,32 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3292517" />
       <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="7" side_tool="true" />
       <window_info id="Nl-Palette" order="2" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3292517" />
       <window_info id="Image Layers" order="6" />
       <window_info id="Designer" order="4" />
       <window_info anchor="right" id="Properties" order="9" />
       <window_info id="UI Designer" order="5" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3296875" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2567237" />
       <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info id="Capture Tool" order="3" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Messages" order="8" weight="0.3292517" />
       <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info id="Favorites" order="7" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2567237" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -886,11 +919,20 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Declared Game class&#10;Added Game class variables: drawPile, discardPile&#10;Added Game class method declarations: { ... }&#10;Added Game class method descriptions (comments)&#10;Added Game class TODOs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Declared Game class&#10;Added Game class variables: drawPile, discardPile&#10;Added Game class method declarations: { ... }&#10;Added Game class method descriptions (comments)&#10;Added Game class TODOs" />
+    <MESSAGE value="Add player functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add player functionality" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/tests/UNOClasses/PlayerTest.java</url>
+          <line>21</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -898,30 +940,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Card/CardType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Deck.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="14" column="62" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Card/UNOColor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -929,7 +947,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/Card/UNOCardTest.java">
+    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/UNOCardTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
@@ -964,7 +982,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/Card/UNOCardTest.java">
+    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/UNOCardTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="48" column="1" selection-start-line="48" selection-start-column="1" selection-end-line="48" selection-end-column="1" />
@@ -1025,7 +1043,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/Card/UNOCardTest.java">
+    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/UNOCardTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
@@ -1085,7 +1103,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/Card/UNOCardTest.java">
+    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/UNOCardTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
@@ -1176,7 +1194,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/Card/UNOCardTest.java">
+    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/UNOCardTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
@@ -1231,7 +1249,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Deck.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
+        <state relative-caret-position="816">
           <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
         </state>
       </provider>
@@ -1246,9 +1264,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/Card/UNOCardTest.java">
+    <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Card/UNOCard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="493">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UNOClassesTests/PlayerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/UNOCardTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
           <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1258,32 +1290,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Card/UNOCard.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.0.0/junit-platform-commons-1.0.0.jar!/org/junit/platform/commons/util/ReflectionUtils.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Hand/PlayerHand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="66" column="16" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
+        <state relative-caret-position="114">
+          <caret line="172" column="13" lean-forward="true" selection-start-line="172" selection-start-column="13" selection-end-line="172" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+        <state relative-caret-position="174">
+          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#268#269#0" expanded="true" />
-            <element signature="e#311#312#0" expanded="true" />
-            <element signature="e#181#182#0" expanded="true" />
-            <element signature="e#211#212#0" expanded="true" />
-            <element signature="e#416#417#0" expanded="true" />
-            <element signature="e#436#437#0" expanded="true" />
+            <element signature="e#451#452#0" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/Hand/PlayerHand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
+          <folding>
+            <element signature="e#1307#1308#0" expanded="true" />
+            <element signature="e#1348#1349#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/UNOClasses/PlayerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="40" column="69" selection-start-line="40" selection-start-column="69" selection-end-line="40" selection-end-column="69" />
+          <folding>
+            <element signature="e#227#228#0" expanded="true" />
+            <element signature="e#257#258#0" expanded="true" />
+            <element signature="e#804#805#0" expanded="true" />
+            <element signature="e#834#835#0" expanded="true" />
           </folding>
         </state>
       </provider>
