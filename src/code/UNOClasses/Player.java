@@ -6,7 +6,7 @@ import code.UNOClasses.Hand.PlayerHand;
 
 public class Player {
     private boolean isHuman; //returns true for the interfacing user, false for computer players (AI)
-    private PlayerHand _hand;
+    private PlayerHand _hand = new PlayerHand();
 
     public Player (boolean isHumanPlayer){
         this.isHuman = isHumanPlayer;
@@ -31,4 +31,8 @@ public class Player {
 
     //expose the hand object so we can use hand methods such as getting the hand total and printing the hand.
     public PlayerHand myHand(){ return _hand; }
+
+    public String toString(){
+        return "Human: " + this.isHuman + "\n" + "Hand:\n" + this._hand.toString();
+    }
 }
