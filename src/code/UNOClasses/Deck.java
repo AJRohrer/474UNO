@@ -5,6 +5,7 @@ import code.UNOClasses.Card.UNOCard;
 import code.UNOClasses.Card.UNOColor;
 import java.util.Vector;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 public class Deck {
     private Vector<UNOCard> deck;
@@ -20,7 +21,7 @@ public class Deck {
     public Deck() {
         this.deck = new Vector<UNOCard>();
         createDeck();
-        shuffleDeck();
+        //shuffleDeck();
     }
 
     public void createDeck() {
@@ -54,5 +55,26 @@ public class Deck {
 
     public int deckTotal() {
         return deck.size();
+    }
+
+    public UNOCard deal() {
+        return deck.remove(0);
+    }
+
+    public String toString() {
+        return deck.stream().map(b -> b.toString()).collect(Collectors.joining("\n"));
+    }
+
+    public static void main(String[] args) {
+        Deck deck = new Deck();
+        System.out.println(deck);
+        System.out.println(deck.deckTotal());
+        //deck.shuffleDeck();
+        //System.out.println(deck);
+        Vector testdeck = new Vector();
+        testdeck.add(deck.deal());
+        System.out.println(testdeck);
+        System.out.println(deck);
+        System.out.println(deck.deckTotal());
     }
 }
