@@ -16,7 +16,7 @@ public class Game {
         /* the caller function from main() which will be responsible for initializing the game instance, by calling:
         *   -   Prompting the user for the number of AI players they would like to play against
         *   -   Randomizing player order for the total number of players
-        *   -   Shuffle card deck
+        *   -   Shuffle card deck before dealing, maybe twice? (deck.shuffleDeck();)
         *   -   Deal cards to each player out of the total number of players
         *   etc.
         *   */
@@ -34,6 +34,7 @@ public class Game {
           * */
         UNOCard topCard = deck.deal();
         discardPile.push(topCard);
+
         // TODO: if topCard = Wild Draw Four, draw again
     }
 
@@ -56,7 +57,7 @@ public class Game {
     }
 
     private void addCardToDiscardPile(UNOCard card){
-        discardPile.add(card);
+        discardPile.push(card);
     }
 
     public boolean playCard(UNOCard card){
@@ -72,14 +73,16 @@ public class Game {
         else { return false; }
     }
 
-    public UNOCard getLastDiscardPileCard(){
+    public UNOCard viewLastDiscardPileCard(){
         /* returns the UNOCard object of the last card placed in the discard pile
         which can be seen by everyone playing BUT does NOT remove the card from the pile
          */
         return discardPile.peek();
     }
 
-
-
-
+    public UNOCard getLastDiscardPileCard() {
+        /* removes and returns the UNOCard object of the last card placed in the discard pile
+         */
+        return discardPile.pop();
+    }
 }
