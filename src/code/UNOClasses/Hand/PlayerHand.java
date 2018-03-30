@@ -2,6 +2,7 @@ package code.UNOClasses.Hand;
 
 import code.UNOClasses.Card.UNOCard;
 
+import java.util.Collections;
 import java.util.Vector;
 
 public class PlayerHand
@@ -15,9 +16,11 @@ public class PlayerHand
     }
 
     // method will sort the vector of cards by color
+    //based on the order in which the Enumerated colors
+    //appear in the UNOColor Enum class
     public void sort()
     {
-        // need to implement this method
+        Collections.sort(unoCardsList);
     }
 
     // method prints the total number of cards in the card list
