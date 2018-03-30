@@ -6,9 +6,6 @@ import code.UNOClasses.Deck;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.Vector;
-import java.util.Collections;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -72,6 +69,12 @@ class DeckTest {
         assertFalse(deck.isEmpty());
         deck.deal();
         assertTrue(deck.isEmpty());
+    }
+
+    @Test
+    void clearDeck() {
+        deck.clearDeck();
+        assertEquals(0, deck.deckTotal());
     }
 
     /*@Test
