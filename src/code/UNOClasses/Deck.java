@@ -4,12 +4,13 @@ import code.UNOClasses.Card.CardType;
 import code.UNOClasses.Card.UNOCard;
 import code.UNOClasses.Card.UNOColor;
 import java.util.Vector;
+import java.util.Stack;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Deck {
     //create empty vector of Uno cards named deck
-    private Vector<UNOCard> deck;
+    private Stack<UNOCard> deck;
 
     //the number of cards 1-9 and action cards (skip, draw two, reverse) per color
     public static final int numberAndActionCards = 2;
@@ -25,7 +26,7 @@ public class Deck {
 
     //Constructor for a new, full, shuffled UNO deck
     public Deck() {
-        this.deck = new Vector<UNOCard>();
+        this.deck = new Stack<UNOCard>();
         createDeck();
         //shuffleDeck();
     }
@@ -72,7 +73,7 @@ public class Deck {
     //takes the "top" card of the deck off and returns it, used in dealing and drawing
     public UNOCard deal() {
         if (!deck.isEmpty()) {
-            return deck.remove(deck.size()-1);
+            return deck.pop();
         }
         else {
             return null;
@@ -85,7 +86,7 @@ public class Deck {
     }
 
     //returns true if deck is empty
-    public boolean isEmpty() { return this.deck.isEmpty(); }
+    public boolean isEmpty() { return this.deck.empty(); }
 
     //takes a vector of cards (any size) and reintroduces them to the deck, then shuffles the deck
     public void shuffleDiscardPile(Vector<UNOCard> cards) {
@@ -96,10 +97,26 @@ public class Deck {
     //removes all cards from deck
     public void clearDeck() { this.deck.removeAllElements(); }
 
-    /*public static void main(String[] args) {
+    //print out the deck and deck total in the terminal, then shuffle and print out the deck and total again
+    //create mock player hand with deal function and print hand and new deck total
+    public static void main(String[] args) {
         Deck deck = new Deck();
-        System.out.println(deck);
-        System.out.println(deck.deckTotal());
-
-    }*/
+        System.out.println("Deck in order\n" + deck);
+        System.out.println("Deck total: " + deck.deckTotal());
+        deck.shuffleDeck();
+        deck.shuffleDeck();
+        System.out.println("Deck shuffled\n" + deck);
+        System.out.println("Deck total: " + deck.deckTotal());
+        Stack test = new Stack();
+        test.push(deck.deal());
+        test.push(deck.deal());
+        test.push(deck.deal());
+        test.push(deck.deal());
+        test.push(deck.deal());
+        test.push(deck.deal());
+        test.push(deck.deal());
+        System.out.println("Mock player hand\n" + test);
+        System.out.println("Deck without player cards\n" + deck);
+        System.out.println("New deck total: " + deck.deckTotal());
+    }
 }
