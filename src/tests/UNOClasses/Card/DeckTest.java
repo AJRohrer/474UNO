@@ -1,11 +1,15 @@
 package tests.UNOClasses.Card;
 
 
+import code.UNOClasses.Card.CardType;
 import code.UNOClasses.Card.UNOCard;
+import code.UNOClasses.Card.UNOColor;
 import code.UNOClasses.Deck;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,5 +83,16 @@ class DeckTest {
 
     /*@Test
     void shuffleDiscardPile() {
+        Vector<UNOCard> discardPile = new Vector<>();
+        discardPile.add(new UNOCard(CardType.ZERO,UNOColor.RED));
+        discardPile.add(new UNOCard(CardType.ZERO,UNOColor.YELLOW));
+        discardPile.add(new UNOCard(CardType.ZERO,UNOColor.BLUE));
+        discardPile.add(new UNOCard(CardType.ZERO,UNOColor.GREEN));
+        discardPile.add(new UNOCard(CardType.ONE,UNOColor.RED));
+        discardPile.add(new UNOCard(CardType.ONE,UNOColor.YELLOW));
+        discardPile.add(new UNOCard(CardType.ONE,UNOColor.BLUE));
+        discardPile.add(new UNOCard(CardType.ONE,UNOColor.GREEN));
+        assertEquals();
+        deck.shuffleDiscardPile(discardPile);
     }*/
 }

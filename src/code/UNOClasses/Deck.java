@@ -27,7 +27,7 @@ public class Deck {
     public Deck() {
         this.deck = new Vector<UNOCard>();
         createDeck();
-        shuffleDeck();
+        //shuffleDeck();
     }
 
     //Create deck is used to fill the deck with 108 UNO cards, the same set every time
@@ -67,28 +67,39 @@ public class Deck {
     }
 
     //returns the number of cards left in the deck
-    public int deckTotal() {
-        return deck.size();
-    }
+    public int deckTotal() { return deck.size(); }
 
     //takes the "top" card of the deck off and returns it, used in dealing and drawing
     public UNOCard deal() {
-        return deck.remove(deck.size()-1);
+        if (!deck.isEmpty()) {
+            return deck.remove(deck.size()-1);
+        }
+        else {
+            return null;
+        }
     }
 
     //overrides toString to create a print method for the deck
     public String toString() {
-        return deck.stream().map(b -> b.toString()).collect(Collectors.joining("\n"));
+        return deck.stream().map(UNOCard::toString).collect(Collectors.joining("\n"));
     }
 
     //returns true if deck is empty
-    public boolean isEmpty() {
-        return this.deck.isEmpty();
-    }
+    public boolean isEmpty() { return this.deck.isEmpty(); }
 
     //takes a vector of cards (any size) and reintroduces them to the deck, then shuffles the deck
     public void shuffleDiscardPile(Vector<UNOCard> cards) {
         this.deck.addAll(cards);
         shuffleDeck();
     }
+
+    //removes all cards from deck
+    public void clearDeck() { this.deck.removeAllElements(); }
+
+    /*public static void main(String[] args) {
+        Deck deck = new Deck();
+        System.out.println(deck);
+        System.out.println(deck.deckTotal());
+
+    }*/
 }
