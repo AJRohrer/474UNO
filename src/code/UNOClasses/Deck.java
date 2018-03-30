@@ -89,7 +89,7 @@ public class Deck {
     public boolean isEmpty() { return this.deck.empty(); }
 
     //takes a vector of cards (any size) and reintroduces them to the deck, then shuffles the deck
-    public void shuffleDiscardPile(Vector<UNOCard> cards) {
+    public void shuffleDiscardPile(Stack<UNOCard> cards) {
         this.deck.addAll(cards);
         shuffleDeck();
     }
