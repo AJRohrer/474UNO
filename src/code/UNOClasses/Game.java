@@ -16,7 +16,7 @@ public class Game {
         /* the caller function from main() which will be responsible for initializing the game instance, by calling:
         *   -   Prompting the user for the number of AI players they would like to play against
         *   -   Randomizing player order for the total number of players
-        *   -   Initialize card deck
+        *   -   Shuffle card deck
         *   -   Deal cards to each player out of the total number of players
         *   etc.
         *   */
