@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Vector;
+import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -81,9 +81,10 @@ class DeckTest {
         assertEquals(0, deck.deckTotal());
     }
 
-    /*@Test
+    @Test
     void shuffleDiscardPile() {
-        Vector<UNOCard> discardPile = new Vector<>();
+        deck.clearDeck();
+        Stack<UNOCard> discardPile = new Stack<>();
         discardPile.add(new UNOCard(CardType.ZERO,UNOColor.RED));
         discardPile.add(new UNOCard(CardType.ZERO,UNOColor.YELLOW));
         discardPile.add(new UNOCard(CardType.ZERO,UNOColor.BLUE));
@@ -92,7 +93,9 @@ class DeckTest {
         discardPile.add(new UNOCard(CardType.ONE,UNOColor.YELLOW));
         discardPile.add(new UNOCard(CardType.ONE,UNOColor.BLUE));
         discardPile.add(new UNOCard(CardType.ONE,UNOColor.GREEN));
-        assertEquals();
+        //System.out.println(discardPile);
         deck.shuffleDiscardPile(discardPile);
-    }*/
+        assertEquals(8, deck.deckTotal());
+        System.out.println(deck);
+    }
 }
