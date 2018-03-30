@@ -39,6 +39,7 @@ public class UNOCard implements Comparable<UNOCard>{
         return this._type == CardType.REVERSE;
     }
 
+    @Override
     public String toString(){
         return this._color.toString() + " " + this._type.toString();
     }
