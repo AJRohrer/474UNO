@@ -3,13 +3,12 @@ package code.UNOClasses;
 import code.UNOClasses.Card.CardType;
 import code.UNOClasses.Card.UNOCard;
 import code.UNOClasses.Card.UNOColor;
-import java.util.Vector;
-import java.util.Stack;
+import java.util.*;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Deck {
-    //create empty vector of Uno cards named deck
+    //create empty Stack of Uno cards named deck
     private Stack<UNOCard> deck;
 
     //the number of cards 1-9 and action cards (skip, draw two, reverse) per color
