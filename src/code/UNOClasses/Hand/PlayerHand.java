@@ -109,4 +109,12 @@ public class PlayerHand
                     "is one card left in your hand ";
         }
     }
+
+    public String toString(){
+        String handstring = "";
+        for (UNOCard uc : unoCardsList){
+             handstring += uc.toString() + "\n";
+        }
+        return handstring;
+    }
 }
