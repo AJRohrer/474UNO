@@ -4,11 +4,11 @@ package code.UNOClasses;
 
 import code.UNOClasses.Card.UNOCard;
 
-import java.util.*;     // added for Vector type
+import java.util.*;     // added for Vector/Stack type
 
 public class Game {
     private Vector<Player> Players; /* TODO: need to decide how player order is to be decided and kept track of */
-    private Vector<UNOCard> discardPile;
+    private Stack<UNOCard> discardPile;
     private Vector<Player> players;
     Deck deck = new Deck();
 
@@ -29,11 +29,12 @@ public class Game {
 
     private void initializeDiscardPile(){
         /* initializes the Discard Pile AFTER players have been dealt their hand
-          * Obtains the top card (last in vector) from the deck & places
-          * it in discardPile
+          * Obtains the top card from the deck & places
+          * it on top of the discardPile
           * */
         UNOCard topCard = deck.deal();
-        discardPile.add(topCard);
+        discardPile.push(topCard);
+        // TODO: if topCard = Wild Draw Four, draw again
     }
 
     public UNOCard drawCard(){
@@ -75,7 +76,7 @@ public class Game {
         /* returns the UNOCard object of the last card placed in the discard pile
         which can be seen by everyone playing BUT does NOT remove the card from the pile
          */
-        return discardPile.get(discardPile.size()-1);
+        return discardPile.peek();
     }
 
 
