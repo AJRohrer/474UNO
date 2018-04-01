@@ -7,6 +7,8 @@ import code.UNOClasses.Hand.PlayerHand;
 public class Player {
     private boolean isHuman; //returns true for the interfacing user, false for computer players (AI)
     private PlayerHand _hand = new PlayerHand();
+    private int position;
+    private String name;
 
     public Player (boolean isHumanPlayer){
         this.isHuman = isHumanPlayer;
@@ -33,6 +35,8 @@ public class Player {
     public PlayerHand myHand(){ return _hand; }
 
     public String toString(){
-        return "Human: " + this.isHuman + "\n" + "Hand:\n" + this._hand.toString();
+        return "Human: " + this.isHuman + "\n" + "Position: " + this.position + "\n" + "Hand:\n" + this._hand.toString();
     }
+
+    public void setPosition (int p) { this.position = p; }
 }
