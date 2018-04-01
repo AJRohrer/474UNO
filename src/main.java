@@ -1,8 +1,11 @@
 import code.UNOClasses.Card.CardType;
 import code.UNOClasses.Card.UNOCard;
 import code.UNOClasses.Card.UNOColor;
+import code.UNOClasses.Deck;
+import code.UNOClasses.Game;
 import code.UNOClasses.Player;
 
+import java.util.Stack;
 import java.util.Vector;
 
 public class main {
@@ -22,6 +25,28 @@ public class main {
         p.addCardtoHand(c);
         p.addCardtoHand(c);
         System.out.println(p.toString());
+
+        Deck deck = new Deck();
+        System.out.println("*******Deck in order\n" + deck);
+        System.out.println("*******Deck total: " + deck.deckTotal());
+        deck.shuffleDeck();
+        deck.shuffleDeck();
+        System.out.println("*******Deck shuffled\n" + deck);
+        System.out.println("*******Deck total: " + deck.deckTotal());
+        Stack test = new Stack();
+        test.push(deck.deal());
+        test.push(deck.deal());
+        test.push(deck.deal());
+        test.push(deck.deal());
+        test.push(deck.deal());
+        test.push(deck.deal());
+        test.push(deck.deal());
+        System.out.println("*******Mock player hand\n" + test);
+        System.out.println("*******Deck without player cards\n" + deck);
+        System.out.println("*******New deck total: " + deck.deckTotal());
+
+        Game gameObj= new Game();
+        gameObj.initialize();
     }
 
 }

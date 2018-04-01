@@ -81,7 +81,7 @@ public class Deck {
 
     //overrides toString to create a print method for the deck
     public String toString() {
-        return deck.stream().map(UNOCard::toString).collect(Collectors.joining("\n"));
+        return deck.stream().map(UNOCard::toString).collect(Collectors.joining(", "));
     }
 
     //returns true if deck is empty

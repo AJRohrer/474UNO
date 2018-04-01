@@ -10,7 +10,7 @@ public class Game {
     private Vector<Player> players; /* TODO: need to decide how player order is to be decided and kept track of */
     private Stack<UNOCard> discardPile;
 
-    Deck deck = new Deck();
+    Deck deck;
     int aIPlayerCount = 0;
 
     public void initialize(){
@@ -68,6 +68,12 @@ public class Game {
     			}    		
     		}
     	}
+    	Collections.shuffle(players);
+    	int k = 0;
+    	for (Player player : players) {
+			player.setPosition(k);
+			k++;
+		}
     	System.out.println("Remaining cards in deck " + deck.deckTotal());
     	System.out.println("Total Number of players including one human is :"+players.size());
     	System.out.println("Cards Assigned to each player :"+players);
