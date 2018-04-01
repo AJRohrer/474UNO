@@ -7,10 +7,11 @@ import code.UNOClasses.Card.UNOCard;
 import java.util.*;     // added for Vector/Stack type
 
 public class Game {
-    private Vector<Player> Players; /* TODO: need to decide how player order is to be decided and kept track of */
+    private Vector<Player> players; /* TODO: need to decide how player order is to be decided and kept track of */
     private Stack<UNOCard> discardPile;
-    private Vector<Player> players;
+
     Deck deck = new Deck();
+    int aIPlayerCount = 0;
 
     public void initialize(){
         /* the caller function from main() which will be responsible for initializing the game instance, by calling:
@@ -20,12 +21,59 @@ public class Game {
         *   -   Deal cards to each player out of the total number of players
         *   etc.
         *   */
-
-
-        initializeDiscardPile();
-
+    	Scanner reader = new Scanner(System.in);
+    	System.out.println("Enter the number of AI players you would like to play against: ");
+    	aIPlayerCount = reader.nextInt();
+    	if(aIPlayerCount >14) {
+    		System.out.println("Maximum number of AI players allowed to play against one human player is 14. ");
+    		System.exit(0);
+    	}
+    	reader.close();
+    	dealHand();
+        //initializeDiscardPile();
         // TODO: implement the initialize() class LAST (once all classes have been structured)
     }
+    /*
+     * @author Pranjali Mishra
+     * This function deals 7 cards each to the AI players and human player
+     * returns collection of players with dealt hands
+     */
+    private Vector<Player> dealHand() {
+    	players= new Vector<Player>();
+    	Deck deck = new Deck();
+    	deck.shuffleDeck();
+    	for (int j=0; j<7; j++) {    		
+    	if (j==0) {
+	    	for (int i=0; i <aIPlayerCount; i++){
+		    	Player player = new Player(false);
+		    	UNOCard uc =deck.deal();		    	
+		    	player.addCardtoHand(uc);
+		    	players.add(player);    	
+	    		}
+	    	//Creating Human Player
+	    	{
+	    		Player player = new Player(true);
+		    	UNOCard uc =deck.deal();
+		    	player.addCardtoHand(uc);
+		    	players.add(player);
+	    	}
+    		}
+    	else {
+    		int playerIndex=0;
+    		for(Player player :players) {    			
+    			UNOCard uc =deck.deal();
+    	    	player.addCardtoHand(uc);
+    	    	players.set(playerIndex,player);
+    	    	playerIndex++;
+    			}    		
+    		}
+    	}
+    	System.out.println("Remaining cards in deck " + deck.deckTotal());
+    	System.out.println("Total Number of players including one human is :"+players.size());
+    	System.out.println("Cards Assigned to each player :"+players);
+    	return players;
+    }
+    
 
     private void initializeDiscardPile(){
         /* initializes the Discard Pile AFTER players have been dealt their hand
@@ -84,5 +132,12 @@ public class Game {
         /* removes and returns the UNOCard object of the last card placed in the discard pile
          */
         return discardPile.pop();
+    }
+    
+    public static void main(String args[]) {
+    	
+    	Game gameObj= new Game();
+    	gameObj.initialize();
+    	
     }
 }
