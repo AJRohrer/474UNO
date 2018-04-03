@@ -3,6 +3,7 @@ package code.UNOClasses;
  * coordinated functionality of what is expected from the game, UNO. */
 
 import code.UNOClasses.Card.UNOCard;
+import java.util.Random;
 
 import java.util.*;     // added for Vector/Stack type
 
@@ -34,10 +35,9 @@ public class Game {
     	reader.close();
 
     	dealHand(); // SRS - FR1.2 & FR1.3 -- complete
-    	initializeDiscardPile(); // SRS - FR1.4 -- complete
+    	initializeDiscardPile(); // SRS - FR1.4 & FR1.5 & FR1.6 -- complete
 
         // initializeDiscardPile() is to be considered to be the first move by the first player, player #0 in the players vector
-
 
     }
     /*
@@ -84,23 +84,24 @@ public class Game {
 		}
     }
 
-    private void initializeDiscardPile(){ // SRS - FR1.4 implementation
+    private void initializeDiscardPile(){ // SRS - FR1.4 & FR1.5 & FR1.6 implementation
         /* initializes the Discard Pile AFTER players have been dealt their hand
           * Obtains the top card from the deck & places
           * it on top of the discardPile
           * */
-        UNOCard topCard = deck.deal();
+        UNOCard topCard = null;
         boolean validCard = false;
-        while (!validCard) {
+        while (!validCard){
+            topCard = deck.deal();
             System.out.println("Discard Pile Card: " + topCard.toString());
             if (topCard.isWildDraw4()) {
                 System.out.println("Card is a \"Wild Draw Four\" - adding back to the Deck.");
                 deck.addCard(topCard);
             } else {
+                discardPile.push(topCard);
                 validCard = true;
             }
         }
-        discardPile.push(topCard);
     }
 
     public UNOCard drawCard(){
@@ -111,10 +112,23 @@ public class Game {
         return returnCard;
     }
 
-    private boolean validateMove(UNOCard card){
+    private boolean validateMove(UNOCard card, Player currentPlayer){
         /* function verifies if the played card is a valid move against the game rules
          */
         boolean result = false;
+
+        if (card.isWild() || card.isWildDraw4()){
+            result = true; // SRS - FR2.3 complete
+            UNOCard declareColorCard = discardPile.pop();
+            if (!currentPlayer.isHuman()){
+                //TODO: randomize the discard pile color declaration
+            }
+            else {
+                //TODO: prompt the human player for what color they'd like to discard pile to be
+
+            }
+            discardPile.push(declareColorCard);
+        }
 
         // TODO: implement logic for verifying if the move is valid
 
@@ -125,13 +139,13 @@ public class Game {
         discardPile.push(card);
     }
 
-    public boolean playCard(UNOCard card){
+    public boolean playCard(UNOCard card, Player currentPlayer){
         /* the player-specified card is attempted to add to the discard pile.
         Function does the following:
             [1] Verifies if card is a valid play, if yes then [2], if not then returns false
             [2] Adds the card to the discardPile & returns true
          */
-        if (validateMove(card)){
+        if (validateMove(card, currentPlayer)){
             addCardToDiscardPile(card);
             return true;
         }
