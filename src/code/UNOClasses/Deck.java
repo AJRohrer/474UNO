@@ -98,7 +98,8 @@ public class Deck {
 
     //adds a specific card back to the deck (like the Wild4 if drawn in FR1.5)
     public void addCard(UNOCard card){
-        deck.add(card);
+        deck.add(0, card);
+        //deck.add(card);
     }
 
 

@@ -12,6 +12,7 @@ import java.util.Vector;
 public class Game {
     private Vector<Player> players; /* TODO: need to decide how player order is to be decided and kept track of */
     private Stack<UNOCard> discardPile;
+    Scanner reader;
 
     Deck deck;
     int aIPlayerCount = 0;
@@ -26,7 +27,7 @@ public class Game {
         *   */
 
         // SRS - FR1.1 -- complete
-    	Scanner reader = new Scanner(System.in);
+    	reader = new Scanner(System.in);
     	System.out.println("Enter the number of AI players you would like to play against: ");
     	aIPlayerCount = reader.nextInt();
     	if(aIPlayerCount > 9) {
@@ -34,7 +35,6 @@ public class Game {
     		System.out.println("Maximum number of AI players allowed to play against one human player is 9.");
     		System.exit(0);
     	}
-    	reader.close();
 
     	dealHand(); // SRS - FR1.2 & FR1.3 -- complete
     	initializeDiscardPile(); // SRS - FR1.4 & FR1.5 & FR1.6 -- complete
@@ -198,12 +198,45 @@ public class Game {
                 }
                 else if (!discardPile.peek().isSkip())
                 {
+                    System.out.println("Last card is not skip");
                     /* if the previous player did not play a Skip card and it's not any of the other
                     special cards, then it's a regular turn for the player
                      */
                     if (players.elementAt(i).isHuman()) {
                         // if the current player is human -- then user gets to choose what they play
-                        // TODO: Implement user interaction with deciding card to play
+                        boolean invalidSelection = true;
+                        while (invalidSelection) {
+                            System.out.println("What would you like to do?");
+                            System.out.println("    [0] Exit");
+                            System.out.println("    [1] Show my hand");
+                            System.out.println("    [2] Get last card played");
+                            System.out.println("    [3] Play a card");
+                            System.out.println("    [4] Declare UNO");
+                            System.out.println("Enter # from above list): ");
+                            int userSelection = reader.nextInt();
+                            switch (userSelection) {
+                                case 0:
+                                    System.out.println("Goodbye!");
+                                    System.exit(0);
+                                    break;
+                                case 1:
+                                    players.elementAt(i).myHand().printHand();
+                                    break;
+                                case 2:
+                                    System.out.println("Discard Pile Card: " + discardPile.peek().toString());
+                                    break;
+                                case 3:
+                                    // TODO: Have player play their card
+                                    invalidSelection = false;
+                                    break;
+                                case 4:
+                                    players.elementAt(i).callUNO(); // TODO: check
+                                    invalidSelection = false;
+                                    break;
+                                default:
+                                    System.out.println("Invalid selection.");
+                            }
+                        }
                     }
                     else {
                         // TODO: Implement logic as to how the AI will decide to pick their card
