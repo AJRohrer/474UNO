@@ -218,10 +218,12 @@ public class Game {
                             else {
                                 System.out.println("Invalid selection. Try again.");
                             }
+                            // TODO: Need to implement logic in this while loop if user changed their mind on playing card (& would like to draw a card instead, etc. - exit to the first while loop)
                         }
+                        invalidSelection = false;
                         break;
                     case 4:
-                        currentPlayer.callUNO(); // TODO: check
+                        System.out.println(currentPlayer.callUNO());
                         invalidSelection = false;
                         break;
                     case 5:
@@ -235,8 +237,13 @@ public class Game {
             }
         }
         else {
-            // TODO: Implement logic as to how the AI will decide to pick their card
+            AIMakeMove(currentPlayer);
         }
+    }
+
+    private void AIMakeMove(Player currentPlayer){
+        // TODO: Implement logic as to how the AI will decide to pick their card
+
     }
 
     public void play(){
@@ -283,6 +290,6 @@ public class Game {
                 }
             }
         }
+        System.out.println("We have a winner!");
     }
-
 }
