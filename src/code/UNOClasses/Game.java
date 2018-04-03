@@ -13,6 +13,7 @@ public class Game {
     private Vector<Player> players; /* TODO: need to decide how player order is to be decided and kept track of */
     private Stack<UNOCard> discardPile;
     Scanner reader;
+    Boolean GameOver = false;
 
     Deck deck;
     int aIPlayerCount = 0;
@@ -169,6 +170,75 @@ public class Game {
         return discardPile.pop();
     }
 
+    private void makeMove(Player currentPlayer){
+        if (currentPlayer.isHuman()) {
+            // if the current player is human -- then user gets to choose what they play
+            boolean invalidSelection = true;
+            while (invalidSelection) {
+                System.out.println("What would you like to do?");
+                System.out.println("    [0] Exit");
+                System.out.println("    [1] Show my hand");
+                System.out.println("    [2] Get last card played");
+                System.out.println("    [3] Play a card");
+                System.out.println("    [4] Declare UNO");
+                System.out.println("    [5] Pick up a card");
+                System.out.println("Enter # from above list): ");
+                int userSelection = reader.nextInt();
+                switch (userSelection) {
+                    case 0:
+                        System.out.println("Goodbye!");
+                        System.exit(0);
+                        break;
+                    case 1:
+                        currentPlayer.myHand().printHand();
+                        break;
+                    case 2:
+                        System.out.println("Discard Pile Card: " + discardPile.peek().toString());
+                        break;
+                    case 3:
+                        Boolean invalidSelection2 = true;
+                        while (invalidSelection2) {
+                            System.out.println("What card would you like to play?");
+                            Vector<UNOCard> cards = currentPlayer.myHand().getUnoCardsList();
+                            System.out.println("    [0] Exit");
+                            for (int q = 0; q < cards.size(); q++) {
+                                System.out.println("    [" + (q + 1) + "] " + cards.elementAt(q).toString());
+                            }
+                            System.out.println("Enter # from above list): ");
+                            int userSelection2 = reader.nextInt();
+                            if (userSelection2 == 0){
+                                System.out.println("Goodbye!");
+                                System.exit(0);
+                            }
+                            UNOCard selectedCard = cards.elementAt(userSelection2-1);
+                            if (playCard(selectedCard, currentPlayer)){
+                                invalidSelection2 = false;
+                                currentPlayer.myHand().removeUNOCard(selectedCard);
+                            }
+                            else {
+                                System.out.println("Invalid selection. Try again.");
+                            }
+                        }
+                        break;
+                    case 4:
+                        currentPlayer.callUNO(); // TODO: check
+                        invalidSelection = false;
+                        break;
+                    case 5:
+                        UNOCard card = deck.deal();
+                        System.out.println("You picked up: " + card.toString());
+                        currentPlayer.addCardtoHand(card);
+                        break;
+                    default:
+                        System.out.println("Invalid selection.");
+                }
+            }
+        }
+        else {
+            // TODO: Implement logic as to how the AI will decide to pick their card
+        }
+    }
+
     public void play(){
         /* the main logical portion of the game which controls the order of moves
          */
@@ -176,6 +246,7 @@ public class Game {
         System.out.println("Starting the game!");
 
         boolean gameInProgress = true;
+        boolean skipOccurred = false;
         while (gameInProgress) {
             for (int i = 0; i < players.size(); i++) {
                 Player currentPlayer = players.elementAt(i);
@@ -189,6 +260,12 @@ public class Game {
                 }
                 else if (discardPile.peek().isSkip()){
                     // if the previous player played a Skip card, the current player misses a turn
+                    if (!skipOccurred) {
+                        skipOccurred = true;
+                    }
+                    else {
+                        makeMove(currentPlayer);
+                    }
                 }
                 else if (discardPile.peek().isDraw2()){
                     // if the previous player played a Draw Two card, the current player has to draw 2 cards from the deck
@@ -199,80 +276,12 @@ public class Game {
                 }
                 else if (!discardPile.peek().isSkip())
                 {
-                    System.out.println("Last card is not skip");
-                    /* if the previous player did not play a Skip card and it's not any of the other
-                    special cards, then it's a regular turn for the player
-                     */
-                    if (currentPlayer.isHuman()) {
-                        // if the current player is human -- then user gets to choose what they play
-                        boolean invalidSelection = true;
-                        while (invalidSelection) {
-                            System.out.println("What would you like to do?");
-                            System.out.println("    [0] Exit");
-                            System.out.println("    [1] Show my hand");
-                            System.out.println("    [2] Get last card played");
-                            System.out.println("    [3] Play a card");
-                            System.out.println("    [4] Declare UNO");
-                            System.out.println("    [5] Pick up a card");
-                            System.out.println("Enter # from above list): ");
-                            int userSelection = reader.nextInt();
-                            switch (userSelection) {
-                                case 0:
-                                    System.out.println("Goodbye!");
-                                    System.exit(0);
-                                    break;
-                                case 1:
-                                    currentPlayer.myHand().printHand();
-                                    break;
-                                case 2:
-                                    System.out.println("Discard Pile Card: " + discardPile.peek().toString());
-                                    break;
-                                case 3:
-                                    Boolean invalidSelection2 = true;
-                                    while (invalidSelection2) {
-                                        System.out.println("What card would you like to play?");
-                                        Vector<UNOCard> cards = currentPlayer.myHand().getUnoCardsList();
-                                        System.out.println("    [0] Exit");
-                                        for (int q = 0; q < cards.size(); q++) {
-                                            System.out.println("    [" + (q + 1) + "] " + cards.elementAt(q).toString());
-                                        }
-                                        System.out.println("Enter # from above list): ");
-                                        int userSelection2 = reader.nextInt();
-                                        if (userSelection2 == 0){
-                                            System.out.println("Goodbye!");
-                                            System.exit(0);
-                                        }
-                                        UNOCard selectedCard = cards.elementAt(userSelection2-1);
-                                        if (playCard(selectedCard, currentPlayer)){
-                                            invalidSelection2 = false;
-                                            currentPlayer.myHand().removeUNOCard(selectedCard);
-                                        }
-                                        else {
-                                            System.out.println("Invalid selection. Try again.");
-                                        }
-                                    }
-                                    break;
-                                case 4:
-                                    currentPlayer.callUNO(); // TODO: check
-                                    invalidSelection = false;
-                                    break;
-                                case 5:
-                                    UNOCard card = deck.deal();
-                                    System.out.println("You picked up: " + card.toString());
-                                    currentPlayer.addCardtoHand(card);
-                                    break;
-                                default:
-                                    System.out.println("Invalid selection.");
-                            }
-                        }
-                    }
-                    else {
-                        // TODO: Implement logic as to how the AI will decide to pick their card
-                    }
+                    makeMove(currentPlayer);
                 }
-                // TODO: Implement check to see if the game is over
+                if (currentPlayer.myHand().isEmpty()){
+                    gameInProgress = false;
+                }
             }
-            gameInProgress = false;
         }
     }
 
