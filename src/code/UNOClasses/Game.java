@@ -3,9 +3,11 @@ package code.UNOClasses;
  * coordinated functionality of what is expected from the game, UNO. */
 
 import code.UNOClasses.Card.UNOCard;
-import java.util.Random;
 
-import java.util.*;     // added for Vector/Stack type
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
 
 public class Game {
     private Vector<Player> players; /* TODO: need to decide how player order is to be decided and kept track of */
@@ -48,6 +50,7 @@ public class Game {
     private void dealHand() { // SRS - FR1.2 & FR1.3 implementation
     	players= new Vector<Player>();
     	deck = new Deck();
+    	discardPile = new Stack<UNOCard>();
     	deck.shuffleDeck();
     	for (int j=0; j<7; j++) {    		
     		if (j==0) {
@@ -96,9 +99,10 @@ public class Game {
             System.out.println("Discard Pile Card: " + topCard.toString());
             if (topCard.isWildDraw4()) {
                 System.out.println("Card is a \"Wild Draw Four\" - adding back to the Deck.");
-                deck.addCard(topCard);
-            } else {
-                discardPile.push(topCard);
+                deck.addCard(topCard); // TODO: deck implement needs to rotate card to the bottom of the deck, which is not possible with a java stack declaration of a deck class
+            }
+            else {
+                discardPile.push(topCard); // TODO: Exception in thread "main" java.lang.NullPointerException sometimes occurs
                 validCard = true;
             }
         }
@@ -163,6 +167,23 @@ public class Game {
         /* removes and returns the UNOCard object of the last card placed in the discard pile
          */
         return discardPile.pop();
+    }
+
+    public void play(){
+        /* the main logical portion of the game which controls the order of moves
+         */
+
+        System.out.println("Starting the game!");
+
+        boolean gameInProgress = true;
+        while (gameInProgress) {
+            for (int i = 0; i < players.size(); i++){
+                System.out.println("Discard Pile Card: " + discardPile.peek().toString());
+
+            }
+            gameInProgress = false;
+        }
+        // TODO: implement logic
     }
 
 }

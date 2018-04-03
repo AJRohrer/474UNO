@@ -6,7 +6,6 @@ import code.UNOClasses.Game;
 import code.UNOClasses.Player;
 
 import java.util.Stack;
-import java.util.Vector;
 
 public class main {
 
@@ -48,6 +47,7 @@ public class main {
         // entry for the project, which will launch a single instance of the game
         Game gameObj= new Game();
         gameObj.initialize();
+        gameObj.play();
     }
 
 }

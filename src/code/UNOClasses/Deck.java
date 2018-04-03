@@ -101,6 +101,9 @@ public class Deck {
         deck.push(card);
     }
 
+    // TODO: Fix addCard() so that if a card is returned back to the deck, it's returned at the bottom, not the top
+
+
     //print out the deck and deck total in the terminal, then shuffle and print out the deck and total again
     //create mock player hand with deal function and print hand and new deck total
     public static void main(String[] args) {
