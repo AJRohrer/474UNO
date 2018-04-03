@@ -98,10 +98,8 @@ public class Deck {
 
     //adds a specific card back to the deck (like the Wild4 if drawn in FR1.5)
     public void addCard(UNOCard card){
-        deck.push(card);
+        deck.add(card);
     }
-
-    // TODO: Fix addCard() so that if a card is returned back to the deck, it's returned at the bottom, not the top
 
 
     //print out the deck and deck total in the terminal, then shuffle and print out the deck and total again

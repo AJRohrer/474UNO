@@ -99,10 +99,10 @@ public class Game {
             System.out.println("Discard Pile Card: " + topCard.toString());
             if (topCard.isWildDraw4()) {
                 System.out.println("Card is a \"Wild Draw Four\" - adding back to the Deck.");
-                deck.addCard(topCard); // TODO: deck implement needs to rotate card to the bottom of the deck, which is not possible with a java stack declaration of a deck class
+                deck.addCard(topCard);
             }
             else {
-                discardPile.push(topCard); // TODO: Exception in thread "main" java.lang.NullPointerException sometimes occurs
+                discardPile.add(topCard);
                 validCard = true;
             }
         }
