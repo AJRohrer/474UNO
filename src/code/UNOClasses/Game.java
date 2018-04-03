@@ -177,13 +177,42 @@ public class Game {
 
         boolean gameInProgress = true;
         while (gameInProgress) {
-            for (int i = 0; i < players.size(); i++){
+            for (int i = 0; i < players.size(); i++) {
                 System.out.println("Discard Pile Card: " + discardPile.peek().toString());
-
+                if (discardPile.peek().isWildDraw4()){
+                    // if the previous player played a Wild Four card, the current player has to draw 4 cards from the deck
+                    // and miss his or her turn
+                    for (int j = 0; j < 4; j++) {
+                        players.elementAt(i).addCardtoHand(deck.deal());
+                    }
+                }
+                else if (discardPile.peek().isSkip()){
+                    // if the previous player played a Skip card, the current player misses a turn
+                }
+                else if (discardPile.peek().isDraw2()){
+                    // if the previous player played a Draw Two card, the current player has to draw 2 cards from the deck
+                    // and miss his or her turn
+                    for (int j = 0; j < 2; j++) {
+                        players.elementAt(i).addCardtoHand(deck.deal());
+                    }
+                }
+                else if (!discardPile.peek().isSkip())
+                {
+                    /* if the previous player did not play a Skip card and it's not any of the other
+                    special cards, then it's a regular turn for the player
+                     */
+                    if (players.elementAt(i).isHuman()) {
+                        // if the current player is human -- then user gets to choose what they play
+                        // TODO: Implement user interaction with deciding card to play
+                    }
+                    else {
+                        // TODO: Implement logic as to how the AI will decide to pick their card
+                    }
+                }
+                // TODO: Implement check to see if the game is over
             }
             gameInProgress = false;
         }
-        // TODO: implement logic
     }
 
 }
