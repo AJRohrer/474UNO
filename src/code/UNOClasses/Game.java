@@ -4,7 +4,10 @@ package code.UNOClasses;
 
 import code.UNOClasses.Card.UNOCard;
 
-import java.util.*;     // added for Vector/Stack type
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
 
 public class Game {
     private Vector<Player> players; /* TODO: need to decide how player order is to be decided and kept track of */
@@ -21,75 +24,88 @@ public class Game {
         *   -   Deal cards to each player out of the total number of players
         *   etc.
         *   */
+
+        // SRS - FR1.1 -- complete
     	Scanner reader = new Scanner(System.in);
     	System.out.println("Enter the number of AI players you would like to play against: ");
     	aIPlayerCount = reader.nextInt();
-    	if(aIPlayerCount >14) {
-    		System.out.println("Maximum number of AI players allowed to play against one human player is 14. ");
+    	if(aIPlayerCount > 9) {
+			System.out.println("Error!");
+    		System.out.println("Maximum number of AI players allowed to play against one human player is 9.");
     		System.exit(0);
     	}
     	reader.close();
-    	dealHand();
-        //initializeDiscardPile();
-        // TODO: implement the initialize() class LAST (once all classes have been structured)
+
+    	dealHand(); // SRS - FR1.2 & FR1.3 -- complete
+    	initializeDiscardPile(); // SRS - FR1.4 & FR1.5 & FR1.6 -- complete
+
+        // initializeDiscardPile() is to be considered to be the first move by the first player, player #0 in the players vector
+
     }
     /*
-     * @author Pranjali Mishra
+     * @author Pranjali Mishra @editor Darya Kiktenko
      * This function deals 7 cards each to the AI players and human player
      * returns collection of players with dealt hands
      */
-    private Vector<Player> dealHand() {
+    private void dealHand() { // SRS - FR1.2 & FR1.3 implementation
     	players= new Vector<Player>();
-    	Deck deck = new Deck();
+    	deck = new Deck();
+    	discardPile = new Stack<UNOCard>();
     	deck.shuffleDeck();
     	for (int j=0; j<7; j++) {    		
-    	if (j==0) {
-	    	for (int i=0; i <aIPlayerCount; i++){
-		    	Player player = new Player(false);
-		    	UNOCard uc =deck.deal();		    	
-		    	player.addCardtoHand(uc);
-		    	players.add(player);    	
+    		if (j==0) {
+    		// initializing AI players and giving them at least one card
+	    		for (int i=0; i < aIPlayerCount; i++){
+					Player player = new Player(false);
+					player.addCardtoHand(deck.deal());
+					players.add(player);
 	    		}
 	    	//Creating Human Player
-	    	{
-	    		Player player = new Player(true);
-		    	UNOCard uc =deck.deal();
-		    	player.addCardtoHand(uc);
-		    	players.add(player);
-	    	}
+	    		{
+	    			Player player = new Player(true);
+		    		player.addCardtoHand(deck.deal());
+		    		players.add(player);
+	    		}
     		}
-    	else {
-    		int playerIndex=0;
-    		for(Player player :players) {    			
-    			UNOCard uc =deck.deal();
-    	    	player.addCardtoHand(uc);
-    	    	players.set(playerIndex,player);
-    	    	playerIndex++;
-    			}    		
+    		else {
+    			for(Player player :players) {
+					player.addCardtoHand(deck.deal());
+				}
     		}
     	}
-    	Collections.shuffle(players);
+    	Collections.shuffle(players); // SRS - FR1.3 -- complete
     	int k = 0;
-    	for (Player player : players) {
-			player.setPosition(k);
+    	for (Player player : players) { // TODO: What is the purpose of knowing one's position?
+    		player.setPosition(k);
 			k++;
 		}
     	System.out.println("Remaining cards in deck " + deck.deckTotal());
-    	System.out.println("Total Number of players including one human is :"+players.size());
-    	System.out.println("Cards Assigned to each player :"+players);
-    	return players;
+    	System.out.println("Total Number of players including one human is :" + players.size());
+		System.out.println("Cards Assigned to each player: ");
+		for (int i =0; i < players.size(); i++){
+			System.out.println(players.elementAt(i).toString());
+		}
     }
-    
 
-    private void initializeDiscardPile(){
+    private void initializeDiscardPile(){ // SRS - FR1.4 & FR1.5 & FR1.6 implementation
         /* initializes the Discard Pile AFTER players have been dealt their hand
           * Obtains the top card from the deck & places
           * it on top of the discardPile
           * */
-        UNOCard topCard = deck.deal();
-        discardPile.push(topCard);
-
-        // TODO: if topCard = Wild Draw Four, draw again
+        UNOCard topCard = null;
+        boolean validCard = false;
+        while (!validCard){
+            topCard = deck.deal();
+            System.out.println("Discard Pile Card: " + topCard.toString());
+            if (topCard.isWildDraw4()) {
+                System.out.println("Card is a \"Wild Draw Four\" - adding back to the Deck.");
+                deck.addCard(topCard);
+            }
+            else {
+                discardPile.add(topCard);
+                validCard = true;
+            }
+        }
     }
 
     public UNOCard drawCard(){
@@ -100,10 +116,23 @@ public class Game {
         return returnCard;
     }
 
-    private boolean validateMove(UNOCard card){
+    private boolean validateMove(UNOCard card, Player currentPlayer){
         /* function verifies if the played card is a valid move against the game rules
          */
         boolean result = false;
+
+        if (card.isWild() || card.isWildDraw4()){
+            result = true; // SRS - FR2.3 complete
+            UNOCard declareColorCard = discardPile.pop();
+            if (!currentPlayer.isHuman()){
+                //TODO: randomize the discard pile color declaration
+            }
+            else {
+                //TODO: prompt the human player for what color they'd like to discard pile to be
+
+            }
+            discardPile.push(declareColorCard);
+        }
 
         // TODO: implement logic for verifying if the move is valid
 
@@ -114,13 +143,13 @@ public class Game {
         discardPile.push(card);
     }
 
-    public boolean playCard(UNOCard card){
+    public boolean playCard(UNOCard card, Player currentPlayer){
         /* the player-specified card is attempted to add to the discard pile.
         Function does the following:
             [1] Verifies if card is a valid play, if yes then [2], if not then returns false
             [2] Adds the card to the discardPile & returns true
          */
-        if (validateMove(card)){
+        if (validateMove(card, currentPlayer)){
             addCardToDiscardPile(card);
             return true;
         }
@@ -139,11 +168,22 @@ public class Game {
          */
         return discardPile.pop();
     }
-    
-    public static void main(String args[]) {
-    	
-    	Game gameObj= new Game();
-    	gameObj.initialize();
-    	
+
+    public void play(){
+        /* the main logical portion of the game which controls the order of moves
+         */
+
+        System.out.println("Starting the game!");
+
+        boolean gameInProgress = true;
+        while (gameInProgress) {
+            for (int i = 0; i < players.size(); i++){
+                System.out.println("Discard Pile Card: " + discardPile.peek().toString());
+
+            }
+            gameInProgress = false;
+        }
+        // TODO: implement logic
     }
+
 }

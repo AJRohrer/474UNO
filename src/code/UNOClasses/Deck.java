@@ -96,6 +96,12 @@ public class Deck {
     //removes all cards from deck
     public void clearDeck() { this.deck.removeAllElements(); }
 
+    //adds a specific card back to the deck (like the Wild4 if drawn in FR1.5)
+    public void addCard(UNOCard card){
+        deck.add(card);
+    }
+
+
     //print out the deck and deck total in the terminal, then shuffle and print out the deck and total again
     //create mock player hand with deal function and print hand and new deck total
     public static void main(String[] args) {
