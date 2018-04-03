@@ -21,24 +21,31 @@ public class Game {
         *   -   Deal cards to each player out of the total number of players
         *   etc.
         *   */
+
+        // SRS - FR1.1 -- complete
     	Scanner reader = new Scanner(System.in);
     	System.out.println("Enter the number of AI players you would like to play against: ");
     	aIPlayerCount = reader.nextInt();
-    	if(aIPlayerCount >14) {
+    	if(aIPlayerCount > 9) {
 			System.out.println("Error!");
-    		System.out.println("Maximum number of AI players allowed to play against one human player is 14.");
+    		System.out.println("Maximum number of AI players allowed to play against one human player is 9.");
     		System.exit(0);
     	}
     	reader.close();
-    	dealHand();
-    	//initializeDiscardPile();
+
+    	dealHand(); // SRS - FR1.2 & FR1.3 -- complete
+    	initializeDiscardPile(); // SRS - FR1.4 -- complete
+
+        // initializeDiscardPile() is to be considered to be the first move by the first player, player #0 in the players vector
+
+
     }
     /*
      * @author Pranjali Mishra @editor Darya Kiktenko
      * This function deals 7 cards each to the AI players and human player
      * returns collection of players with dealt hands
      */
-    private void dealHand() {
+    private void dealHand() { // SRS - FR1.2 & FR1.3 implementation
     	players= new Vector<Player>();
     	deck = new Deck();
     	deck.shuffleDeck();
@@ -63,7 +70,7 @@ public class Game {
 				}
     		}
     	}
-    	Collections.shuffle(players);
+    	Collections.shuffle(players); // SRS - FR1.3 -- complete
     	int k = 0;
     	for (Player player : players) { // TODO: What is the purpose of knowing one's position?
     		player.setPosition(k);
@@ -76,17 +83,24 @@ public class Game {
 			System.out.println(players.elementAt(i).toString());
 		}
     }
-    
 
-    private void initializeDiscardPile(){
+    private void initializeDiscardPile(){ // SRS - FR1.4 implementation
         /* initializes the Discard Pile AFTER players have been dealt their hand
           * Obtains the top card from the deck & places
           * it on top of the discardPile
           * */
         UNOCard topCard = deck.deal();
+        boolean validCard = false;
+        while (!validCard) {
+            System.out.println("Discard Pile Card: " + topCard.toString());
+            if (topCard.isWildDraw4()) {
+                System.out.println("Card is a \"Wild Draw Four\" - adding back to the Deck.");
+                deck.addCard(topCard);
+            } else {
+                validCard = true;
+            }
+        }
         discardPile.push(topCard);
-
-        // TODO: if topCard = Wild Draw Four, draw again
     }
 
     public UNOCard drawCard(){
@@ -136,11 +150,5 @@ public class Game {
          */
         return discardPile.pop();
     }
-    
-    public static void main(String args[]) {
-    	
-    	Game gameObj= new Game();
-    	gameObj.initialize();
-    	
-    }
+
 }
