@@ -25,59 +25,56 @@ public class Game {
     	System.out.println("Enter the number of AI players you would like to play against: ");
     	aIPlayerCount = reader.nextInt();
     	if(aIPlayerCount >14) {
-    		System.out.println("Maximum number of AI players allowed to play against one human player is 14. ");
+			System.out.println("Error!");
+    		System.out.println("Maximum number of AI players allowed to play against one human player is 14.");
     		System.exit(0);
     	}
     	reader.close();
     	dealHand();
-        //initializeDiscardPile();
-        // TODO: implement the initialize() class LAST (once all classes have been structured)
+    	//initializeDiscardPile();
     }
     /*
-     * @author Pranjali Mishra
+     * @author Pranjali Mishra @editor Darya Kiktenko
      * This function deals 7 cards each to the AI players and human player
      * returns collection of players with dealt hands
      */
-    private Vector<Player> dealHand() {
+    private void dealHand() {
     	players= new Vector<Player>();
-    	Deck deck = new Deck();
+    	deck = new Deck();
     	deck.shuffleDeck();
     	for (int j=0; j<7; j++) {    		
-    	if (j==0) {
-	    	for (int i=0; i <aIPlayerCount; i++){
-		    	Player player = new Player(false);
-		    	UNOCard uc =deck.deal();		    	
-		    	player.addCardtoHand(uc);
-		    	players.add(player);    	
+    		if (j==0) {
+    		// initializing AI players and giving them at least one card
+	    		for (int i=0; i < aIPlayerCount; i++){
+					Player player = new Player(false);
+					player.addCardtoHand(deck.deal());
+					players.add(player);
 	    		}
 	    	//Creating Human Player
-	    	{
-	    		Player player = new Player(true);
-		    	UNOCard uc =deck.deal();
-		    	player.addCardtoHand(uc);
-		    	players.add(player);
-	    	}
+	    		{
+	    			Player player = new Player(true);
+		    		player.addCardtoHand(deck.deal());
+		    		players.add(player);
+	    		}
     		}
-    	else {
-    		int playerIndex=0;
-    		for(Player player :players) {    			
-    			UNOCard uc =deck.deal();
-    	    	player.addCardtoHand(uc);
-    	    	players.set(playerIndex,player);
-    	    	playerIndex++;
-    			}    		
+    		else {
+    			for(Player player :players) {
+					player.addCardtoHand(deck.deal());
+				}
     		}
     	}
     	Collections.shuffle(players);
     	int k = 0;
-    	for (Player player : players) {
-			player.setPosition(k);
+    	for (Player player : players) { // TODO: What is the purpose of knowing one's position?
+    		player.setPosition(k);
 			k++;
 		}
     	System.out.println("Remaining cards in deck " + deck.deckTotal());
-    	System.out.println("Total Number of players including one human is :"+players.size());
-    	System.out.println("Cards Assigned to each player :"+players);
-    	return players;
+    	System.out.println("Total Number of players including one human is :" + players.size());
+		System.out.println("Cards Assigned to each player: ");
+		for (int i =0; i < players.size(); i++){
+			System.out.println(players.elementAt(i).toString());
+		}
     }
     
 

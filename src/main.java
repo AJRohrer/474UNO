@@ -45,6 +45,7 @@ public class main {
         System.out.println("*******Deck without player cards\n" + deck);
         System.out.println("*******New deck total: " + deck.deckTotal());
 
+        // entry for the project, which will launch a single instance of the game
         Game gameObj= new Game();
         gameObj.initialize();
     }
