@@ -171,6 +171,13 @@ public class Game {
     }
 
     private void makeMove(Player currentPlayer){
+        /*
+
+        The following snippet of code has been commented out on April 4 by DK due it being out of
+        scope for the first sprint. However, this lays down the groundwork for the logical operation
+        of how the game will run. So, for future sprints, bits and pieces of this work will be dissected
+        when deemed relevant.
+
         if (currentPlayer.isHuman()) {
             // if the current player is human -- then user gets to choose what they play
             boolean invalidSelection = true;
@@ -239,6 +246,7 @@ public class Game {
         else {
             AIMakeMove(currentPlayer);
         }
+        */
     }
 
     private void AIMakeMove(Player currentPlayer){
@@ -249,6 +257,12 @@ public class Game {
     public void play(){
         /* the main logical portion of the game which controls the order of moves
          */
+
+        /*
+        The following snippet of code has been commented out on April 4 by DK due it being out of
+        scope for the first sprint. However, this lays down the groundwork for the logical operation
+        of how the game will run. So, for future sprints, bits and pieces of this work will be dissected
+        when deemed relevant.
 
         System.out.println("Starting the game!");
 
@@ -291,5 +305,6 @@ public class Game {
             }
         }
         System.out.println("We have a winner!");
+        */
     }
 }
