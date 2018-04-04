@@ -70,4 +70,8 @@ public class UNOCard implements Comparable<UNOCard>{
             return -1;
         }
     }
+
+    public void set_color(UNOColor color){
+        this._color = color;
+    }
 }

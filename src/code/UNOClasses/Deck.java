@@ -3,13 +3,12 @@ package code.UNOClasses;
 import code.UNOClasses.Card.CardType;
 import code.UNOClasses.Card.UNOCard;
 import code.UNOClasses.Card.UNOColor;
-import java.util.Vector;
-import java.util.Stack;
+import java.util.*;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class Deck {
-    //create empty vector of Uno cards named deck
+    //create empty Stack of Uno cards named deck
     private Stack<UNOCard> deck;
 
     //the number of cards 1-9 and action cards (skip, draw two, reverse) per color
@@ -82,7 +81,7 @@ public class Deck {
 
     //overrides toString to create a print method for the deck
     public String toString() {
-        return deck.stream().map(UNOCard::toString).collect(Collectors.joining("\n"));
+        return deck.stream().map(UNOCard::toString).collect(Collectors.joining(", "));
     }
 
     //returns true if deck is empty
@@ -96,6 +95,13 @@ public class Deck {
 
     //removes all cards from deck
     public void clearDeck() { this.deck.removeAllElements(); }
+
+    //adds a specific card back to the deck (like the Wild4 if drawn in FR1.5)
+    public void addCard(UNOCard card){
+        deck.add(0, card);
+        //deck.add(card);
+    }
+
 
     //print out the deck and deck total in the terminal, then shuffle and print out the deck and total again
     //create mock player hand with deal function and print hand and new deck total
