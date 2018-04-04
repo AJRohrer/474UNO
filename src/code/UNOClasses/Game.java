@@ -10,8 +10,10 @@ import java.util.Stack;
 import java.util.Vector;
 
 public class Game {
-    private Vector<Player> players; /* TODO: need to decide how player order is to be decided and kept track of */
+    private Vector<Player> players;
     private Stack<UNOCard> discardPile;
+    Scanner reader;
+    Boolean GameOver = false;
 
     Deck deck;
     int aIPlayerCount = 0;
@@ -26,7 +28,7 @@ public class Game {
         *   */
 
         // SRS - FR1.1 -- complete
-    	Scanner reader = new Scanner(System.in);
+    	reader = new Scanner(System.in);
     	System.out.println("Enter the number of AI players you would like to play against: ");
     	aIPlayerCount = reader.nextInt();
     	if(aIPlayerCount > 9) {
@@ -34,7 +36,6 @@ public class Game {
     		System.out.println("Maximum number of AI players allowed to play against one human player is 9.");
     		System.exit(0);
     	}
-    	reader.close();
 
     	dealHand(); // SRS - FR1.2 & FR1.3 -- complete
     	initializeDiscardPile(); // SRS - FR1.4 & FR1.5 & FR1.6 -- complete
@@ -116,26 +117,70 @@ public class Game {
         return returnCard;
     }
 
-    private boolean validateMove(UNOCard card, Player currentPlayer){
+    public boolean validateCardColorsMatch(UNOCard playedCard, UNOCard discardPileTopCard){
+        /* compares two cards based on the color */
+
+        boolean result = false;
+        if (discardPileTopCard.get_color() == playedCard.get_color()){
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean validateCardTypesMatch(UNOCard playedCard, UNOCard discardPileTopCard){
+        /* compares two cards based on their type. */
+
+        boolean result = false;
+        if (discardPileTopCard.get_type() == playedCard.get_type()){
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean challengeWildDraw4Card(Player challenger, Player challenged){
+        /* NOTE: distinction between challenger and challenged.
+            Challenger is the PERSON AFTER the challenged (turn-wise) who suspects
+            that the challenged that they have a card in their hand which matched the discardPile's  top card
+            before the challenged played the Wild 4 Draw card.
+            Challenged is the player who played the Wild 4 Draw card.
+         */
+
+        /* function check's the challenged hand against the discardPile's top card BEFORE the challenged played
+        * the Wild 4 Draw card. If the hand contains any color of the same COLOR as the discardPile's top card,
+        * function returns true (& challenged will have to draw 4 cards).
+        * If the challenged does NOT have any card with the same COLOR as the discardPile's top card,
+        * the function will return false (& the challenger will have to draw 6 cards).
+        * */
+
+        // TODO: implement the challenge function
+        return false;
+    }
+
+    private boolean validateMove(UNOCard playedCard, Player currentPlayer){
         /* function verifies if the played card is a valid move against the game rules
          */
         boolean result = false;
+        UNOCard discardPileCard = discardPile.pop();
+        if (playedCard.isWild() || playedCard.isWildDraw4()){
+            /* if the played card is a wild card, then there's nothing to check except
+            to prompt the player to what color they would like to change the game play to */
 
-        if (card.isWild() || card.isWildDraw4()){
             result = true; // SRS - FR2.3 complete
             UNOCard declareColorCard = discardPile.pop();
             if (!currentPlayer.isHuman()){
-                //TODO: randomize the discard pile color declaration
+                //TODO: randomize the discard pile color declaration & set it to declareColorCard
             }
             else {
-                //TODO: prompt the human player for what color they'd like to discard pile to be
-
+                //TODO: prompt the human player for what color they'd like to discard pile to be & set it to declareColorCard
             }
-            discardPile.push(declareColorCard);
+            discardPile.push(declareColorCard); // taking top card & changing it's color
         }
-
-        // TODO: implement logic for verifying if the move is valid
-
+        else {
+            // otherwise, it's not a special card that is played and we just need to check if either the type or color match
+            if (validateCardColorsMatch(playedCard, discardPileCard) || validateCardTypesMatch(playedCard, discardPileCard)){
+                result = true;
+            }
+        }
         return result;
     }
 
@@ -169,21 +214,141 @@ public class Game {
         return discardPile.pop();
     }
 
+    private void makeMove(Player currentPlayer){
+        /*
+
+        The following snippet of code has been commented out on April 4 by DK due it being out of
+        scope for the first sprint. However, this lays down the groundwork for the logical operation
+        of how the game will run. So, for future sprints, bits and pieces of this work will be dissected
+        when deemed relevant.
+
+        if (currentPlayer.isHuman()) {
+            // if the current player is human -- then user gets to choose what they play
+            boolean invalidSelection = true;
+            while (invalidSelection) {
+                System.out.println("What would you like to do?");
+                System.out.println("    [0] Exit");
+                System.out.println("    [1] Show my hand");
+                System.out.println("    [2] Get last card played");
+                System.out.println("    [3] Play a card");
+                System.out.println("    [4] Declare UNO");
+                System.out.println("    [5] Pick up a card");
+                System.out.println("Enter # from above list): ");
+                int userSelection = reader.nextInt();
+                switch (userSelection) {
+                    case 0:
+                        System.out.println("Goodbye!");
+                        System.exit(0);
+                        break;
+                    case 1:
+                        currentPlayer.myHand().printHand();
+                        break;
+                    case 2:
+                        System.out.println("Discard Pile Card: " + discardPile.peek().toString());
+                        break;
+                    case 3:
+                        Boolean invalidSelection2 = true;
+                        while (invalidSelection2) {
+                            System.out.println("What card would you like to play?");
+                            Vector<UNOCard> cards = currentPlayer.myHand().getUnoCardsList();
+                            System.out.println("    [0] Exit");
+                            for (int q = 0; q < cards.size(); q++) {
+                                System.out.println("    [" + (q + 1) + "] " + cards.elementAt(q).toString());
+                            }
+                            System.out.println("Enter # from above list): ");
+                            int userSelection2 = reader.nextInt();
+                            if (userSelection2 == 0){
+                                System.out.println("Goodbye!");
+                                System.exit(0);
+                            }
+                            UNOCard selectedCard = cards.elementAt(userSelection2-1);
+                            if (playCard(selectedCard, currentPlayer)){
+                                invalidSelection2 = false;
+                                currentPlayer.myHand().removeUNOCard(selectedCard);
+                            }
+                            else {
+                                System.out.println("Invalid selection. Try again.");
+                            }
+                            // TODO: Need to implement logic in this while loop if user changed their mind on playing card (& would like to draw a card instead, etc. - exit to the first while loop)
+                        }
+                        invalidSelection = false;
+                        break;
+                    case 4:
+                        System.out.println(currentPlayer.callUNO());
+                        invalidSelection = false;
+                        break;
+                    case 5:
+                        UNOCard card = deck.deal();
+                        System.out.println("You picked up: " + card.toString());
+                        currentPlayer.addCardtoHand(card);
+                        break;
+                    default:
+                        System.out.println("Invalid selection.");
+                }
+            }
+        }
+        else {
+            AIMakeMove(currentPlayer);
+        }
+        */
+    }
+
+    private void AIMakeMove(Player currentPlayer){
+        // TODO: Implement logic as to how the AI will decide to pick their card
+
+    }
+
     public void play(){
         /* the main logical portion of the game which controls the order of moves
          */
 
+        /*
+        The following snippet of code has been commented out on April 4 by DK due it being out of
+        scope for the first sprint. However, this lays down the groundwork for the logical operation
+        of how the game will run. So, for future sprints, bits and pieces of this work will be dissected
+        when deemed relevant.
+
         System.out.println("Starting the game!");
 
         boolean gameInProgress = true;
+        boolean skipOccurred = false;
         while (gameInProgress) {
-            for (int i = 0; i < players.size(); i++){
+            for (int i = 0; i < players.size(); i++) {
+                Player currentPlayer = players.elementAt(i);
                 System.out.println("Discard Pile Card: " + discardPile.peek().toString());
-
+                if (discardPile.peek().isWildDraw4()){
+                    // if the previous player played a Wild Four card, the current player has to draw 4 cards from the deck
+                    // and miss his or her turn
+                    for (int j = 0; j < 4; j++) {
+                        currentPlayer.addCardtoHand(deck.deal());
+                    }
+                }
+                else if (discardPile.peek().isSkip()){
+                    // if the previous player played a Skip card, the current player misses a turn
+                    if (!skipOccurred) {
+                        skipOccurred = true;
+                    }
+                    else {
+                        makeMove(currentPlayer);
+                    }
+                }
+                else if (discardPile.peek().isDraw2()){
+                    // if the previous player played a Draw Two card, the current player has to draw 2 cards from the deck
+                    // and miss his or her turn
+                    for (int j = 0; j < 2; j++) {
+                        currentPlayer.addCardtoHand(deck.deal());
+                    }
+                }
+                else if (!discardPile.peek().isSkip())
+                {
+                    makeMove(currentPlayer);
+                }
+                if (currentPlayer.myHand().isEmpty()){
+                    gameInProgress = false;
+                }
             }
-            gameInProgress = false;
         }
-        // TODO: implement logic
+        System.out.println("We have a winner!");
+        */
     }
-
 }

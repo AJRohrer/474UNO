@@ -29,7 +29,8 @@ public class Player {
 
     //Somehow the game should check to see if a player has one card left and if they have emitted UNO! as a string
     //to determine if they should be penalized for not calling UNO!
-    public String callUNO(){ return "UNO!"; }
+    public String callUNO(){
+        return "UNO!"; }
 
     //expose the hand object so we can use hand methods such as getting the hand total and printing the hand.
     public PlayerHand myHand(){ return _hand; }
