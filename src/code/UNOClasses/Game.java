@@ -11,7 +11,7 @@ public class Game {
     private Stack<UNOCard> discardPile;
 
     Deck deck = new Deck();
-    int aIPlayerCount = 0;
+
 
     public void initialize(){
         /* the caller function from main() which will be responsible for initializing the game instance, by calling:
@@ -23,13 +23,13 @@ public class Game {
         *   */
     	Scanner reader = new Scanner(System.in);
     	System.out.println("Enter the number of AI players you would like to play against: ");
-    	aIPlayerCount = reader.nextInt();
+    	int aIPlayerCount = reader.nextInt();
     	if(aIPlayerCount >14) {
     		System.out.println("Maximum number of AI players allowed to play against one human player is 14. ");
     		System.exit(0);
     	}
     	reader.close();
-    	dealHand();
+    	dealHand(aIPlayerCount);
         //initializeDiscardPile();
         // TODO: implement the initialize() class LAST (once all classes have been structured)
     }
@@ -38,13 +38,13 @@ public class Game {
      * This function deals 7 cards each to the AI players and human player
      * returns collection of players with dealt hands
      */
-    private Vector<Player> dealHand() {
+    public Vector<Player> dealHand(int playerCount) {
     	players= new Vector<Player>();
     	Deck deck = new Deck();
     	deck.shuffleDeck();
     	for (int j=0; j<7; j++) {    		
     	if (j==0) {
-	    	for (int i=0; i <aIPlayerCount; i++){
+	    	for (int i=0; i <playerCount; i++){
 		    	Player player = new Player(false);
 		    	UNOCard uc =deck.deal();		    	
 		    	player.addCardtoHand(uc);
