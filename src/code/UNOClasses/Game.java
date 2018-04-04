@@ -10,7 +10,7 @@ import java.util.Stack;
 import java.util.Vector;
 
 public class Game {
-    private Vector<Player> players; /* TODO: need to decide how player order is to be decided and kept track of */
+    private Vector<Player> players;
     private Stack<UNOCard> discardPile;
     Scanner reader;
     Boolean GameOver = false;
@@ -117,26 +117,70 @@ public class Game {
         return returnCard;
     }
 
-    private boolean validateMove(UNOCard card, Player currentPlayer){
+    public boolean validateCardColorsMatch(UNOCard playedCard, UNOCard discardPileTopCard){
+        /* compares two cards based on the color */
+
+        boolean result = false;
+        if (discardPileTopCard.get_color() == playedCard.get_color()){
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean validateCardTypesMatch(UNOCard playedCard, UNOCard discardPileTopCard){
+        /* compares two cards based on their type. */
+
+        boolean result = false;
+        if (discardPileTopCard.get_type() == playedCard.get_type()){
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean challengeWildDraw4Card(Player challenger, Player challenged){
+        /* NOTE: distinction between challenger and challenged.
+            Challenger is the PERSON AFTER the challenged (turn-wise) who suspects
+            that the challenged that they have a card in their hand which matched the discardPile's  top card
+            before the challenged played the Wild 4 Draw card.
+            Challenged is the player who played the Wild 4 Draw card.
+         */
+
+        /* function check's the challenged hand against the discardPile's top card BEFORE the challenged played
+        * the Wild 4 Draw card. If the hand contains any color of the same COLOR as the discardPile's top card,
+        * function returns true (& challenged will have to draw 4 cards).
+        * If the challenged does NOT have any card with the same COLOR as the discardPile's top card,
+        * the function will return false (& the challenger will have to draw 6 cards).
+        * */
+
+        // TODO: implement the challenge function
+        return false;
+    }
+
+    private boolean validateMove(UNOCard playedCard, Player currentPlayer){
         /* function verifies if the played card is a valid move against the game rules
          */
         boolean result = false;
+        UNOCard discardPileCard = discardPile.pop();
+        if (playedCard.isWild() || playedCard.isWildDraw4()){
+            /* if the played card is a wild card, then there's nothing to check except
+            to prompt the player to what color they would like to change the game play to */
 
-        if (card.isWild() || card.isWildDraw4()){
             result = true; // SRS - FR2.3 complete
             UNOCard declareColorCard = discardPile.pop();
             if (!currentPlayer.isHuman()){
-                //TODO: randomize the discard pile color declaration
+                //TODO: randomize the discard pile color declaration & set it to declareColorCard
             }
             else {
-                //TODO: prompt the human player for what color they'd like to discard pile to be
-
+                //TODO: prompt the human player for what color they'd like to discard pile to be & set it to declareColorCard
             }
-            discardPile.push(declareColorCard);
+            discardPile.push(declareColorCard); // taking top card & changing it's color
         }
-
-        // TODO: implement logic for verifying if the move is valid
-
+        else {
+            // otherwise, it's not a special card that is played and we just need to check if either the type or color match
+            if (validateCardColorsMatch(playedCard, discardPileCard) || validateCardTypesMatch(playedCard, discardPileCard)){
+                result = true;
+            }
+        }
         return result;
     }
 
