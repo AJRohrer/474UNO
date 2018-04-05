@@ -8,12 +8,10 @@ public class Player {
     private boolean isHuman; //returns true for the interfacing user, false for computer players (AI)
     private PlayerHand _hand = new PlayerHand();
     private int position;
-    private String playerName;
+    private String name;
 
-    public Player (boolean isHumanPlayer, String name){
+    public Player (boolean isHumanPlayer){
         this.isHuman = isHumanPlayer;
-        this.playerName = name;
-
     }
 
     public boolean isHuman() {
@@ -33,11 +31,6 @@ public class Player {
     //to determine if they should be penalized for not calling UNO!
     public String callUNO(){
         return "UNO!"; }
-
-    //Get Player's Name
-    public String getName() {
-        return playerName;
-    }
 
     //expose the hand object so we can use hand methods such as getting the hand total and printing the hand.
     public PlayerHand myHand(){ return _hand; }

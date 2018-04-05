@@ -106,31 +106,6 @@ public class Deck {
     //print out the deck and deck total in the terminal, then shuffle and print out the deck and total again
     //create mock player hand with deal function and print hand and new deck total
     public static void main(String[] args) {
-        //Need to check whether the player is human or not
-        //To Identify whether Human or System is playing the game. Once I get the UI Component Details, I will modify the code below.
-       /** try {
-            // Get Players name too
-            Scanner sc=new Scanner(System.in);
-            System.out.println("Enter Number 5");
-            int humanIdentifiyValue=sc.nextInt();
-            System.out.println("Human Value:"+humanIdentifiyValue);
-            sc.close();
-
-            if(humanIdentifiyValue==5){
-                Player p = new Player(true,"Player1");
-                p.isHuman();
-                System.out.println("  I am Human  ");
-                callDeck(p.isHuman()); //call the below methods in a call deck function
-            }else{
-                System.out.println(" AI  ");
-                callDeck(false);
-            }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }**/
-
-
         Deck deck = new Deck();
         System.out.println("Deck in order\n" + deck);
         System.out.println("Deck total: " + deck.deckTotal());
