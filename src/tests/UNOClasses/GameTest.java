@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.util.Vector;
 
 
@@ -42,6 +43,11 @@ public class GameTest {
 	public void testDealHandPlayers() {
 		Game game = new Game();
 		Vector<Player> playerList= game.dealHand(3); //TODO: Need to fix - dealHand() does not take any parameters
+		assertEquals(4, playerList.size());
+  @Test
+	public void testDealHandPlayers() {
+		Game game = new Game();
+		Vector<Player> playerList= game.dealHand(3);
 		assertEquals(4, playerList.size());
 	}
 

@@ -15,6 +15,7 @@ public class Game {
     Scanner reader;
     Boolean GameOver = false;
 
+
     Deck deck;
     int aIPlayerCount = 0;
 
@@ -30,6 +31,7 @@ public class Game {
         // SRS - FR1.1 -- complete
     	reader = new Scanner(System.in);
     	System.out.println("Enter the number of AI players you would like to play against: ");
+
     	aIPlayerCount = reader.nextInt();
     	if(aIPlayerCount > 9) {
 			System.out.println("Error!");
@@ -48,18 +50,22 @@ public class Game {
      * This function deals 7 cards each to the AI players and human player
      * returns collection of players with dealt hands
      */
+
     private void dealHand() { // SRS - FR1.2 & FR1.3 implementation
+
     	players= new Vector<Player>();
     	deck = new Deck();
     	discardPile = new Stack<UNOCard>();
     	deck.shuffleDeck();
     	for (int j=0; j<7; j++) {    		
+
     		if (j==0) {
     		// initializing AI players and giving them at least one card
 	    		for (int i=0; i < aIPlayerCount; i++){
 					Player player = new Player(false);
 					player.addCardtoHand(deck.deal());
 					players.add(player);
+
 	    		}
 	    	//Creating Human Player
 	    		{
