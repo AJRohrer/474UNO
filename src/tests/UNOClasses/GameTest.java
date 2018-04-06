@@ -19,7 +19,6 @@ public class GameTest {
 	@Test
 	public void testDrawCard(){
 		Game testGame = new Game();
-		testGame.initialize();
 		assertEquals(testGame.deck.deal(), testGame.drawCard());
 	}
 
