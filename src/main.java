@@ -46,7 +46,6 @@ public class main {
 
         // entry for the project, which will launch a single instance of the game
         Game gameObj= new Game();
-        gameObj.initialize();
         gameObj.play();
     }
 
