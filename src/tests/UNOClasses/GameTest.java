@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.util.Vector;
 
 
@@ -18,7 +19,6 @@ public class GameTest {
 	@Test
 	public void testDrawCard(){
 		Game testGame = new Game();
-		testGame.initialize();
 		assertEquals(testGame.deck.deal(), testGame.drawCard());
 	}
 
@@ -30,11 +30,42 @@ public class GameTest {
 		testGame.validateCardColorsMatch(card1,card2);
 	}
 
-	@Test void testCardTypeCheck(){
+	@Test
+	public void testCardTypeCheck(){
 		Game testGame = new Game();
 		UNOCard card1 = new UNOCard(CardType.EIGHT,UNOColor.YELLOW);
 		UNOCard card2 = new UNOCard(CardType.EIGHT,UNOColor.BLUE);
 		testGame.validateCardTypesMatch(card1,card2);
+	}
+
+	@Test
+	public void testShufflePlayerOrder(){
+		// TODO: testShufflePlayerOrder()
+	}
+
+	@Test
+	public void testGetTotalNumberOfPlayers(){
+		// TODO: testGetTotalNumberOfPlayers()
+	}
+
+	@Test
+	public void testSetTotalNumberOfPlayers(){
+		// TODO: testSetTotalNumberOfPlayers()
+	}
+
+	@Test
+	public void testInitiatePlayersVector(){
+		// TODO: testInitiatePlayersVector()
+	}
+
+	@Test
+	public void testDealHand(){
+		// TODO: testDealHand()
+	}
+
+	@Test
+	public void testInitializeDiscardPile(){
+		// TODO: testInitializeDiscardPile()
 	}
 
 	/*
@@ -43,8 +74,13 @@ public class GameTest {
 		Game game = new Game();
 		Vector<Player> playerList= game.dealHand(3); //TODO: Need to fix - dealHand() does not take any parameters
 		assertEquals(4, playerList.size());
+  @Test
+	public void testDealHandPlayers() {
+		Game game = new Game();
+		Vector<Player> playerList= game.dealHand(3);
+		assertEquals(4, playerList.size());
 	}
-	
+
 	@Test
 	public void testDealHandPlayersHuman() {
 		Game game = new Game();

@@ -15,97 +15,128 @@ public class Game {
     Scanner reader;
     Boolean GameOver = false;
 
+    private int totalNumberOfPlayers = 0;
 
-    Deck deck;
+    public Deck deck;
     int aIPlayerCount = 0;
 
-    public void initialize(){
-        /* the caller function from main() which will be responsible for initializing the game instance, by calling:
-        *   -   Prompting the user for the number of AI players they would like to play against
-        *   -   Randomizing player order for the total number of players
-        *   -   Shuffle card deck before dealing, maybe twice? (deck.shuffleDeck();)
-        *   -   Deal cards to each player out of the total number of players
-        *   etc.
-        *   */
+    public Game(){
+        /** <h1>Game class constructor</h1>
+         *  <p><When Game class is declared, the function will be responsible for initializing the
+         *  game class instance, by
+         *  [1] obtaining total number of players,
+         *  [2] randomizing the player order,
+         *  [3] creating a deck,
+         *  [4] shuffling the deck
+         *  [5] deal cards to each play.
+         *  [6] initializing the discard pile of cards from the deck (draw first card)
+         *
+         *  This will prepare the Game for gameplay. </p>
+         *
+         * @author Darya Kiktenko
+         * @author Pranjali Mishra
+         */
 
-        // SRS - FR1.1 -- complete
-    	reader = new Scanner(System.in);
-    	System.out.println("Enter the number of AI players you would like to play against: ");
-
-    	aIPlayerCount = reader.nextInt();
-    	if(aIPlayerCount > 9) {
-			System.out.println("Error!");
-    		System.out.println("Maximum number of AI players allowed to play against one human player is 9.");
-    		System.exit(0);
-    	}
-
-    	dealHand(); // SRS - FR1.2 & FR1.3 -- complete
-    	initializeDiscardPile(); // SRS - FR1.4 & FR1.5 & FR1.6 -- complete
-
-        // initializeDiscardPile() is to be considered to be the first move by the first player, player #0 in the players vector
-
-    }
-    /*
-     * @author Pranjali Mishra @editor Darya Kiktenko
-     * This function deals 7 cards each to the AI players and human player
-     * returns collection of players with dealt hands
-     */
-
-    private void dealHand() { // SRS - FR1.2 & FR1.3 implementation
-
-    	players= new Vector<Player>();
-    	deck = new Deck();
-    	discardPile = new Stack<UNOCard>();
-    	deck.shuffleDeck();
-    	for (int j=0; j<7; j++) {    		
-
-    		if (j==0) {
-    		// initializing AI players and giving them at least one card
-	    		for (int i=0; i < aIPlayerCount; i++){
-					Player player = new Player(false);
-					player.addCardtoHand(deck.deal());
-					players.add(player);
-
-	    		}
-	    	//Creating Human Player
-	    		{
-	    			Player player = new Player(true);
-		    		player.addCardtoHand(deck.deal());
-		    		players.add(player);
-	    		}
-    		}
-    		else {
-    			for(Player player :players) {
-					player.addCardtoHand(deck.deal());
-				}
-    		}
-    	}
-    	Collections.shuffle(players); // SRS - FR1.3 -- complete
-    	int k = 0;
-    	for (Player player : players) { // TODO: What is the purpose of knowing one's position?
-    		player.setPosition(k);
-			k++;
-		}
-    	System.out.println("Remaining cards in deck " + deck.deckTotal());
-    	System.out.println("Total Number of players including one human is :" + players.size());
-		System.out.println("Cards Assigned to each player: ");
-		for (int i =0; i < players.size(); i++){
-			System.out.println(players.elementAt(i).toString());
-		}
+        setTotalNumberOfPlayers(getTotalNumberOfPlayers());
+        initiatePlayersVector(totalNumberOfPlayers);
+        shufflePlayerOrder(players);
+        deck = new Deck();
+        deck.shuffleDeck();
+        dealHand(deck, players);
+        initializeDiscardPile(deck);
     }
 
-    private void initializeDiscardPile(){ // SRS - FR1.4 & FR1.5 & FR1.6 implementation
-        /* initializes the Discard Pile AFTER players have been dealt their hand
-          * Obtains the top card from the deck & places
-          * it on top of the discardPile
-          * */
+    public Vector<Player> shufflePlayerOrder(Vector<Player> playerVector) {
+        /** Shuffles the players vector
+         * Adapted from original dealHand(), separated for OOP & unit testing purposes
+         * @author Darya Kiktenko
+         * @author Pranjali Mishra
+         */
+
+        Collections.shuffle(playerVector);
+        return playerVector;
+    }
+
+    public int getTotalNumberOfPlayers(){
+        /** Obtains the total number of players in the game in addition to the human player
+         * @author Darya Kiktenko
+         * @author Pranjali Mishra
+         */
+        int result = 1; //default for the human player
+
+        // TODO: To be changed with incorporation of the UI
+
+        reader = new Scanner(System.in);
+        System.out.println("Enter the number of AI players you would like to play against: ");
+        aIPlayerCount = reader.nextInt();
+        if(aIPlayerCount > 9) {
+            System.out.println("Error!");
+            System.out.println("Maximum number of AI players allowed to play against one human player is 9.");
+            System.exit(0);
+        }
+        else {
+            result = aIPlayerCount + 1; //+1 to include human player
+        }
+        return result;
+    }
+
+    public void setTotalNumberOfPlayers(int totalNumber){
+        /** Sets the total number of players which will be playing the game (including the human user)
+         * @author Darya Kiktenko
+         */
+        totalNumberOfPlayers = totalNumber;
+    }
+
+    public Vector<Player> initiatePlayersVector(int numberOfPlayers) {
+        /** Initializes the players vector class member
+         * by creating a new player object and adding that to the vector
+         * @author Darya Kiktenko
+         */
+        players = new Vector<Player>();
+        for (int i = 0; i < (numberOfPlayers-1); i++){ // minus 1, because human player will be separately initialized
+            Player tempPlayer = new Player(false); //false, because all except human are AI players
+            players.add(tempPlayer);
+        }
+
+        Player human = new Player(true);
+        players.add(human);
+
+        return players;
+    }
+
+    private Vector<Player> dealHand(Deck deckToDealFrom, Vector<Player> gamePlayers) { // SRS - FR1.2 & FR1.3 implementation
+        /** deals 7 cards from the deck to each of the players in the gamePlayers vector,
+         * including the AI and the human player.
+         * Returns the players vector that now have been dealt cards.
+         * Adapted from the original dealHand() function written by Pranjali Mishra
+         * @author Pranjali Mishra
+         */
+
+    	for (int j=0; j<7; j++) {
+    	    for(Player player : gamePlayers) {
+    	        player.addCardtoHand(deckToDealFrom.deal());
+    	    }
+    	}
+    	return gamePlayers;
+    }
+
+    private Stack<UNOCard> initializeDiscardPile(Deck deckToDealFrom){ // SRS - FR1.4 & FR1.5 & FR1.6 implementation
+        /** initializes the Discard Pile AFTER players have been dealt their hand
+         * Obtains the top card from the deck & places it on top of the discardPile.
+         * Unless the drawn card is wild draw 4 card, then the card is returned to the bottom of the draw
+         * deck and another card is drawn from the top of the draw deck.
+         * Returns the new initialized stack of UNOCards that is the discardPile
+         * Adapted from the original initializeDiscardPile() function written by Pranjali Mishra
+         * @author Pranjali Mishra
+         * @author Darya Kiktenko
+         */
+        discardPile = new Stack<UNOCard>();
         UNOCard topCard = null;
         boolean validCard = false;
         while (!validCard){
-            topCard = deck.deal();
-            System.out.println("Discard Pile Card: " + topCard.toString());
+            topCard = deckToDealFrom.deal();
             if (topCard.isWildDraw4()) {
-                System.out.println("Card is a \"Wild Draw Four\" - adding back to the Deck.");
+                System.out.println("First card drawn is a \"Wild Draw Four\"- adding back to the Deck & drawing another card.");
                 deck.addCard(topCard);
             }
             else {
@@ -113,6 +144,7 @@ public class Game {
                 validCard = true;
             }
         }
+        return discardPile;
     }
 
     public UNOCard drawCard(){
