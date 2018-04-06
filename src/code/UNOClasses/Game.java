@@ -92,7 +92,7 @@ public class Game {
          * by creating a new player object and adding that to the vector
          * @author Darya Kiktenko
          */
-
+        players = new Vector<Player>();
         for (int i = 0; i < (numberOfPlayers-1); i++){ // minus 1, because human player will be separately initialized
             Player tempPlayer = new Player(false); //false, because all except human are AI players
             players.add(tempPlayer);
