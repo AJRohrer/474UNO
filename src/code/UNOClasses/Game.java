@@ -42,7 +42,7 @@ public class Game {
         shufflePlayerOrder(players);
         deck = new Deck();
         deck.shuffleDeck();
-        dealHand();
+        dealHand(deck, players);
         initializeDiscardPile();
     }
 
@@ -104,53 +104,21 @@ public class Game {
         return players;
     }
 
-    /*
-     * @author Pranjali Mishra @editor Darya Kiktenko
-     * This function deals 7 cards each to the AI players and human player
-     * returns collection of players with dealt hands
-     */
+    private Vector<Player> dealHand(Deck deckToDealFrom, Vector<Player> gamePlayers) { // SRS - FR1.2 & FR1.3 implementation
+        /** deals 7 cards from the deck to each of the players in the gamePlayers vector,
+         * including the AI and the human player.
+         * Returns the players vector that now have been dealt cards.
+         * Adapted from the original dealHand() function written by Pranjali Mishra
+         * @author Pranjali Mishra
+         * @author Darya Kiktenko
+         */
 
-    private void dealHand() { // SRS - FR1.2 & FR1.3 implementation
-
-    	players= new Vector<Player>();
-    	deck = new Deck();
-    	discardPile = new Stack<UNOCard>();
-    	deck.shuffleDeck();
-    	for (int j=0; j<7; j++) {    		
-
-    		if (j==0) {
-    		// initializing AI players and giving them at least one card
-	    		for (int i=0; i < aIPlayerCount; i++){
-					Player player = new Player(false);
-					player.addCardtoHand(deck.deal());
-					players.add(player);
-
-	    		}
-	    	//Creating Human Player
-	    		{
-	    			Player player = new Player(true);
-		    		player.addCardtoHand(deck.deal());
-		    		players.add(player);
-	    		}
-    		}
-    		else {
-    			for(Player player :players) {
-					player.addCardtoHand(deck.deal());
-				}
-    		}
+    	for (int j=0; j<7; j++) {
+    	    for(Player player : gamePlayers) {
+    	        player.addCardtoHand(deckToDealFrom.deal());
+    	    }
     	}
-    	Collections.shuffle(players); // SRS - FR1.3 -- complete
-    	int k = 0;
-    	for (Player player : players) { // TODO: What is the purpose of knowing one's position?
-    		player.setPosition(k);
-			k++;
-		}
-    	System.out.println("Remaining cards in deck " + deck.deckTotal());
-    	System.out.println("Total Number of players including one human is :" + players.size());
-		System.out.println("Cards Assigned to each player: ");
-		for (int i =0; i < players.size(); i++){
-			System.out.println(players.elementAt(i).toString());
-		}
+    	return gamePlayers;
     }
 
     private void initializeDiscardPile(){ // SRS - FR1.4 & FR1.5 & FR1.6 implementation
