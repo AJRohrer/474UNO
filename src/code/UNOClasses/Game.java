@@ -43,7 +43,7 @@ public class Game {
         deck = new Deck();
         deck.shuffleDeck();
         dealHand(deck, players);
-        initializeDiscardPile();
+        initializeDiscardPile(deck);
     }
 
     public Vector<Player> shufflePlayerOrder(Vector<Player> playerVector) {
@@ -110,7 +110,6 @@ public class Game {
          * Returns the players vector that now have been dealt cards.
          * Adapted from the original dealHand() function written by Pranjali Mishra
          * @author Pranjali Mishra
-         * @author Darya Kiktenko
          */
 
     	for (int j=0; j<7; j++) {
@@ -121,18 +120,23 @@ public class Game {
     	return gamePlayers;
     }
 
-    private void initializeDiscardPile(){ // SRS - FR1.4 & FR1.5 & FR1.6 implementation
-        /* initializes the Discard Pile AFTER players have been dealt their hand
-          * Obtains the top card from the deck & places
-          * it on top of the discardPile
-          * */
+    private Stack<UNOCard> initializeDiscardPile(Deck deckToDealFrom){ // SRS - FR1.4 & FR1.5 & FR1.6 implementation
+        /** initializes the Discard Pile AFTER players have been dealt their hand
+         * Obtains the top card from the deck & places it on top of the discardPile.
+         * Unless the drawn card is wild draw 4 card, then the card is returned to the bottom of the draw
+         * deck and another card is drawn from the top of the draw deck.
+         * Returns the new initialized stack of UNOCards that is the discardPile
+         * Adapted from the original initializeDiscardPile() function written by Pranjali Mishra
+         * @author Pranjali Mishra
+         * @author Darya Kiktenko
+         */
+        discardPile = new Stack<UNOCard>();
         UNOCard topCard = null;
         boolean validCard = false;
         while (!validCard){
-            topCard = deck.deal();
-            System.out.println("Discard Pile Card: " + topCard.toString());
+            topCard = deckToDealFrom.deal();
             if (topCard.isWildDraw4()) {
-                System.out.println("Card is a \"Wild Draw Four\" - adding back to the Deck.");
+                System.out.println("First card drawn is a \"Wild Draw Four\"- adding back to the Deck & drawing another card.");
                 deck.addCard(topCard);
             }
             else {
@@ -140,6 +144,7 @@ public class Game {
                 validCard = true;
             }
         }
+        return discardPile;
     }
 
     public UNOCard drawCard(){
