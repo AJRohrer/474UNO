@@ -30,11 +30,42 @@ public class GameTest {
 		testGame.validateCardColorsMatch(card1,card2);
 	}
 
-	@Test void testCardTypeCheck(){
+	@Test
+	public void testCardTypeCheck(){
 		Game testGame = new Game();
 		UNOCard card1 = new UNOCard(CardType.EIGHT,UNOColor.YELLOW);
 		UNOCard card2 = new UNOCard(CardType.EIGHT,UNOColor.BLUE);
 		testGame.validateCardTypesMatch(card1,card2);
+	}
+
+	@Test
+	public void testShufflePlayerOrder(){
+		// TODO: testShufflePlayerOrder()
+	}
+
+	@Test
+	public void testGetTotalNumberOfPlayers(){
+		// TODO: testGetTotalNumberOfPlayers()
+	}
+
+	@Test
+	public void testSetTotalNumberOfPlayers(){
+		// TODO: testSetTotalNumberOfPlayers()
+	}
+
+	@Test
+	public void testInitiatePlayersVector(){
+		// TODO: testInitiatePlayersVector()
+	}
+
+	@Test
+	public void testDealHand(){
+		// TODO: testDealHand()
+	}
+
+	@Test
+	public void testInitializeDiscardPile(){
+		// TODO: testInitializeDiscardPile()
 	}
 
 	/*
