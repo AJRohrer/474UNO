@@ -15,7 +15,7 @@ public class Game {
     Scanner reader;
     Boolean GameOver = false;
 
-    private int totalNumberOfPlayers = 0;
+    public int totalNumberOfPlayers = 0;
 
     public Deck deck;
     int aIPlayerCount = 0;
@@ -66,17 +66,8 @@ public class Game {
 
         // TODO: To be changed with incorporation of the UI
 
-        reader = new Scanner(System.in);
-        System.out.println("Enter the number of AI players you would like to play against: ");
-        aIPlayerCount = reader.nextInt();
-        if(aIPlayerCount > 9) {
-            System.out.println("Error!");
-            System.out.println("Maximum number of AI players allowed to play against one human player is 9.");
-            System.exit(0);
-        }
-        else {
-            result = aIPlayerCount + 1; //+1 to include human player
-        }
+        result += 3; // 3 AI
+
         return result;
     }
 
@@ -104,7 +95,7 @@ public class Game {
         return players;
     }
 
-    private Vector<Player> dealHand(Deck deckToDealFrom, Vector<Player> gamePlayers) { // SRS - FR1.2 & FR1.3 implementation
+    public Vector<Player> dealHand(Deck deckToDealFrom, Vector<Player> gamePlayers) { // SRS - FR1.2 & FR1.3 implementation
         /** deals 7 cards from the deck to each of the players in the gamePlayers vector,
          * including the AI and the human player.
          * Returns the players vector that now have been dealt cards.
@@ -120,7 +111,7 @@ public class Game {
     	return gamePlayers;
     }
 
-    private Stack<UNOCard> initializeDiscardPile(Deck deckToDealFrom){ // SRS - FR1.4 & FR1.5 & FR1.6 implementation
+    public Stack<UNOCard> initializeDiscardPile(Deck deckToDealFrom){ // SRS - FR1.4 & FR1.5 & FR1.6 implementation
         /** initializes the Discard Pile AFTER players have been dealt their hand
          * Obtains the top card from the deck & places it on top of the discardPile.
          * Unless the drawn card is wild draw 4 card, then the card is returned to the bottom of the draw
@@ -154,6 +145,8 @@ public class Game {
         UNOCard returnCard = deck.deal();
         return returnCard;
     }
+
+    
 
     public boolean validateCardColorsMatch(UNOCard playedCard, UNOCard discardPileTopCard){
         /* compares two cards based on the color */
