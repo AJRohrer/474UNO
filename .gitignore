@@ -22,7 +22,7 @@
 hs_err_pid*
 
 #ignore idea files
-*.idea
+
 
 *.iml
 /bin/
@@ -30,5 +30,4 @@ out/
 
 # ignore xml files
 
-*.xml
 .idea/workspace.xml
