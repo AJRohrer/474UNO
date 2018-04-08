@@ -3,6 +3,8 @@ package code.UNOClasses;
  * coordinated functionality of what is expected from the game, UNO. */
 
 import code.UNOClasses.Card.UNOCard;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
 
 import java.util.Collections;
 import java.util.Scanner;
@@ -46,6 +48,11 @@ public class Game {
         initializeDiscardPile(deck);
     }
 
+    public Label UNOWelcome;
+
+    public void sayUNOWelcome(ActionEvent actionEvent) {
+        UNOWelcome.setText("Welcome to UNO!");
+    }
     public Vector<Player> shufflePlayerOrder(Vector<Player> playerVector) {
         /** Shuffles the players vector
          * Adapted from original dealHand(), separated for OOP & unit testing purposes
