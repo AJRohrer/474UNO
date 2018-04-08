@@ -1,16 +1,25 @@
-import code.UNOClasses.Card.CardType;
-import code.UNOClasses.Card.UNOCard;
-import code.UNOClasses.Card.UNOColor;
-import code.UNOClasses.Deck;
-import code.UNOClasses.Game;
-import code.UNOClasses.Player;
+package code.UNOClasses;
 
-import java.util.Stack;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class main {
+public class Main extends Application {
 
-    public static void main(String args[]){
-        UNOCard c = new UNOCard(CardType.DRAWTWO, UNOColor.BLUE);
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("UNO.fxml"));
+        primaryStage.setTitle("UNO");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
+        /*UNOCard c = new UNOCard(CardType.DRAWTWO, UNOColor.BLUE);
         System.out.println(c);
 
         System.out.println("Draw 2: " + c.isDraw2());
@@ -46,7 +55,6 @@ public class main {
 
         // entry for the project, which will launch a single instance of the game
         Game gameObj= new Game();
-        gameObj.play();
+        gameObj.play();*/
     }
-
 }

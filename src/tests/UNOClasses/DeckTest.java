@@ -1,4 +1,4 @@
-package tests.UNOClasses.Card;
+package tests.UNOClasses;
 
 
 import code.UNOClasses.Card.CardType;
