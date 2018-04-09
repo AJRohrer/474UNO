@@ -5,21 +5,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import code.UNOClasses.Card.*;
+import java.util.Stack;
 
-public class Main extends Application {
+public class Main {
 
-    @Override
+    /*@Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("UNO.fxml"));
         primaryStage.setTitle("UNO");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-    }
+    }*/
 
 
     public static void main(String[] args) {
-        launch(args);
-        /*UNOCard c = new UNOCard(CardType.DRAWTWO, UNOColor.BLUE);
+        //launch(args);
+        UNOCard c = new UNOCard(CardType.DRAWTWO, UNOColor.BLUE);
         System.out.println(c);
 
         System.out.println("Draw 2: " + c.isDraw2());
@@ -55,6 +57,6 @@ public class Main extends Application {
 
         // entry for the project, which will launch a single instance of the game
         Game gameObj= new Game();
-        gameObj.play();*/
+        gameObj.play();
     }
 }
