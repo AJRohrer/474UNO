@@ -1,4 +1,4 @@
-package code.UNOClasses.Hand;
+package code.UNOClasses;
 
 import code.UNOClasses.Card.UNOCard;
 
