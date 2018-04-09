@@ -2,7 +2,6 @@ package code.UNOClasses;
 
 
 import code.UNOClasses.Card.UNOCard;
-import code.UNOClasses.Hand.PlayerHand;
 
 public class Player {
     private boolean isHuman; //returns true for the interfacing user, false for computer players (AI)

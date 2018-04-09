@@ -1,9 +1,9 @@
-package tests.UNOClasses.Hand;
+package tests.UNOClasses;
 
 import code.UNOClasses.Card.CardType;
 import code.UNOClasses.Card.UNOCard;
 import code.UNOClasses.Card.UNOColor;
-import code.UNOClasses.Hand.PlayerHand;
+import code.UNOClasses.PlayerHand;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
