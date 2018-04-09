@@ -7,6 +7,7 @@ import code.UNOClasses.Deck;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 import java.util.Stack;
@@ -21,8 +22,9 @@ public class GameTest {
 	@Test
 	public void testDrawCard(){
 		Game testGame = new Game();
-		Deck testDeck = testGame.deck;
-		assertEquals(testDeck.deal(), testGame.drawCard());
+		int fullDeckSize = testGame.deck.deckTotal();
+		testGame.drawCard();
+		assertEquals(fullDeckSize-1, testGame.deck.deckTotal());
 	}
 
 	@Test
@@ -92,25 +94,4 @@ public class GameTest {
 		assertFalse(testGame.initializeDiscardPile(testDeck).empty());
 	}
 
-
-	/*
-	@Test
-	public void testDealHandPlayers() {
-		Game game = new Game();
-		Vector<Player> playerList= game.dealHand(3); //TODO: Need to fix - dealHand() does not take any parameters
-		assertEquals(4, playerList.size());
-  @Test
-	public void testDealHandPlayers() {
-		Game game = new Game();
-		Vector<Player> playerList= game.dealHand(3);
-		assertEquals(4, playerList.size());
-	}
-
-	@Test
-	public void testDealHandPlayersHuman() {
-		Game game = new Game();
-		Vector<Player> playerList= game.dealHand(3); //TODO: Need to fix - dealHand() does not take any parameters
-	    assertTrue(playerList.get(3).isHuman());
-	}
-	*/
 }

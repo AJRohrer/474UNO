@@ -146,17 +146,18 @@ public class Game {
     }
 
     public UNOCard drawCard(){
-        /* returns an UNOCard from the top of the deck &
-        * removes that card from the deck*/
+        /** returns the UNOCard from the top of the deck & removes that card from the deck
+         * @author Darya Kiktenko
+         * */
 
-        UNOCard returnCard = deck.deal();
-        return returnCard;
+        return deck.deal();
     }
 
     
 
     public boolean validateCardColorsMatch(UNOCard playedCard, UNOCard discardPileTopCard){
-        /* compares two cards based on the color */
+        /** compares two cards based on the color
+         * @author Darya Kiktenko*/
 
         boolean result = false;
         if (discardPileTopCard.get_color() == playedCard.get_color()){
@@ -166,7 +167,8 @@ public class Game {
     }
 
     public boolean validateCardTypesMatch(UNOCard playedCard, UNOCard discardPileTopCard){
-        /* compares two cards based on their type. */
+        /** compares two cards based on their type.
+         * @author Darya Kiktenko */
 
         boolean result = false;
         if (discardPileTopCard.get_type() == playedCard.get_type()){
