@@ -58,5 +58,37 @@ public class Main {
         // entry for the project, which will launch a single instance of the game
         Game gameObj= new Game();
         gameObj.play();
+
+        //moving turns test.
+        System.out.println("This is a test to make sure the player turns work::::::::::::::::::::::");
+        PlayerTurnState pts = PlayerTurnState.getInstance();
+        pts.initialize(4,1);
+
+        pts.skipNextPlayer();
+
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println("reverse");
+        pts.reverseTurnOrder();
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println("reverse");
+        pts.reverseTurnOrder();
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        pts.skipNextPlayer();
+        pts.reverseTurnOrder();
+        System.out.println(pts.moveNextPlayer());
+        System.out.println("skip -> reverse");
+        System.out.println(pts.getCurrentTurn());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+
     }
 }
