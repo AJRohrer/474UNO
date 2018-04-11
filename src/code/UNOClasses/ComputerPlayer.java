@@ -68,8 +68,32 @@ public class ComputerPlayer extends Player {
                 and that is why playableCardFound boolean flag remains false */
         }
 
-        if (playableCardFound){
-            // TODO: Apply logic here
+        if (playableCardFound){ // if no playable card was found, then why do any additional work - just return null
+
+            /* here is where we analyze what possible moves can be made.
+            First, we consider circumstances if a special card was last played,
+            then, we apply logic if a number card was played (hence the if-else) */
+
+            if (!lastCardPlayed.isNumberCard()){
+                if (lastCardPlayed.isWildDraw4()){
+                    // TODO: What should AI do if the last card played is a Wild Draw 4?
+                }
+                else if (lastCardPlayed.isWild()){
+                    // TODO: What should AI do if the last card played is a Wild card?
+                }
+                else if (lastCardPlayed.isDraw2()){
+                    // TODO: What should AI do if the last card played is a a Draw 2 card?
+                }
+                else if (lastCardPlayed.isReverse()){
+                    // TODO: What should AI do if the last card played is a Reverse card?
+                }
+                else if (lastCardPlayed.isSkip()){
+                    // TODO: What should AI do if the last card played is a Skip card?
+                }
+            }
+            else {
+                // TODO: What should AI do if the last card played is a numbered card?
+            }
         }
 
         return cardToPlay;
