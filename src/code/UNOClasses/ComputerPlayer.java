@@ -11,15 +11,18 @@ public class ComputerPlayer extends Player {
         super(false);
     }
 
-    public UNOCard makeMove(UNOCard lastCardPlayed){
+    public UNOCard makeMove(UNOCard lastCardPlayed) {
         /** The implementation of the AI automated player would
          * make a move based on a set of circumstances.
+         *
+         * Returns null if no card can be played & a card must be drawn
          *
          * @author Darya Kiktenko
          */
 
         boolean playableCardFound = true;
         Vector<UNOCard> myCards = myHand().getUnoCardsList();
+        UNOCard cardToPlay = null;
 
         Integer WildFourIndex = -1;
         Integer WildCardIndex = -1;
@@ -27,57 +30,48 @@ public class ComputerPlayer extends Player {
         Integer ReverseCardIndex = -1;
         Integer DrawTwoCardIndex = -1;
 
-        if (lastCardPlayed.isNumberCard()) {
-            /* If the last card played is a numbered card  */
+        UNOColor lastColor = lastCardPlayed.get_color();
+        CardType lastType = lastCardPlayed.get_type();
+        Vector<Integer> colorMatchIndices = new Vector<Integer>();
+        Vector<Integer> typeMatchIndices = new Vector<Integer>();
 
-            UNOColor lastColor = lastCardPlayed.get_color();
-            CardType lastType = lastCardPlayed.get_type();
-            Vector<Integer> colorMatchIndices = new Vector<Integer>();
-            Vector<Integer> typeMatchIndices = new Vector<Integer>();
-
-            /* analyzing what cards are in the hand */
-
-            for (int i = 0; i < myCards.size(); i++) {
-                UNOCard cardAnalyzed = myCards.elementAt(i);
-                if (cardAnalyzed.get_color() == lastColor) {
-                    colorMatchIndices.add(i);
-                    playableCardFound = true;
-                }
-
-                if (cardAnalyzed.get_type() == lastType) {
-                    typeMatchIndices.add(i);
-                    playableCardFound = true;
-                }
-
-                if (cardAnalyzed.isWildDraw4()){
-                    WildFourIndex = i;
-                    playableCardFound = true;
-                }
-                else if (cardAnalyzed.isWild()){
-                    WildCardIndex = i;
-                    playableCardFound = true;
-                }
-                else if (cardAnalyzed.isSkip()){
-                    SkipCardIndex = i;
-                    playableCardFound = true;
-                }
-                else if (cardAnalyzed.isReverse()){
-                    ReverseCardIndex = i;
-                    playableCardFound = true;
-                }
-                else if (cardAnalyzed.isDraw2()){
-                    DrawTwoCardIndex = i;
-                    playableCardFound = true;
-                }
-
-                // if nothing else match, then the only option would be to draw a card
-
-
+        for (int i = 0; i < myCards.size(); i++) {
+            UNOCard cardAnalyzed = myCards.elementAt(i);
+            if (cardAnalyzed.get_color() == lastColor) {
+                colorMatchIndices.add(i);
+                playableCardFound = true;
             }
+
+            if (cardAnalyzed.get_type() == lastType) {
+                typeMatchIndices.add(i);
+                playableCardFound = true;
+            }
+
+            if (cardAnalyzed.isWildDraw4()) {
+                WildFourIndex = i;
+                playableCardFound = true;
+            } else if (cardAnalyzed.isWild()) {
+                WildCardIndex = i;
+                playableCardFound = true;
+            } else if (cardAnalyzed.isSkip()) {
+                SkipCardIndex = i;
+                playableCardFound = true;
+            } else if (cardAnalyzed.isReverse()) {
+                ReverseCardIndex = i;
+                playableCardFound = true;
+            } else if (cardAnalyzed.isDraw2()) {
+                DrawTwoCardIndex = i;
+                playableCardFound = true;
+            }
+
+            /* if nothing else match, then the only option would be to draw a card
+                and that is why playableCardFound boolean flag remains false */
         }
-        else {
-            /* TODO: Need to figure out the logic if the last card played is a special card
-            */
+
+        if (playableCardFound){
+            // TODO: Apply logic here
         }
+
+        return cardToPlay;
     }
 }
