@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import code.UNOClasses.Card.*;
+import java.util.Stack;
 
 public class Main extends Application {
 
@@ -19,6 +21,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
         /*UNOCard c = new UNOCard(CardType.DRAWTWO, UNOColor.BLUE);
         System.out.println(c);
 
@@ -55,6 +58,38 @@ public class Main extends Application {
 
         // entry for the project, which will launch a single instance of the game
         Game gameObj= new Game();
-        gameObj.play();*/
+        gameObj.play();
+
+        //moving turns test.
+        System.out.println("This is a test to make sure the player turns work::::::::::::::::::::::");
+        PlayerTurnState pts = PlayerTurnState.getInstance();
+        pts.initialize(4,1);
+
+        pts.skipNextPlayer();
+
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println("reverse");
+        pts.reverseTurnOrder();
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println("reverse");
+        pts.reverseTurnOrder();
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        pts.skipNextPlayer();
+        pts.reverseTurnOrder();
+        System.out.println(pts.moveNextPlayer());
+        System.out.println("skip -> reverse");
+        System.out.println(pts.getCurrentTurn());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());
+        System.out.println(pts.moveNextPlayer());*/
+
     }
 }
