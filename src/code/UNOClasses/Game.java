@@ -254,6 +254,14 @@ public class Game {
         return discardPile.pop();
     }
 
+    public void play(){
+
+    }
+
+
+
+
+
     private void makeMove(Player currentPlayer){
         /*
 
@@ -338,7 +346,7 @@ public class Game {
 
     }
 
-    public void play(){
+    //public void play(){
         /* the main logical portion of the game which controls the order of moves
          */
 
@@ -390,5 +398,5 @@ public class Game {
         }
         System.out.println("We have a winner!");
         */
-    }
+    //}
 }
