@@ -93,6 +93,12 @@ public class ComputerPlayer extends Player {
                 }
             }
 
+            if ((colorMatchIndices.size() == 0) && (nextPlayerHandSize < 3) && (WildFourIndex != -1)){
+                // no colors match & we have a wild draw 4 card, we want to place that so next player
+                cardToPlay = myCards.elementAt(WildCardIndex);
+                // TODO: Remove card from my hand
+            }
+
 
             if (!lastCardPlayed.isNumberCard()){
                 if (lastCardPlayed.isWildDraw4()){
