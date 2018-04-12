@@ -20,9 +20,11 @@ public class PlayerTurnState {
     private PlayerTurnState() {
     }
 
+    //Make sure that the starting player is the position in the array, not the player number.
     public void initialize(int numofPlayers, int startingPlayer){
         this.numberOfPlayers = numofPlayers;
         this.currentPlayerTurn = startingPlayer;
+        this.nextPlayer = true;
     }
 
     public int moveNextPlayer(){
