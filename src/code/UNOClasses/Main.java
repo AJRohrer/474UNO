@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import code.UNOClasses.Card.*;
 import java.util.Stack;
 
-public class Main {
+public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
