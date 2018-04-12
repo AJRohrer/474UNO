@@ -26,6 +26,9 @@ public class TurnStateTest {
         assertEquals(pts.getCurrentTurn(), 4);
         assertEquals(pts.moveNextPlayer(), 3);
         assertEquals(pts.moveNextPlayer(), 2);
+        pts.reverseTurnOrder();
+        assertEquals(pts.moveNextPlayer(),3);
+        assertEquals(pts.moveNextPlayer(), 4);
     }
 
     @Test
