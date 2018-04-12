@@ -74,12 +74,22 @@ public class ComputerPlayer extends Player {
             First, we consider circumstances if a special card was last played,
             then, we apply logic if a number card was played (hence the if-else) */
 
-            /* if UNO has been previously called ... */
+            /* checking if UNO has been previously called & we want to know how many cards the person after
+             * us has and the person after them has, so we know circumstances if we play a special card
+              * like skip or draw */
 
             boolean UNOCalled = false;
+            int nextPlayerHandSize = -1;
+            int playerAfterNextHandSize = -1;
             for (int i = 0; i < players.size(); i++){
                 if (players.elementAt(i).UNOCalled){
                     UNOCalled = true;
+                }
+                if (players.elementAt(i).getPosition() == (this.getPosition()+1)){
+                    nextPlayerHandSize = players.elementAt(i).myHand().handTotal();
+                }
+                if (players.elementAt(i).getPosition() == (this.getPosition()+2)){
+                    playerAfterNextHandSize = players.elementAt(i).myHand().handTotal();
                 }
             }
 
@@ -87,9 +97,12 @@ public class ComputerPlayer extends Player {
             if (!lastCardPlayed.isNumberCard()){
                 if (lastCardPlayed.isWildDraw4()){
                     // TODO: What should AI do if the last card played is a Wild Draw 4?
+                    // TODO: How do we determine what color the player who played the card chose?
+                    // TODO: Does PlayerTurn control that the person after the player who played the card is skipped or do we have to implement in Player class?
                 }
                 else if (lastCardPlayed.isWild()){
                     // TODO: What should AI do if the last card played is a Wild card?
+                    // TODO: How do we determine what color the player who played the card chose?
                 }
                 else if (lastCardPlayed.isDraw2()){
                     // TODO: What should AI do if the last card played is a a Draw 2 card?

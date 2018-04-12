@@ -41,4 +41,6 @@ public class Player {
     }
 
     public void setPosition (int p) { this.position = p; }
+
+    public int getPosition(){return this.position;}
 }
