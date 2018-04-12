@@ -8,6 +8,7 @@ public class Player {
     private PlayerHand _hand = new PlayerHand();
     private int position;
     private String name;
+    public boolean UNOCalled = false;
 
     public Player (boolean isHumanPlayer){
         this.isHuman = isHumanPlayer;
@@ -29,6 +30,7 @@ public class Player {
     //Somehow the game should check to see if a player has one card left and if they have emitted UNO! as a string
     //to determine if they should be penalized for not calling UNO!
     public String callUNO(){
+        UNOCalled = true;
         return "UNO!"; }
 
     //expose the hand object so we can use hand methods such as getting the hand total and printing the hand.

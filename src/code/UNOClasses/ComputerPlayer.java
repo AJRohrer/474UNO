@@ -11,7 +11,7 @@ public class ComputerPlayer extends Player {
         super(false);
     }
 
-    public UNOCard makeMove(UNOCard lastCardPlayed) {
+    public UNOCard makeMove(UNOCard lastCardPlayed, Vector<Player> players) {
         /** The implementation of the AI automated player would
          * make a move based on a set of circumstances.
          *
@@ -73,6 +73,16 @@ public class ComputerPlayer extends Player {
             /* here is where we analyze what possible moves can be made.
             First, we consider circumstances if a special card was last played,
             then, we apply logic if a number card was played (hence the if-else) */
+
+            /* if UNO has been previously called ... */
+
+            boolean UNOCalled = false;
+            for (int i = 0; i < players.size(); i++){
+                if (players.elementAt(i).UNOCalled){
+                    UNOCalled = true;
+                }
+            }
+
 
             if (!lastCardPlayed.isNumberCard()){
                 if (lastCardPlayed.isWildDraw4()){
