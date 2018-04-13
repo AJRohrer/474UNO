@@ -79,11 +79,15 @@ public class ComputerPlayer extends Player {
               * like skip or draw */
 
             boolean UNOCalled = false;
+            int playerBeforeHandSize = -1;
             int nextPlayerHandSize = -1;
             int playerAfterNextHandSize = -1;
             for (int i = 0; i < players.size(); i++){
                 if (players.elementAt(i).UNOCalled){
                     UNOCalled = true;
+                }
+                if (players.elementAt(i).getPosition() == (this.getPosition()-1)){
+                    playerBeforeHandSize = players.elementAt(i).myHand().handTotal();
                 }
                 if (players.elementAt(i).getPosition() == (this.getPosition()+1)){
                     nextPlayerHandSize = players.elementAt(i).myHand().handTotal();
@@ -92,13 +96,6 @@ public class ComputerPlayer extends Player {
                     playerAfterNextHandSize = players.elementAt(i).myHand().handTotal();
                 }
             }
-
-            if ((colorMatchIndices.size() == 0) && (nextPlayerHandSize < 3) && (WildFourIndex != -1)){
-                // no colors match & we have a wild draw 4 card, we want to place that so next player
-                cardToPlay = myCards.elementAt(WildCardIndex);
-                // TODO: Remove card from my hand
-            }
-
 
             if (!lastCardPlayed.isNumberCard()){
                 if (lastCardPlayed.isWildDraw4()){
@@ -123,6 +120,44 @@ public class ComputerPlayer extends Player {
             else {
                 // TODO: What should AI do if the last card played is a numbered card?
             }
+
+            /* Playing special cards should be considered first before numbered cards.
+            Logic based on the following logic:
+
+            	                                                Wild Draw 4	 Wild Card	Skip Card	Reverse Card	Draw Two
+                No color match discard	                            Y	        -	        -	        -	            -
+                Next player has less cards than others	            Y	        -	        Y	        Y	            Y
+                Player before you has less cards than others       	-	        -	        -	        N	            -
+                Player after next has less cards than others	    N	        -	        N	        -	            N
+             */
+
+            boolean cardToPlayFound = true;
+            if (nextPlayerHandSize <= 3){
+                if (playerAfterNextHandSize >= 2){
+                    if ((colorMatchIndices.size() == 0) && (WildFourIndex != -1)){
+                        cardToPlay = myCards.elementAt(WildFourIndex);
+                    }
+                    else if (DrawTwoCardIndex != -1){
+                        cardToPlay = myCards.elementAt(DrawTwoCardIndex);
+                    }
+                    else if (SkipCardIndex != -1){
+                        cardToPlay = myCards.elementAt(SkipCardIndex);
+                    }
+                    else if ((playerBeforeHandSize >= 2) && (ReverseCardIndex != -1)){
+                        cardToPlay = myCards.elementAt(ReverseCardIndex);
+                    }
+                    else {
+                        cardToPlayFound = false;
+                    }
+                }
+                else {
+                    // otherwise, we can't play neither the Wild Draw 4, a skip card, or a draw two
+                }
+            }
+            else {
+                // TODO: consider playing a regular card, else play a wild card
+            }
+
         }
 
         return cardToPlay;
