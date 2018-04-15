@@ -12,7 +12,7 @@ public class ComputerPlayer extends Player {
         super(false);
     }
 
-    public UNOCard makeMove(UNOCard lastCardPlayed, Vector<Player> players) {
+    public UNOCard makeMove(UNOCard lastCardPlayed, Player playerBefore, Player playerAfter, Player playerAfterNext) {
         /** The implementation of the AI automated player would
          * make a move based on a set of circumstances.
          *
@@ -79,43 +79,11 @@ public class ComputerPlayer extends Player {
              * us has and the person after them has, so we know circumstances if we play a special card
              * like skip or draw */
 
-            boolean UNOCalled = false;
-            int playerBeforeHandSize = -1;
-            int nextPlayerHandSize = -1;
-            int playerAfterNextHandSize = -1;
-            for (int i = 0; i < players.size(); i++) {
-                if (players.elementAt(i).UNOCalled) {
-                    UNOCalled = true;
-                }
-                if (players.elementAt(i).getPosition() == (this.getPosition() - 1)) { // TODO: we don't know if there is a Player before us (if we're at position 0)
-                    playerBeforeHandSize = players.elementAt(i).myHand().handTotal();
-                }
-                if (players.elementAt(i).getPosition() == (this.getPosition() + 1)) { // TODO: we don't know if there is a Player before us (if we're at last position of the vector)
-                    nextPlayerHandSize = players.elementAt(i).myHand().handTotal();
-                }
-                if (players.elementAt(i).getPosition() == (this.getPosition() + 2)) { // TODO: we don't know if there is a Player before us (if we're at last position of the vector)
-                    playerAfterNextHandSize = players.elementAt(i).myHand().handTotal();
-                }
-            }
 
-            if (!lastCardPlayed.isNumberCard()) {
-                if (lastCardPlayed.isWildDraw4()) {
-                    // TODO: What should AI do if the last card played is a Wild Draw 4?
-                    // TODO: How do we determine what color the player who played the card chose?
-                    // TODO: Does PlayerTurn control that the person after the player who played the card is skipped or do we have to implement in Player class?
-                } else if (lastCardPlayed.isWild()) {
-                    // TODO: What should AI do if the last card played is a Wild card?
-                    // TODO: How do we determine what color the player who played the card chose?
-                } else if (lastCardPlayed.isDraw2()) {
-                    // TODO: What should AI do if the last card played is a a Draw 2 card?
-                } else if (lastCardPlayed.isReverse()) {
-                    // TODO: What should AI do if the last card played is a Reverse card?
-                } else if (lastCardPlayed.isSkip()) {
-                    // TODO: What should AI do if the last card played is a Skip card?
-                }
-            } else {
-                // TODO: What should AI do if the last card played is a numbered card?
-            }
+            int playerBeforeHandSize = playerBefore.myHand().handTotal();
+            int nextPlayerHandSize = playerAfter.myHand().handTotal();
+            int playerAfterNextHandSize = playerAfterNext.myHand().handTotal();
+
 
             /* Playing special cards should be considered first before numbered cards.
             Priority is given that the "less special" cards should be played before hand,
