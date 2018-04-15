@@ -3,6 +3,7 @@ package code.UNOClasses;
 import code.UNOClasses.Card.CardType;
 import code.UNOClasses.Card.UNOCard;
 import code.UNOClasses.Card.UNOColor;
+import java.util.Random;
 
 import java.util.Vector;
 
@@ -20,9 +21,11 @@ public class ComputerPlayer extends Player {
          * @author Darya Kiktenko
          */
 
-        boolean playableCardFound = true;
+        /* First, figure out what cards are currently in our hand */
+
+        boolean playableCardFound = false;
         Vector<UNOCard> myCards = myHand().getUnoCardsList();
-        UNOCard cardToPlay = null;
+        UNOCard cardToPlay = null; // the card we will return -- if null, a card must be drawn
 
         Integer WildFourIndex = -1;
         Integer WildCardIndex = -1;
@@ -30,19 +33,17 @@ public class ComputerPlayer extends Player {
         Integer ReverseCardIndex = -1;
         Integer DrawTwoCardIndex = -1;
 
-        UNOColor lastColor = lastCardPlayed.get_color();
-        CardType lastType = lastCardPlayed.get_type();
         Vector<Integer> colorMatchIndices = new Vector<Integer>();
         Vector<Integer> typeMatchIndices = new Vector<Integer>();
 
         for (int i = 0; i < myCards.size(); i++) {
             UNOCard cardAnalyzed = myCards.elementAt(i);
-            if (cardAnalyzed.get_color() == lastColor) {
+            if (cardAnalyzed.get_color() == lastCardPlayed.get_color()) {
                 colorMatchIndices.add(i);
                 playableCardFound = true;
             }
 
-            if (cardAnalyzed.get_type() == lastType) {
+            if (cardAnalyzed.get_type() == lastCardPlayed.get_type()) {
                 typeMatchIndices.add(i);
                 playableCardFound = true;
             }
@@ -169,13 +170,53 @@ public class ComputerPlayer extends Player {
 
             } else {
                 // none of the criteria to play a special card was met ...
+
+                int randomIndex = -1;
+                if ((!colorMatchIndices.isEmpty()) &&
+                        (!typeMatchIndices.isEmpty())){
+
+                    /* if a color match and a type match card is present, then we
+                    "flip a coin" on which match to go off of (color or type) -
+                    else, based on whichever match is found, we're going to randomize
+                    a card pick from the available list of indices to pick the card we're
+                    going to play
+                     */
+
+                    int randomChoice = randomNumberPick(2);
+                    if (randomChoice == 0){
+                        randomIndex = randomNumberPick(colorMatchIndices.size());
+                        cardToPlay = myCards.elementAt(randomIndex);
+                    }
+                    else {
+                        randomIndex = randomNumberPick(typeMatchIndices.size());
+                        cardToPlay = myCards.elementAt(randomIndex);
+                    }
+                }
+                else if (!colorMatchIndices.isEmpty()){
+                    randomIndex = randomNumberPick(colorMatchIndices.size());
+                    cardToPlay = myCards.elementAt(randomIndex);
+                }
+                else if (!typeMatchIndices.isEmpty()){
+                    randomIndex = randomNumberPick(typeMatchIndices.size());
+                    cardToPlay = myCards.elementAt(randomIndex);
+                }
+
             }
 
         }
-        else{ // playableCardFound NOT found
-            // TODO
-        }
 
         return cardToPlay;
+    }
+
+    public int randomNumberPick(int max){
+        /** Function will randomize a number between 0 and the max boundry (exclusive)
+         *
+         * Example: call with max of 10, will produce a number between 0 and 10, including 0 as a possibility,
+         * but NOT 10 (will produce 9 as max int)
+         *
+         * @author Darya Kiktenko
+         */
+        Random rand = new Random();
+        return rand.nextInt(max);
     }
 }
