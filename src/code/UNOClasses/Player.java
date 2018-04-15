@@ -43,4 +43,11 @@ public class Player {
     public void setPosition (int p) { this.position = p; }
 
     public int getPosition(){return this.position;}
+
+    public UNOCard makeMove(UNOCard lastCardPlayed, Player playerBefore, Player playerAfter, Player playerAfterNext) {
+
+        // TODO: implement logic for how a human player would be prompted for making a move
+
+        return null;
+    }
 }

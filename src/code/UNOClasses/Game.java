@@ -12,7 +12,7 @@ import java.util.Stack;
 import java.util.Vector;
 
 public class Game {
-    private Vector<Player> players;
+    public Vector<Player> players;
     private Stack<UNOCard> discardPile;
     Scanner reader;
     Boolean GameOver = false;
@@ -92,8 +92,8 @@ public class Game {
          */
         players = new Vector<Player>();
         for (int i = 0; i < (numberOfPlayers-1); i++){ // minus 1, because human player will be separately initialized
-            Player tempPlayer = new Player(false); //false, because all except human are AI players
-            players.add(tempPlayer);
+            ComputerPlayer cp = new ComputerPlayer();
+            players.add(cp);
         }
 
         Player human = new Player(true);

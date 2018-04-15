@@ -12,6 +12,7 @@ public class ComputerPlayer extends Player {
         super(false);
     }
 
+    @Override
     public UNOCard makeMove(UNOCard lastCardPlayed, Player playerBefore, Player playerAfter, Player playerAfterNext) {
         /** The implementation of the AI automated player would
          * make a move based on a set of circumstances.
