@@ -86,13 +86,13 @@ public class ComputerPlayer extends Player {
                 if (players.elementAt(i).UNOCalled){
                     UNOCalled = true;
                 }
-                if (players.elementAt(i).getPosition() == (this.getPosition()-1)){
+                if (players.elementAt(i).getPosition() == (this.getPosition()-1)){ // TODO: we don't know if there is a Player before us (if we're at position 0)
                     playerBeforeHandSize = players.elementAt(i).myHand().handTotal();
                 }
-                if (players.elementAt(i).getPosition() == (this.getPosition()+1)){
+                if (players.elementAt(i).getPosition() == (this.getPosition()+1)){ // TODO: we don't know if there is a Player before us (if we're at last position of the vector)
                     nextPlayerHandSize = players.elementAt(i).myHand().handTotal();
                 }
-                if (players.elementAt(i).getPosition() == (this.getPosition()+2)){
+                if (players.elementAt(i).getPosition() == (this.getPosition()+2)){ // TODO: we don't know if there is a Player before us (if we're at last position of the vector)
                     playerAfterNextHandSize = players.elementAt(i).myHand().handTotal();
                 }
             }
@@ -125,10 +125,10 @@ public class ComputerPlayer extends Player {
             Logic based on the following logic:
 
             	                                                Wild Draw 4	 Wild Card	Skip Card	Reverse Card	Draw Two
-                No color match discard	                            Y	        -	        -	        -	            -
-                Next player has less cards than others	            Y	        -	        Y	        Y	            Y
-                Player before you has less cards than others       	-	        -	        -	        N	            -
-                Player after next has less cards than others	    N	        -	        N	        -	            N
+                No color matched    	                            Y	        -	        -	        -	            -
+                Next player has less than 3 cards   	            Y	        -	        Y	        Y	            Y
+                Player before you has less than 3 cards            	-	        -	        -	        N	            -
+                Player after next has less than 3 cards     	    N	        -	        N	        -	            N
              */
 
             boolean cardToPlayFound = true;
