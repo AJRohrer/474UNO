@@ -22,7 +22,7 @@ public class Game {
     public Deck deck;
     int aIPlayerCount = 0;
 
-    public Game(){
+    public Game(int numberOfCompPlayers){
         /** <h1>Game class constructor</h1>
          *  <p><When Game class is declared, the function will be responsible for initializing the
          *  game class instance, by
@@ -39,7 +39,7 @@ public class Game {
          * @author Pranjali Mishra
          */
 
-        setTotalNumberOfPlayers(getTotalNumberOfPlayers());
+        setTotalNumberOfPlayers(numberOfCompPlayers + 1);
         initiatePlayersVector(totalNumberOfPlayers);
         shufflePlayerOrder(players);
         deck = new Deck();
@@ -78,11 +78,11 @@ public class Game {
         return result;
     }
 
-    public void setTotalNumberOfPlayers(int totalNumber){
+    public void setTotalNumberOfPlayers(int numberOfPlayers){
         /** Sets the total number of players which will be playing the game (including the human user)
          * @author Darya Kiktenko
          */
-        totalNumberOfPlayers = totalNumber;
+        totalNumberOfPlayers = numberOfPlayers;
     }
 
     public Vector<Player> initiatePlayersVector(int numberOfPlayers) {

@@ -15,6 +15,7 @@ public class UNOTableController implements Initializable {
     @FXML private Spinner numberOfPlayersSpinner;
     @FXML private Button setNumberOfPlayersButton;
     @FXML private Label numberOfPlayersLabel;
+    @FXML private Button startNewGame;
 
     private int numberOfCompPlayers;
 
@@ -36,5 +37,10 @@ public class UNOTableController implements Initializable {
     public void getNumberOfCompPlayers () {
         this.numberOfCompPlayers = this.numberOfPlayersSpinner.getValue().hashCode();
         System.out.println(numberOfCompPlayers);
+    }
+
+    public void startGameButtonPushed() {
+        Game gameObj= new Game(numberOfCompPlayers);
+        gameObj.play();
     }
 }
