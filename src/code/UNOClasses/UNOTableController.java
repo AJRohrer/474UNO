@@ -41,7 +41,7 @@ public class UNOTableController implements Initializable {
     }
 
     public void viewHumanPlayerHand () {
-        this.showHandLabel.setText("Your hand: " + gameObj.getHumanPlayer().myHand().toString());
+        this.showHandLabel.setText("Your hand:\n" + gameObj.getHumanPlayer().myHand().toString());
         System.out.println(gameObj.getHumanPlayer().myHand().toString());
     }
 
