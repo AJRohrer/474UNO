@@ -48,11 +48,6 @@ public class Game {
         initializeDiscardPile(deck);
     }
 
-    public Label UNOWelcome;
-
-    public void sayUNOWelcome(ActionEvent actionEvent) {
-        UNOWelcome.setText("Welcome to UNO!");
-    }
     public Vector<Player> shufflePlayerOrder(Vector<Player> playerVector) {
         /** Shuffles the players vector
          * Adapted from original dealHand(), separated for OOP & unit testing purposes
@@ -83,6 +78,23 @@ public class Game {
          * @author Darya Kiktenko
          */
         totalNumberOfPlayers = numberOfPlayers;
+    }
+
+    public Player getHumanPlayer() {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).isHuman() == true) {
+                return players.get(i);
+            }
+        }
+        return null;
+    }
+
+    public String toString () {
+        String gameState = null;
+        for (int i = 0; i < players.size(); i++) {
+            gameState += players.get(i).toString();
+        }
+        return gameState;
     }
 
     public Vector<Player> initiatePlayersVector(int numberOfPlayers) {

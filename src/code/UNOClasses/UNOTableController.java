@@ -2,10 +2,7 @@ package code.UNOClasses;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,8 +13,10 @@ public class UNOTableController implements Initializable {
     @FXML private Button setNumberOfPlayersButton;
     @FXML private Label numberOfPlayersLabel;
     @FXML private Button startNewGame;
+    @FXML private Label showHandLabel;
 
     private int numberOfCompPlayers;
+    private Game gameObj;
 
     public void setNumberOfCompPlayers() {
         this.numberOfCompPlayers = this.numberOfPlayersSpinner.getValue().hashCode();
@@ -32,15 +31,18 @@ public class UNOTableController implements Initializable {
         //numberOfPlayersSpinner.setEditable(true);
 
         numberOfPlayersLabel.setText("");
+        showHandLabel.setText("");
     }
 
-    public void getNumberOfCompPlayers () {
-        this.numberOfCompPlayers = this.numberOfPlayersSpinner.getValue().hashCode();
-        System.out.println(numberOfCompPlayers);
+    public void startNewGame() {
+        gameObj= new Game(numberOfCompPlayers);
+        System.out.println(gameObj.toString());
+        viewHumanPlayerHand();
     }
 
-    public void startGameButtonPushed() {
-        Game gameObj= new Game(numberOfCompPlayers);
-        gameObj.play();
+    public void viewHumanPlayerHand () {
+        this.showHandLabel.setText("Your hand: " + gameObj.getHumanPlayer().myHand().toString());
+        System.out.println(gameObj.getHumanPlayer().myHand().toString());
     }
+
 }
