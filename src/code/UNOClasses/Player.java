@@ -55,7 +55,7 @@ public class Player {
         Collections.addAll(names, "Liz", "Tyree", "Darya", "Andrew", "Pranjali", "Suchitra", "Roxeanne", "Bob", "Rocky",
                 "Lisa", "Jesse", "Christopher", "Batman", "Sylvia", "Aldo", "Ethelene", "Tifany", "Beaulah", "Chantell", "Willard",
                 "Marita", "Lavonda", "Calista", "Chelsey", "Cristi", "Delfina", "Tawny", "Shelly", "Chantel", "Delsie", "Valentine",
-                "Bradford", "Sun");
+                "Bradford", "Sun", "Raphael", "Donatello", "Leonardo", "Michelangelo", "Splinter");
 
         Random rnd = new Random();
         int total = names.size();
