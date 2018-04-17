@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 public class UNOTableController implements Initializable {
 
@@ -15,6 +16,7 @@ public class UNOTableController implements Initializable {
     @FXML private Button startNewGame;
     @FXML private Label showHandLabel;
     @FXML private Label showDiscardPile;
+    @FXML private Label showCompPlayerCardNumberLabel;
 
     private int numberOfCompPlayers;
     private Game gameObj;
@@ -34,6 +36,7 @@ public class UNOTableController implements Initializable {
         numberOfPlayersLabel.setText("");
         showHandLabel.setText("");
         showDiscardPile.setText("");
+        showCompPlayerCardNumberLabel.setText("");
     }
 
     public void startNewGame() {
@@ -41,6 +44,7 @@ public class UNOTableController implements Initializable {
         System.out.println(gameObj.toString());
         viewHumanPlayerHand();
         viewDiscardPile();
+        showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
     }
 
     public void viewHumanPlayerHand () {
@@ -50,5 +54,16 @@ public class UNOTableController implements Initializable {
 
     public void viewDiscardPile () {
         this.showDiscardPile.setText("Discard Pile: " + gameObj.viewLastDiscardPileCard().toString());
+    }
+
+    public String viewCompPlayerCardNumber () {
+        Vector<Player> players = gameObj.getPlayers();
+        String remainingCards = "";
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).isHuman() == false) {
+                remainingCards += "Player " + (i) + " has " + players.get(i).myHand().handTotal() + " cards remaining.\n";
+            }
+        }
+        return remainingCards;
     }
 }

@@ -80,6 +80,10 @@ public class Game {
         totalNumberOfPlayers = numberOfPlayers;
     }
 
+    public Vector getPlayers () {
+        return this.players;
+    }
+
     public Player getHumanPlayer() {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isHuman() == true) {
