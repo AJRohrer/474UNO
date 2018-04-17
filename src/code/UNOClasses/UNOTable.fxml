@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -40,6 +41,11 @@
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: orange;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="400.0">
             <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Turn options:" />
+            <ChoiceBox fx:id="chooseCardFromHandChoiceBox" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+               </VBox.margin>
+            </ChoiceBox>
                 <Button mnemonicParsing="false" text="Play card">
                     <VBox.margin>
                         <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />

@@ -1,10 +1,13 @@
 package code.UNOClasses;
 
+import code.UNOClasses.Card.UNOCard;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
@@ -17,6 +20,7 @@ public class UNOTableController implements Initializable {
     @FXML private Label showHandLabel;
     @FXML private Label showDiscardPile;
     @FXML private Label showCompPlayerCardNumberLabel;
+    @FXML private ChoiceBox chooseCardFromHandChoiceBox;
 
     private int numberOfCompPlayers;
     private Game gameObj;
@@ -37,6 +41,7 @@ public class UNOTableController implements Initializable {
         showHandLabel.setText("");
         showDiscardPile.setText("");
         showCompPlayerCardNumberLabel.setText("");
+        chooseCardFromHandChoiceBox.setValue("");
     }
 
     public void startNewGame() {
@@ -45,6 +50,8 @@ public class UNOTableController implements Initializable {
         viewHumanPlayerHand();
         viewDiscardPile();
         showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
+        cardsInHand();
+        chooseCardFromHandChoiceBox.show();
     }
 
     public void viewHumanPlayerHand () {
@@ -65,5 +72,10 @@ public class UNOTableController implements Initializable {
             }
         }
         return remainingCards;
+    }
+
+    public void cardsInHand () {
+        this.chooseCardFromHandChoiceBox.setItems(FXCollections.observableArrayList(gameObj.getHumanPlayer().myHand().getUnoCardsList()));
+        System.out.println(chooseCardFromHandChoiceBox.getItems());
     }
 }
