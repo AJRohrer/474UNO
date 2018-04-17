@@ -13,32 +13,6 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.UNOClasses.UNOTableController">
     <children>
-        <VBox prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: green;">
-         <children>
-            <Label fx:id="showHandLabel" text="Show Hand Label" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </VBox.margin></Label>
-            <Label fx:id="showDiscardPile" text="Show Discard Pile" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-            </Label>
-            <Label fx:id="showCompPlayerCardNumberLabel" text="Show Computer Player Card Number" textFill="WHITE">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children></VBox>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: orange;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="400.0">
             <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Turn options:" />
@@ -78,6 +52,24 @@
                 </Button>
             </children>
         </VBox>
+        <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" AnchorPane.rightAnchor="200.0">
+         <children>
+            <Label fx:id="showHandLabel" text="Show Hand Label" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin></Label>
+            <Label fx:id="showDiscardPile" text="Show Discard Pile" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+         </children></VBox>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: yellow;" AnchorPane.topAnchor="400.0">
             <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose number of computer players (1-9)">
@@ -106,5 +98,17 @@
                 </Button>
             </children>
         </VBox>
+      <VBox fillWidth="false" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: green;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="600.0">
+         <children>
+            <Label fx:id="showCompPlayerCardNumberLabel" text="Show Computer Player Card Number" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
     </children>
 </AnchorPane>

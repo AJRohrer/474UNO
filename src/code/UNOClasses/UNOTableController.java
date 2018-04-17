@@ -64,10 +64,14 @@ public class UNOTableController implements Initializable {
 
     public String viewCompPlayerCardNumber () {
         Vector<Player> players = gameObj.getPlayers();
-        String remainingCards = "";
+        String remainingCards = "Player status\n";
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isHuman() == false) {
-                remainingCards += players.get(i).getName() + " has " + players.get(i).myHand().handTotal() + " cards remaining.\n";
+                remainingCards += i + ". " + players.get(i).getName() + ": " + players.get(i).myHand().handTotal() + " cards\n";
+            }
+            else if (players.get(i).isHuman() == true) {
+                players.get(i).setName("You");
+                remainingCards += i + ". " + players.get(i).getName() + ": " + players.get(i).myHand().handTotal() + " cards\n";
             }
         }
         return remainingCards;
