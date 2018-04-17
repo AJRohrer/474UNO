@@ -14,6 +14,7 @@ public class UNOTableController implements Initializable {
     @FXML private Label numberOfPlayersLabel;
     @FXML private Button startNewGame;
     @FXML private Label showHandLabel;
+    @FXML private Label showDiscardPile;
 
     private int numberOfCompPlayers;
     private Game gameObj;
@@ -32,12 +33,14 @@ public class UNOTableController implements Initializable {
 
         numberOfPlayersLabel.setText("");
         showHandLabel.setText("");
+        showDiscardPile.setText("");
     }
 
     public void startNewGame() {
         gameObj= new Game(numberOfCompPlayers);
         System.out.println(gameObj.toString());
         viewHumanPlayerHand();
+        viewDiscardPile();
     }
 
     public void viewHumanPlayerHand () {
@@ -45,4 +48,7 @@ public class UNOTableController implements Initializable {
         System.out.println(gameObj.getHumanPlayer().myHand().toString());
     }
 
+    public void viewDiscardPile () {
+        this.showDiscardPile.setText("Discard Pile: " + gameObj.viewLastDiscardPileCard().toString());
+    }
 }
