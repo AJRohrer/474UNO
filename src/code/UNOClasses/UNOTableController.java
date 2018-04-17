@@ -51,7 +51,6 @@ public class UNOTableController implements Initializable {
         viewDiscardPile();
         showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
         cardsInHand();
-        chooseCardFromHandChoiceBox.show();
     }
 
     public void viewHumanPlayerHand () {
@@ -77,5 +76,9 @@ public class UNOTableController implements Initializable {
     public void cardsInHand () {
         this.chooseCardFromHandChoiceBox.setItems(FXCollections.observableArrayList(gameObj.getHumanPlayer().myHand().getUnoCardsList()));
         System.out.println(chooseCardFromHandChoiceBox.getItems());
+    }
+
+    public void playCardButtonPushed () {
+
     }
 }
