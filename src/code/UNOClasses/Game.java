@@ -109,6 +109,7 @@ public class Game {
         players = new Vector<Player>();
         for (int i = 0; i < (numberOfPlayers-1); i++){ // minus 1, because human player will be separately initialized
             Player tempPlayer = new Player(false); //false, because all except human are AI players
+            tempPlayer.setName(tempPlayer.chooseRandomName());
             players.add(tempPlayer);
         }
 

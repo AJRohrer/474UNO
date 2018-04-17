@@ -67,7 +67,7 @@ public class UNOTableController implements Initializable {
         String remainingCards = "";
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isHuman() == false) {
-                remainingCards += "Player " + (i) + " has " + players.get(i).myHand().handTotal() + " cards remaining.\n";
+                remainingCards += players.get(i).getName() + " has " + players.get(i).myHand().handTotal() + " cards remaining.\n";
             }
         }
         return remainingCards;
