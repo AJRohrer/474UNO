@@ -7,11 +7,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Vector;
+import java.util.*;
 
 public class UNOTableController implements Initializable {
 
@@ -25,6 +25,9 @@ public class UNOTableController implements Initializable {
     @FXML private ChoiceBox chooseCardFromHandChoiceBox;
     @FXML private ImageView discardPileImage;
     @FXML private ImageView drawPileImage;
+    @FXML private ImageView[] showPlayerHandImageView;
+    @FXML private HBox playerHandHBox;
+    @FXML private GridPane playerHandGridPane;
 
     private int numberOfCompPlayers;
     private Game gameObj;
@@ -57,6 +60,7 @@ public class UNOTableController implements Initializable {
         showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
         cardsInHand();
         setDiscardPileImage();
+        setShowPlayerHandImageView();
     }
 
     public void viewHumanPlayerHand () {
@@ -103,5 +107,34 @@ public class UNOTableController implements Initializable {
         System.out.println(path);
         Image card = new Image(path);
         this.discardPileImage.setImage(card);
+    }
+
+    public List createHandImageArray () {
+        Vector<UNOCard> hand = gameObj.getHumanPlayer().myHand().getUnoCardsList();
+        List<Image> cardImages = new LinkedList();
+        for (int i = 0; i < hand.size(); i++) {
+            String cardType = hand.get(i).get_type().toString();
+            String cardColor = hand.get(i).get_color().toString();
+            String path = "resources/images/" + cardColor + "_" + cardType + ".png";
+            System.out.println(path);
+            Image card = new Image(path);
+            cardImages.add(card);
+        }
+        return cardImages;
+    }
+
+    public void setShowPlayerHandImageView () {
+        int handTotal = gameObj.getHumanPlayer().myHand().handTotal();
+        showPlayerHandImageView = new ImageView[handTotal];
+        List<Image> allCardImages = createHandImageArray();
+        for (int i = 0; i < handTotal; i++) {
+            showPlayerHandImageView[i] = new ImageView(allCardImages.get(i));
+            showPlayerHandImageView[i].setFitHeight(100);
+            showPlayerHandImageView[i].setFitWidth(100);
+            showPlayerHandImageView[i].setSmooth(true);
+            showPlayerHandImageView[i].setPreserveRatio(true);
+            this.playerHandHBox.getChildren().add(showPlayerHandImageView[i]);
+        }
+
     }
 }

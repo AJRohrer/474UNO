@@ -8,7 +8,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -56,13 +59,6 @@
         </VBox>
         <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" AnchorPane.rightAnchor="200.0">
          <children>
-            <Label fx:id="showHandLabel" text="Show Hand Label" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin></Label>
             <Label fx:id="showDiscardPile" text="Show Discard Pile" textFill="WHITE">
                <font>
                   <Font size="14.0" />
@@ -88,6 +84,25 @@
                   </ImageView>
                </children>
             </HBox>
+            <HBox fx:id="playerHandHBox" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="showHandLabel" text="Show Hand Label" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children></HBox>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
          </children></VBox>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: yellow;" AnchorPane.topAnchor="400.0">
             <children>
