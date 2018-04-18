@@ -5,6 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ public class UNOTableController implements Initializable {
     @FXML private Label showDiscardPile;
     @FXML private Label showCompPlayerCardNumberLabel;
     @FXML private ChoiceBox chooseCardFromHandChoiceBox;
+    @FXML private ImageView discardPileImage;
+    @FXML private ImageView drawPileImage;
 
     private int numberOfCompPlayers;
     private Game gameObj;
@@ -42,6 +46,7 @@ public class UNOTableController implements Initializable {
         showDiscardPile.setText("");
         showCompPlayerCardNumberLabel.setText("");
         chooseCardFromHandChoiceBox.setValue("");
+        discardPileImage.setImage(null);
     }
 
     public void startNewGame() {
@@ -51,6 +56,7 @@ public class UNOTableController implements Initializable {
         viewDiscardPile();
         showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
         cardsInHand();
+        setDiscardPileImage();
     }
 
     public void viewHumanPlayerHand () {
@@ -84,5 +90,18 @@ public class UNOTableController implements Initializable {
 
     public void playCardButtonPushed () {
 
+    }
+
+    public void updateCardView () {
+        Vector hand = gameObj.getHumanPlayer().myHand().getUnoCardsList();
+    }
+
+    public void setDiscardPileImage () {
+        String cardType = gameObj.viewLastDiscardPileCard().get_type().toString();
+        String cardColor = gameObj.viewLastDiscardPileCard().get_color().toString();
+        String path = "resources/images/" + cardColor + "_" + cardType + ".png";
+        System.out.println(path);
+        Image card = new Image(path);
+        this.discardPileImage.setImage(card);
     }
 }
