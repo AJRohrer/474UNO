@@ -64,7 +64,8 @@ public class UNOTableController implements Initializable {
     }
 
     public void viewHumanPlayerHand () {
-        this.showHandLabel.setText("Your hand:\n" + gameObj.getHumanPlayer().myHand().toString());
+        this.showHandLabel.setText("Your hand:");
+        //this.showHandLabel.setText("Your hand:\n" + gameObj.getHumanPlayer().myHand().toString());
         System.out.println(gameObj.getHumanPlayer().myHand().toString());
     }
 
@@ -96,10 +97,6 @@ public class UNOTableController implements Initializable {
 
     }
 
-    public void updateCardView () {
-        Vector hand = gameObj.getHumanPlayer().myHand().getUnoCardsList();
-    }
-
     public void setDiscardPileImage () {
         String cardType = gameObj.viewLastDiscardPileCard().get_type().toString();
         String cardColor = gameObj.viewLastDiscardPileCard().get_color().toString();
@@ -129,8 +126,8 @@ public class UNOTableController implements Initializable {
         List<Image> allCardImages = createHandImageArray();
         for (int i = 0; i < handTotal; i++) {
             showPlayerHandImageView[i] = new ImageView(allCardImages.get(i));
-            showPlayerHandImageView[i].setFitHeight(100);
-            showPlayerHandImageView[i].setFitWidth(100);
+            showPlayerHandImageView[i].setFitHeight(75);
+            showPlayerHandImageView[i].setFitWidth(75);
             showPlayerHandImageView[i].setSmooth(true);
             showPlayerHandImageView[i].setPreserveRatio(true);
             this.playerHandHBox.getChildren().add(showPlayerHandImageView[i]);
