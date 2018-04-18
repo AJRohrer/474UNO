@@ -28,6 +28,7 @@ public class UNOTableController implements Initializable {
     @FXML private ImageView[] showPlayerHandImageView;
     @FXML private HBox playerHandHBox;
     @FXML private GridPane playerHandGridPane;
+    @FXML private Button drawCardButton;
 
     private int numberOfCompPlayers;
     private Game gameObj;
@@ -121,6 +122,7 @@ public class UNOTableController implements Initializable {
     }
 
     public void setShowPlayerHandImageView () {
+        this.playerHandHBox.getChildren().clear();
         int handTotal = gameObj.getHumanPlayer().myHand().handTotal();
         showPlayerHandImageView = new ImageView[handTotal];
         List<Image> allCardImages = createHandImageArray();
@@ -132,6 +134,10 @@ public class UNOTableController implements Initializable {
             showPlayerHandImageView[i].setPreserveRatio(true);
             this.playerHandHBox.getChildren().add(showPlayerHandImageView[i]);
         }
+    }
 
+    public void drawCardButtonPushed () {
+        gameObj.getHumanPlayer().myHand().addUNOCard(gameObj.drawCard());
+        setShowPlayerHandImageView();
     }
 }
