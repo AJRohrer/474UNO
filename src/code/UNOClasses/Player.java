@@ -2,6 +2,7 @@ package code.UNOClasses;
 
 
 import code.UNOClasses.Card.UNOCard;
+import java.util.*;
 
 public class Player {
     private boolean isHuman; //returns true for the interfacing user, false for computer players (AI)
@@ -26,6 +27,7 @@ public class Player {
         return uc;
     }
 
+
     //Somehow the game should check to see if a player has one card left and if they have emitted UNO! as a string
     //to determine if they should be penalized for not calling UNO!
     public String callUNO(){
@@ -39,4 +41,27 @@ public class Player {
     }
 
     public void setPosition (int p) { this.position = p; }
+
+    public void setName (String name) {
+        this.name = name;
+    }
+
+    public String getName () {
+        return this.name;
+    }
+
+    public String chooseRandomName () {
+        ArrayList<String> names = new ArrayList<>();
+        Collections.addAll(names, "Liz", "Tyree", "Darya", "Andrew", "Pranjali", "Suchitra", "Roxeanne", "Bob", "Rocky",
+                "Lisa", "Jesse", "Christopher", "Batman", "Sylvia", "Aldo", "Ethelene", "Tifany", "Beaulah", "Chantell", "Willard",
+                "Marita", "Lavonda", "Calista", "Chelsey", "Cristi", "Delfina", "Tawny", "Shelly", "Chantel", "Delsie", "Valentine",
+                "Bradford", "Sun", "Raphael", "Donatello", "Leonardo", "Michelangelo", "Splinter");
+
+        Random rnd = new Random();
+        int total = names.size();
+        int index = rnd.nextInt(total);
+        return names.get(index);
+
+    }
 }
+

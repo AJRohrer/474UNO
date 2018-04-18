@@ -1,20 +1,24 @@
 package code.UNOClasses;
 
+import code.UNOClasses.Card.CardType;
+import code.UNOClasses.Card.UNOCard;
+import code.UNOClasses.Card.UNOColor;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import code.UNOClasses.Card.*;
+
 import java.util.Stack;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("UNO.fxml"));
-        primaryStage.setTitle("UNO");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Parent root = FXMLLoader.load(Main.class.getResource("UNOTable.fxml"));
+        Scene scene = new Scene(root);
+
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
@@ -22,7 +26,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
 
-        /*UNOCard c = new UNOCard(CardType.DRAWTWO, UNOColor.BLUE);
+        UNOCard c = new UNOCard(CardType.DRAWTWO, UNOColor.BLUE);
         System.out.println(c);
 
         System.out.println("Draw 2: " + c.isDraw2());
@@ -37,7 +41,7 @@ public class Main extends Application {
         p.addCardtoHand(c);
         System.out.println(p.toString());
 
-        Deck deck = new Deck();
+        /*Deck deck = new Deck();
         System.out.println("*******Deck in order\n" + deck);
         System.out.println("*******Deck total: " + deck.deckTotal());
         deck.shuffleDeck();
@@ -54,10 +58,10 @@ public class Main extends Application {
         test.push(deck.deal());
         System.out.println("*******Mock player hand\n" + test);
         System.out.println("*******Deck without player cards\n" + deck);
-        System.out.println("*******New deck total: " + deck.deckTotal());
+        System.out.println("*******New deck total: " + deck.deckTotal());*/
 
         // entry for the project, which will launch a single instance of the game
-        Game gameObj= new Game();
+        Game gameObj= new Game(2);
         gameObj.play();
 
         //moving turns test.
@@ -89,7 +93,7 @@ public class Main extends Application {
         System.out.println(pts.getCurrentTurn());
         System.out.println(pts.moveNextPlayer());
         System.out.println(pts.moveNextPlayer());
-        System.out.println(pts.moveNextPlayer());*/
+        System.out.println(pts.moveNextPlayer());
 
     }
 }

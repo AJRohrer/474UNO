@@ -22,7 +22,7 @@ public class Game {
     public Deck deck;
     int aIPlayerCount = 0;
 
-    public Game(){
+    public Game(int numberOfCompPlayers){
         /** <h1>Game class constructor</h1>
          *  <p><When Game class is declared, the function will be responsible for initializing the
          *  game class instance, by
@@ -39,7 +39,7 @@ public class Game {
          * @author Pranjali Mishra
          */
 
-        setTotalNumberOfPlayers(getTotalNumberOfPlayers());
+        setTotalNumberOfPlayers(numberOfCompPlayers + 1);
         initiatePlayersVector(totalNumberOfPlayers);
         shufflePlayerOrder(players);
         deck = new Deck();
@@ -48,11 +48,6 @@ public class Game {
         initializeDiscardPile(deck);
     }
 
-    public Label UNOWelcome;
-
-    public void sayUNOWelcome(ActionEvent actionEvent) {
-        UNOWelcome.setText("Welcome to UNO!");
-    }
     public Vector<Player> shufflePlayerOrder(Vector<Player> playerVector) {
         /** Shuffles the players vector
          * Adapted from original dealHand(), separated for OOP & unit testing purposes
@@ -78,11 +73,32 @@ public class Game {
         return result;
     }
 
-    public void setTotalNumberOfPlayers(int totalNumber){
+    public void setTotalNumberOfPlayers(int numberOfPlayers){
         /** Sets the total number of players which will be playing the game (including the human user)
          * @author Darya Kiktenko
          */
-        totalNumberOfPlayers = totalNumber;
+        totalNumberOfPlayers = numberOfPlayers;
+    }
+
+    public Vector getPlayers () {
+        return this.players;
+    }
+
+    public Player getHumanPlayer() {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).isHuman() == true) {
+                return players.get(i);
+            }
+        }
+        return null;
+    }
+
+    public String toString () {
+        String gameState = null;
+        for (int i = 0; i < players.size(); i++) {
+            gameState += players.get(i).toString();
+        }
+        return gameState;
     }
 
     public Vector<Player> initiatePlayersVector(int numberOfPlayers) {
@@ -93,6 +109,7 @@ public class Game {
         players = new Vector<Player>();
         for (int i = 0; i < (numberOfPlayers-1); i++){ // minus 1, because human player will be separately initialized
             Player tempPlayer = new Player(false); //false, because all except human are AI players
+            tempPlayer.setName(tempPlayer.chooseRandomName());
             players.add(tempPlayer);
         }
 
