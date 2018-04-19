@@ -81,11 +81,11 @@ public class UNOTableController implements Initializable {
         String remainingCards = "Player status\n";
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isHuman() == false) {
-                remainingCards += i + ". " + players.get(i).getName() + ": " + players.get(i).myHand().handTotal() + " cards\n";
+                remainingCards += (i + 1) + ". " + players.get(i).getName() + ": " + players.get(i).myHand().handTotal() + " cards\n";
             }
             else if (players.get(i).isHuman() == true) {
                 players.get(i).setName("You");
-                remainingCards += i + ". " + players.get(i).getName() + ": " + players.get(i).myHand().handTotal() + " cards\n";
+                remainingCards += (i + 1) + ". " + players.get(i).getName() + ": " + players.get(i).myHand().handTotal() + " cards\n";
             }
         }
         return remainingCards;
