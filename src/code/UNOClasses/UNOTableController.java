@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -27,6 +28,7 @@ public class UNOTableController implements Initializable {
     @FXML private ImageView drawPileImage;
     @FXML private ImageView[] showPlayerHandImageView;
     @FXML private HBox playerHandHBox;
+    @FXML private FlowPane playerHandFlowPane;
     @FXML private GridPane playerHandGridPane;
     @FXML private Button drawCardButton;
 
@@ -123,17 +125,17 @@ public class UNOTableController implements Initializable {
     }
 
     public void setShowPlayerHandImageView () {
-        this.playerHandHBox.getChildren().clear();
+        this.playerHandFlowPane.getChildren().clear();
         int handTotal = gameObj.getHumanPlayer().myHand().handTotal();
         showPlayerHandImageView = new ImageView[handTotal];
         List<Image> allCardImages = createHandImageArray();
         for (int i = 0; i < handTotal; i++) {
             showPlayerHandImageView[i] = new ImageView(allCardImages.get(i));
-            showPlayerHandImageView[i].setFitHeight(75);
+            showPlayerHandImageView[i].setFitHeight(100);
             showPlayerHandImageView[i].setFitWidth(75);
             showPlayerHandImageView[i].setSmooth(true);
             showPlayerHandImageView[i].setPreserveRatio(true);
-            this.playerHandHBox.getChildren().add(showPlayerHandImageView[i]);
+            this.playerHandFlowPane.getChildren().add(showPlayerHandImageView[i]);
         }
     }
 
