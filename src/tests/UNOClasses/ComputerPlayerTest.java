@@ -20,7 +20,7 @@ public class ComputerPlayerTest {
 
         AIPlayer.myHand().addUNOCard(new UNOCard(CardType.FIVE,UNOColor.GREEN));
         AIPlayer.myHand().addUNOCard(new UNOCard(CardType.REVERSE, UNOColor.YELLOW));
-        AIPlayer.myHand().addUNOCard(new UNOCard(CardType.WILD, UNOColor.YELLOW));
+        AIPlayer.myHand().addUNOCard(new UNOCard(CardType.WILDDRAW4, UNOColor.YELLOW));
         AIPlayer.myHand().addUNOCard(new UNOCard(CardType.ONE, UNOColor.RED));
         AIPlayer.myHand().addUNOCard(new UNOCard(CardType.ONE, UNOColor.GREEN));
 

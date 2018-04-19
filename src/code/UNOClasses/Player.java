@@ -63,5 +63,7 @@ public class Player {
         return names.get(index);
 
     }
+
+    public UNOCard makeMove(UNOCard lastCardPlayed, Player playerBefore, Player playerAfter, Player playerAfterNext){return null;}
 }
 
