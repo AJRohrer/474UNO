@@ -2,13 +2,13 @@ package code.UNOClasses;
 
 
 import code.UNOClasses.Card.UNOCard;
+import java.util.*;
 
 public class Player {
     private boolean isHuman; //returns true for the interfacing user, false for computer players (AI)
     private PlayerHand _hand = new PlayerHand();
     private int position;
     private String name;
-    public boolean UNOCalled = false;
 
     public Player (boolean isHumanPlayer){
         this.isHuman = isHumanPlayer;
@@ -27,10 +27,10 @@ public class Player {
         return uc;
     }
 
+
     //Somehow the game should check to see if a player has one card left and if they have emitted UNO! as a string
     //to determine if they should be penalized for not calling UNO!
     public String callUNO(){
-        UNOCalled = true;
         return "UNO!"; }
 
     //expose the hand object so we can use hand methods such as getting the hand total and printing the hand.
@@ -42,12 +42,26 @@ public class Player {
 
     public void setPosition (int p) { this.position = p; }
 
-    public int getPosition(){return this.position;}
+    public void setName (String name) {
+        this.name = name;
+    }
 
-    public UNOCard makeMove(UNOCard lastCardPlayed, Player playerBefore, Player playerAfter, Player playerAfterNext) {
+    public String getName () {
+        return this.name;
+    }
 
-        // TODO: implement logic for how a human player would be prompted for making a move
+    public String chooseRandomName () {
+        ArrayList<String> names = new ArrayList<>();
+        Collections.addAll(names, "Liz", "Tyree", "Darya", "Andrew", "Pranjali", "Suchitra", "Roxeanne", "Bob", "Rocky",
+                "Lisa", "Jesse", "Christopher", "Batman", "Sylvia", "Aldo", "Ethelene", "Tifany", "Beaulah", "Chantell", "Willard",
+                "Marita", "Lavonda", "Calista", "Chelsey", "Cristi", "Delfina", "Tawny", "Shelly", "Chantel", "Delsie", "Valentine",
+                "Bradford", "Sun", "Raphael", "Donatello", "Leonardo", "Michelangelo", "Splinter");
 
-        return null;
+        Random rnd = new Random();
+        int total = names.size();
+        int index = rnd.nextInt(total);
+        return names.get(index);
+
     }
 }
+
