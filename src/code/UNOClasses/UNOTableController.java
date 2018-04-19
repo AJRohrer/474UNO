@@ -108,6 +108,7 @@ public class UNOTableController implements Initializable {
     }
 
     public List createHandImageArray () {
+        gameObj.getHumanPlayer().myHand().sort();
         Vector<UNOCard> hand = gameObj.getHumanPlayer().myHand().getUnoCardsList();
         List<Image> cardImages = new LinkedList();
         for (int i = 0; i < hand.size(); i++) {
