@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -27,7 +28,9 @@ public class UNOTableController implements Initializable {
     @FXML private ImageView drawPileImage;
     @FXML private ImageView[] showPlayerHandImageView;
     @FXML private HBox playerHandHBox;
+    @FXML private FlowPane playerHandFlowPane;
     @FXML private GridPane playerHandGridPane;
+    @FXML private Button drawCardButton;
 
     private int numberOfCompPlayers;
     private Game gameObj;
@@ -78,11 +81,11 @@ public class UNOTableController implements Initializable {
         String remainingCards = "Player status\n";
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isHuman() == false) {
-                remainingCards += i + ". " + players.get(i).getName() + ": " + players.get(i).myHand().handTotal() + " cards\n";
+                remainingCards += (i + 1) + ". " + players.get(i).getName() + ": " + players.get(i).myHand().handTotal() + " cards\n";
             }
             else if (players.get(i).isHuman() == true) {
                 players.get(i).setName("You");
-                remainingCards += i + ". " + players.get(i).getName() + ": " + players.get(i).myHand().handTotal() + " cards\n";
+                remainingCards += (i + 1) + ". " + players.get(i).getName() + ": " + players.get(i).myHand().handTotal() + " cards\n";
             }
         }
         return remainingCards;
@@ -107,6 +110,7 @@ public class UNOTableController implements Initializable {
     }
 
     public List createHandImageArray () {
+        gameObj.getHumanPlayer().myHand().sort();
         Vector<UNOCard> hand = gameObj.getHumanPlayer().myHand().getUnoCardsList();
         List<Image> cardImages = new LinkedList();
         for (int i = 0; i < hand.size(); i++) {
@@ -121,17 +125,22 @@ public class UNOTableController implements Initializable {
     }
 
     public void setShowPlayerHandImageView () {
+        this.playerHandFlowPane.getChildren().clear();
         int handTotal = gameObj.getHumanPlayer().myHand().handTotal();
         showPlayerHandImageView = new ImageView[handTotal];
         List<Image> allCardImages = createHandImageArray();
         for (int i = 0; i < handTotal; i++) {
             showPlayerHandImageView[i] = new ImageView(allCardImages.get(i));
-            showPlayerHandImageView[i].setFitHeight(75);
+            showPlayerHandImageView[i].setFitHeight(100);
             showPlayerHandImageView[i].setFitWidth(75);
             showPlayerHandImageView[i].setSmooth(true);
             showPlayerHandImageView[i].setPreserveRatio(true);
-            this.playerHandHBox.getChildren().add(showPlayerHandImageView[i]);
+            this.playerHandFlowPane.getChildren().add(showPlayerHandImageView[i]);
         }
+    }
 
+    public void drawCardButtonPushed () {
+        gameObj.getHumanPlayer().myHand().addUNOCard(gameObj.drawCard());
+        setShowPlayerHandImageView();
     }
 }

@@ -7,129 +7,149 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.UNOClasses.UNOTableController">
-    <children>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: orange;" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="400.0">
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.UNOClasses.UNOTableController">
+    <top>
+        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Turn options:" />
-            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
+                <VBox prefHeight="200.0" prefWidth="300.0">
+                    <children>
+                        <Label fx:id="showDiscardPile" text="Show Discard Pile" textFill="WHITE">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fx:id="drawPileImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@/resources/images/back.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <ImageView fx:id="discardPileImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                    <HBox.margin>
+                                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                    </children>
+                    <opaqueInsets>
+                        <Insets right="200.0" />
+                    </opaqueInsets>
+                    <HBox.margin>
+                        <Insets right="350.0" />
+                    </HBox.margin>
+                </VBox>
+            <FlowPane prefHeight="165.0" prefWidth="510.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a card from your hand">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </Text>
-                  <ChoiceBox fx:id="chooseCardFromHandChoiceBox" prefWidth="150.0">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </ChoiceBox>
-                      <Button mnemonicParsing="false" text="Play card">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                      </Button>
+                        <Label fx:id="showCompPlayerCardNumberLabel" text="Show Computer Player Card Number" textFill="WHITE" />
                </children>
-            </HBox>
-                <Button mnemonicParsing="false" text="Pass turn">
-                    <VBox.margin>
-                        <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-                    </VBox.margin>
-                </Button>
-                <Button mnemonicParsing="false" text="Draw card">
-                    <VBox.margin>
-                        <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-                    </VBox.margin>
-                </Button>
-                <Button mnemonicParsing="false" text="Call UNO!">
-                    <VBox.margin>
-                        <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-                    </VBox.margin>
-                </Button>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </FlowPane>
             </children>
-        </VBox>
-        <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" AnchorPane.rightAnchor="200.0">
-         <children>
-            <Label fx:id="showDiscardPile" text="Show Discard Pile" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
+        </HBox>
+    </top>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="showHandLabel" text="Show Hand Label" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
-            </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="drawPileImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@/resources/images/back.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="discardPileImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <HBox.margin>
-                        <Insets bottom="50.0" left="10.0" right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </ImageView>
-               </children>
-            </HBox>
-            <Label fx:id="showHandLabel" text="Show Hand Label" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <HBox fx:id="playerHandHBox" prefHeight="100.0" prefWidth="200.0">
-               <VBox.margin>
-                  <Insets left="10.0" top="20.0" />
-               </VBox.margin></HBox>
-         </children></VBox>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: yellow;" AnchorPane.topAnchor="400.0">
-            <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose number of computer players (1-9)">
-               <VBox.margin>
-                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-               </VBox.margin>
-            </Text>
-            <Spinner fx:id="numberOfPlayersSpinner" prefHeight="27.0" prefWidth="74.0">
-               <VBox.margin>
-                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-               </VBox.margin>
-            </Spinner>
-            <Button fx:id="setNumberOfPlayersButton" mnemonicParsing="false" onAction="#setNumberOfCompPlayers" text="Submit number of players">
-               <VBox.margin>
-                  <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
-               </VBox.margin>
-            </Button>
-            <Label fx:id="numberOfPlayersLabel" text="Number of Players Label" />
-                <Button fx:id="startNewGame" mnemonicParsing="false" onAction="#startNewGame" text="Start new game">
-                    <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-                </Button>
+                </Label>
+                <FlowPane fx:id="playerHandFlowPane" prefHeight="325.0" prefWidth="600.0" />
             </children>
         </VBox>
-      <VBox fillWidth="false" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: green;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="600.0">
-         <children>
-            <Label fx:id="showCompPlayerCardNumberLabel" text="Show Computer Player Card Number" textFill="WHITE">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-    </children>
-</AnchorPane>
+    </center>
+    <bottom>
+        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: yellow;">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose number of computer players (1-9)">
+                            <VBox.margin>
+                                <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                            </VBox.margin>
+                        </Text>
+                        <Spinner fx:id="numberOfPlayersSpinner" prefHeight="27.0" prefWidth="74.0">
+                            <VBox.margin>
+                                <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                            </VBox.margin>
+                        </Spinner>
+                        <Button fx:id="setNumberOfPlayersButton" mnemonicParsing="false" onAction="#setNumberOfCompPlayers" text="Submit number of players">
+                            <VBox.margin>
+                                <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Label fx:id="numberOfPlayersLabel" text="Number of Players Label" />
+                        <Button fx:id="startNewGame" mnemonicParsing="false" onAction="#startNewGame" text="Start new game">
+                            <VBox.margin>
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: orange;">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Turn options:" />
+                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0">
+                            <children>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose a card from your hand">
+                                    <HBox.margin>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </HBox.margin>
+                                </Text>
+                                <ChoiceBox fx:id="chooseCardFromHandChoiceBox" prefWidth="150.0">
+                                    <HBox.margin>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </HBox.margin>
+                                </ChoiceBox>
+                                <Button mnemonicParsing="false" text="Play card">
+                                    <HBox.margin>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                        <Button mnemonicParsing="false" text="Pass turn">
+                            <VBox.margin>
+                                <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button fx:id="drawCardButton" mnemonicParsing="false" onAction="#drawCardButtonPushed" text="Draw card">
+                            <VBox.margin>
+                                <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                            </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Call UNO!">
+                            <VBox.margin>
+                                <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
