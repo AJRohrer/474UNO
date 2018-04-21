@@ -1,6 +1,7 @@
 package code.UNOClasses;
 
 import code.UNOClasses.Card.UNOCard;
+import code.UNOClasses.Card.UNOColor;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import java.util.Random;
 
 import java.net.URL;
 import java.util.*;
@@ -338,29 +340,31 @@ public class UNOTableController implements Initializable {
     private boolean validateMove(UNOCard playedCard, Player currentPlayer){
         /* function verifies if the played card is a valid move against the game rules
          */
-        boolean result = false;
+
         UNOCard discardPileCard = discardPile.pop();
         if (playedCard.isWild() || playedCard.isWildDraw4()){
             /* if the played card is a wild card, then there's nothing to check except
             to prompt the player to what color they would like to change the game play to */
 
-            result = true; // SRS - FR2.3 complete
+            // SRS - FR2.3 complete
             UNOCard declareColorCard = discardPile.pop();
             if (!currentPlayer.isHuman()){
-                //TODO: randomize the discard pile color declaration & set it to declareColorCard
+                Random r = new Random();
+                declareColorCard.set_color(UNOColor.values()[r.nextInt(4)]); //cast random int
             }
             else {
                 //TODO: prompt the human player for what color they'd like to discard pile to be & set it to declareColorCard
             }
             discardPile.push(declareColorCard); // taking top card & changing it's color
+            return true;
         }
         else {
             // otherwise, it's not a special card that is played and we just need to check if either the type or color match
             if (validateCardColorsMatch(playedCard, discardPileCard) || validateCardTypesMatch(playedCard, discardPileCard)){
-                result = true;
+                return true;
             }
         }
-        return result;
+        return false;
     }
 
     private void addCardToDiscardPile(UNOCard card){
@@ -375,6 +379,7 @@ public class UNOTableController implements Initializable {
          */
         if (validateMove(card, currentPlayer)){
             addCardToDiscardPile(card);
+            performCardAction(card); //if the card isn't a skip or reverse the next player will get their turn.
             return true;
         }
         else { return false; }
@@ -391,5 +396,17 @@ public class UNOTableController implements Initializable {
         /* removes and returns the UNOCard object of the last card placed in the discard pile
          */
         return discardPile.pop();
+    }
+
+    //
+    private void performCardAction(UNOCard c){
+        switch(c.get_type()){
+            case REVERSE:
+                pts.reverseTurnOrder();
+            case SKIP:
+                pts.skipNextPlayer();
+            default:
+                pts.moveNextPlayer();
+        }
     }
 }
