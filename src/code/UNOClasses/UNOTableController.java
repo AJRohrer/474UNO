@@ -31,9 +31,16 @@ public class UNOTableController implements Initializable {
     @FXML private FlowPane playerHandFlowPane;
     @FXML private GridPane playerHandGridPane;
     @FXML private Button drawCardButton;
+    @FXML private Label showCurrentPlayerLabel;
 
     private int numberOfCompPlayers;
-    private Game gameObj;
+    private Vector<Player> players;
+    private Stack<UNOCard> discardPile;
+    private PlayerTurnState pts = PlayerTurnState.getInstance();
+    Boolean GameOver = false;
+    public int totalNumberOfPlayers = 0;
+    public Deck deck;
+    int aIPlayerCount = 0;
 
     public void setNumberOfCompPlayers() {
         this.numberOfCompPlayers = this.numberOfPlayersSpinner.getValue().hashCode();
@@ -51,33 +58,49 @@ public class UNOTableController implements Initializable {
         showHandLabel.setText("");
         showDiscardPile.setText("");
         showCompPlayerCardNumberLabel.setText("");
+        showCurrentPlayerLabel.setText("");
         chooseCardFromHandChoiceBox.setValue("");
         discardPileImage.setImage(null);
     }
 
     public void startNewGame() {
-        gameObj= new Game(numberOfCompPlayers);
-        System.out.println(gameObj.toString());
+        setTotalNumberOfPlayers(numberOfCompPlayers + 1);
+        initiatePlayersVector(totalNumberOfPlayers);
+        shufflePlayerOrder(players);
+        pts.initialize(totalNumberOfPlayers, 0);
+        deck = new Deck();
+        deck.shuffleDeck();
+        dealHand(deck, players);
+        initializeDiscardPile(deck);
         viewHumanPlayerHand();
         viewDiscardPile();
         showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
         cardsInHand();
         setDiscardPileImage();
         setShowPlayerHandImageView();
+        setShowCurrentPlayerLabel();
+    }
+
+    public void play () {
+        //This is a pseudocode placeholder
     }
 
     public void viewHumanPlayerHand () {
         this.showHandLabel.setText("Your hand:");
-        //this.showHandLabel.setText("Your hand:\n" + gameObj.getHumanPlayer().myHand().toString());
-        System.out.println(gameObj.getHumanPlayer().myHand().toString());
+        System.out.println(getHumanPlayer().myHand().toString());
     }
 
     public void viewDiscardPile () {
-        this.showDiscardPile.setText("Discard Pile: " + gameObj.viewLastDiscardPileCard().toString());
+        this.showDiscardPile.setText("Discard Pile: " + viewLastDiscardPileCard().toString());
+    }
+
+    public void setShowCurrentPlayerLabel () {
+        int currentPlayerIndex = pts.getCurrentTurn();
+        this.showCurrentPlayerLabel.setText("Current Player: " + players.get(currentPlayerIndex).getName());
     }
 
     public String viewCompPlayerCardNumber () {
-        Vector<Player> players = gameObj.getPlayers();
+        Vector<Player> players = getPlayers();
         String remainingCards = "Player status\n";
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).isHuman() == false) {
@@ -92,17 +115,18 @@ public class UNOTableController implements Initializable {
     }
 
     public void cardsInHand () {
-        this.chooseCardFromHandChoiceBox.setItems(FXCollections.observableArrayList(gameObj.getHumanPlayer().myHand().getUnoCardsList()));
+        this.chooseCardFromHandChoiceBox.setItems(FXCollections.observableArrayList(getHumanPlayer().myHand().getUnoCardsList()));
         System.out.println(chooseCardFromHandChoiceBox.getItems());
     }
 
     public void playCardButtonPushed () {
+        // TODO: create method that checks that played card matches type and color, or if wild, takes in a new card color
 
     }
 
     public void setDiscardPileImage () {
-        String cardType = gameObj.viewLastDiscardPileCard().get_type().toString();
-        String cardColor = gameObj.viewLastDiscardPileCard().get_color().toString();
+        String cardType = viewLastDiscardPileCard().get_type().toString();
+        String cardColor = viewLastDiscardPileCard().get_color().toString();
         String path = "resources/images/" + cardColor + "_" + cardType + ".png";
         System.out.println(path);
         Image card = new Image(path);
@@ -110,8 +134,8 @@ public class UNOTableController implements Initializable {
     }
 
     public List createHandImageArray () {
-        gameObj.getHumanPlayer().myHand().sort();
-        Vector<UNOCard> hand = gameObj.getHumanPlayer().myHand().getUnoCardsList();
+        getHumanPlayer().myHand().sort();
+        Vector<UNOCard> hand = getHumanPlayer().myHand().getUnoCardsList();
         List<Image> cardImages = new LinkedList();
         for (int i = 0; i < hand.size(); i++) {
             String cardType = hand.get(i).get_type().toString();
@@ -126,7 +150,7 @@ public class UNOTableController implements Initializable {
 
     public void setShowPlayerHandImageView () {
         this.playerHandFlowPane.getChildren().clear();
-        int handTotal = gameObj.getHumanPlayer().myHand().handTotal();
+        int handTotal = getHumanPlayer().myHand().handTotal();
         showPlayerHandImageView = new ImageView[handTotal];
         List<Image> allCardImages = createHandImageArray();
         for (int i = 0; i < handTotal; i++) {
@@ -140,7 +164,232 @@ public class UNOTableController implements Initializable {
     }
 
     public void drawCardButtonPushed () {
-        gameObj.getHumanPlayer().myHand().addUNOCard(gameObj.drawCard());
+        getHumanPlayer().myHand().addUNOCard(drawCard());
         setShowPlayerHandImageView();
+    }
+
+    //Methods from Game
+
+    public Vector<Player> shufflePlayerOrder(Vector<Player> playerVector) {
+        /** Shuffles the players vector
+         * Adapted from original dealHand(), separated for OOP & unit testing purposes
+         * @author Darya Kiktenko
+         * @author Pranjali Mishra
+         */
+
+        Collections.shuffle(playerVector);
+        return playerVector;
+    }
+
+    public int getTotalNumberOfPlayers(){
+        /** Obtains the total number of players in the game in addition to the human player
+         * @author Darya Kiktenko
+         * @author Pranjali Mishra
+         */
+        int result = 1; //default for the human player
+
+        // TODO: To be changed with incorporation of the UI
+
+        result += 3; // 3 AI
+
+        return result;
+    }
+
+    public void setTotalNumberOfPlayers(int numberOfPlayers){
+        /** Sets the total number of players which will be playing the game (including the human user)
+         * @author Darya Kiktenko
+         */
+        totalNumberOfPlayers = numberOfPlayers;
+    }
+
+    public Vector getPlayers () {
+        return this.players;
+    }
+
+    public Player getHumanPlayer() {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).isHuman() == true) {
+                return players.get(i);
+            }
+        }
+        return null;
+    }
+
+    public String toString () {
+        String gameState = null;
+        for (int i = 0; i < players.size(); i++) {
+            gameState += players.get(i).toString();
+        }
+        return gameState;
+    }
+
+    public Vector<Player> initiatePlayersVector(int numberOfPlayers) {
+        /** Initializes the players vector class member
+         * by creating a new player object and adding that to the vector
+         * @author Darya Kiktenko
+         */
+        players = new Vector<Player>();
+        for (int i = 0; i < (numberOfPlayers-1); i++){ // minus 1, because human player will be separately initialized
+            Player tempPlayer = new Player(false); //false, because all except human are AI players
+            tempPlayer.setName(tempPlayer.chooseRandomName());
+            players.add(tempPlayer);
+        }
+
+        Player human = new Player(true);
+        players.add(human);
+
+        return players;
+    }
+
+    public Vector<Player> dealHand(Deck deckToDealFrom, Vector<Player> gamePlayers) { // SRS - FR1.2 & FR1.3 implementation
+        /** deals 7 cards from the deck to each of the players in the gamePlayers vector,
+         * including the AI and the human player.
+         * Returns the players vector that now have been dealt cards.
+         * Adapted from the original dealHand() function written by Pranjali Mishra
+         * @author Pranjali Mishra
+         */
+
+        for (int j=0; j<7; j++) {
+            for(Player player : gamePlayers) {
+                player.addCardtoHand(deckToDealFrom.deal());
+            }
+        }
+        return gamePlayers;
+    }
+
+    public Stack<UNOCard> initializeDiscardPile(Deck deckToDealFrom){ // SRS - FR1.4 & FR1.5 & FR1.6 implementation
+        /** initializes the Discard Pile AFTER players have been dealt their hand
+         * Obtains the top card from the deck & places it on top of the discardPile.
+         * Unless the drawn card is wild draw 4 card, then the card is returned to the bottom of the draw
+         * deck and another card is drawn from the top of the draw deck.
+         * Returns the new initialized stack of UNOCards that is the discardPile
+         * Adapted from the original initializeDiscardPile() function written by Pranjali Mishra
+         * @author Pranjali Mishra
+         * @author Darya Kiktenko
+         */
+        discardPile = new Stack<UNOCard>();
+        UNOCard topCard = null;
+        boolean validCard = false;
+        while (!validCard){
+            topCard = deckToDealFrom.deal();
+            if (topCard.isWildDraw4()) {
+                System.out.println("First card drawn is a \"Wild Draw Four\"- adding back to the Deck & drawing another card.");
+                deck.addCard(topCard);
+            }
+            else {
+                discardPile.add(topCard);
+                validCard = true;
+            }
+        }
+        return discardPile;
+    }
+
+    public UNOCard drawCard(){
+        /** returns the UNOCard from the top of the deck & removes that card from the deck
+         * @author Darya Kiktenko
+         * */
+
+        return deck.deal();
+    }
+
+
+
+    public boolean validateCardColorsMatch(UNOCard playedCard, UNOCard discardPileTopCard){
+        /** compares two cards based on the color
+         * @author Darya Kiktenko*/
+
+        boolean result = false;
+        if (discardPileTopCard.get_color() == playedCard.get_color()){
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean validateCardTypesMatch(UNOCard playedCard, UNOCard discardPileTopCard){
+        /** compares two cards based on their type.
+         * @author Darya Kiktenko */
+
+        boolean result = false;
+        if (discardPileTopCard.get_type() == playedCard.get_type()){
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean challengeWildDraw4Card(Player challenger, Player challenged){
+        /* NOTE: distinction between challenger and challenged.
+            Challenger is the PERSON AFTER the challenged (turn-wise) who suspects
+            that the challenged that they have a card in their hand which matched the discardPile's  top card
+            before the challenged played the Wild 4 Draw card.
+            Challenged is the player who played the Wild 4 Draw card.
+         */
+
+        /* function check's the challenged hand against the discardPile's top card BEFORE the challenged played
+         * the Wild 4 Draw card. If the hand contains any color of the same COLOR as the discardPile's top card,
+         * function returns true (& challenged will have to draw 4 cards).
+         * If the challenged does NOT have any card with the same COLOR as the discardPile's top card,
+         * the function will return false (& the challenger will have to draw 6 cards).
+         * */
+
+        // TODO: implement the challenge function
+        return false;
+    }
+
+    private boolean validateMove(UNOCard playedCard, Player currentPlayer){
+        /* function verifies if the played card is a valid move against the game rules
+         */
+        boolean result = false;
+        UNOCard discardPileCard = discardPile.pop();
+        if (playedCard.isWild() || playedCard.isWildDraw4()){
+            /* if the played card is a wild card, then there's nothing to check except
+            to prompt the player to what color they would like to change the game play to */
+
+            result = true; // SRS - FR2.3 complete
+            UNOCard declareColorCard = discardPile.pop();
+            if (!currentPlayer.isHuman()){
+                //TODO: randomize the discard pile color declaration & set it to declareColorCard
+            }
+            else {
+                //TODO: prompt the human player for what color they'd like to discard pile to be & set it to declareColorCard
+            }
+            discardPile.push(declareColorCard); // taking top card & changing it's color
+        }
+        else {
+            // otherwise, it's not a special card that is played and we just need to check if either the type or color match
+            if (validateCardColorsMatch(playedCard, discardPileCard) || validateCardTypesMatch(playedCard, discardPileCard)){
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    private void addCardToDiscardPile(UNOCard card){
+        discardPile.push(card);
+    }
+
+    public boolean playCard(UNOCard card, Player currentPlayer){
+        /* the player-specified card is attempted to add to the discard pile.
+        Function does the following:
+            [1] Verifies if card is a valid play, if yes then [2], if not then returns false
+            [2] Adds the card to the discardPile & returns true
+         */
+        if (validateMove(card, currentPlayer)){
+            addCardToDiscardPile(card);
+            return true;
+        }
+        else { return false; }
+    }
+
+    public UNOCard viewLastDiscardPileCard(){
+        /* returns the UNOCard object of the last card placed in the discard pile
+        which can be seen by everyone playing BUT does NOT remove the card from the pile
+         */
+        return discardPile.peek();
+    }
+
+    public UNOCard getLastDiscardPileCard() {
+        /* removes and returns the UNOCard object of the last card placed in the discard pile
+         */
+        return discardPile.pop();
     }
 }
