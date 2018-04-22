@@ -122,7 +122,19 @@ public class UNOTableController implements Initializable {
     }
 
     public void playCardButtonPushed () {
-        // TODO: create method that checks that played card matches type and color, or if wild, takes in a new card color
+
+        while(getHumanPlayerInt() != pts.getCurrentTurn()){
+
+            //gets the uno card that the computer will play based on the algorithm.
+            UNOCard computerplayerUNOCard = ((ComputerPlayer) players.get( pts.getCurrentTurn()))
+                    .makeMove(discardPile.peek(),
+                            players.get(pts.peekLastTurn()),
+                            players.get(pts.peekNextTurn()),
+                            players.get(pts.peekTwoPlayers()));
+
+            playCard(computerplayerUNOCard, players.get(pts.getCurrentTurn()));
+        }
+
 
     }
 
@@ -215,6 +227,15 @@ public class UNOTableController implements Initializable {
             }
         }
         return null;
+    }
+
+    public int getHumanPlayerInt(){
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).isHuman() == true) {
+                return i;
+            }
+        }
+        return -1; //should never have human player as -1 and will break the code.
     }
 
     public String toString () {
