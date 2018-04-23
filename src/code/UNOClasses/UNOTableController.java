@@ -84,7 +84,30 @@ public class UNOTableController implements Initializable {
     }
 
     public void play () {
-        //This is a pseudocode placeholder
+        //This is a pseudocode placeholder/rough outline of the main game play loop
+        /* while (gamestate is true) {
+            if (deck is empty) -> reshuffle
+
+            else (
+                //nested loop to check if player is human
+                if (player is not human)
+                    computer player makeMove
+                    if (makeMove = null) -> draw card, then makeMove
+
+                else (player is human)
+                    not quite sure what goes here, the action events should push on to the next code somehow
+                    either the human player will play a card or pass after drawing a card
+                check players hand to see if they have zero cards to determine winner
+                //main view block, updates view at the end of each turn
+                    viewHumanPlayerHand();
+                    viewDiscardPile();
+                    showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
+                    cardsInHand();
+                    setDiscardPileImage();
+                    setShowPlayerHandImageView();
+                    setShowCurrentPlayerLabel();
+                    turnstate move to next player()
+                    */
     }
 
     public void viewHumanPlayerHand () {
@@ -427,7 +450,8 @@ public class UNOTableController implements Initializable {
             case SKIP:
                 pts.skipNextPlayer();
             default:
-                pts.moveNextPlayer();
+                pts.moveNextPlayer();//this should be in main loop
+                //TODO: add draw two card
         }
     }
 }
