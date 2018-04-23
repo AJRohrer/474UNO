@@ -463,4 +463,20 @@ public class UNOTableController implements Initializable {
                 pts.moveNextPlayer();//this should be in main loop
         }
     }
+
+    public void determineWinner()
+    {
+        for (Player player : players)
+        {
+            if (player.myHand().handTotal() == 0)
+            {
+                player.myHand().callUNO();
+            }
+            else
+            {
+                System.out.println("The game ends when the first player" +
+                        "with zero cards left in their hands calls UNO!" );
+            }
+        }
+    }
 }
