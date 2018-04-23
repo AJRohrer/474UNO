@@ -84,6 +84,13 @@ public class UNOTableController implements Initializable {
     }
 
     public void play () {
+
+        /*Andrew's comment: I think that this should be called each time that the human player plays a card.
+        This will allow us to tie an event to the rythem of the game. My idea is that whenever the human player plays
+        a card there will be a loop in play that has all the computer players play their cards until the turn points
+        to the human player again. Then the human player will decide what card to play and the game will cycle through
+        the computer players again. */
+
         //This is a pseudocode placeholder/rough outline of the main game play loop
         /* while (gamestate is true) {
             if (deck is empty) -> reshuffle

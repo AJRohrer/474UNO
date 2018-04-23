@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="928051f8-a6cb-4e63-a3bc-3764ea63af2a" name="Default" comment="Add functionality to draw2 cards.">
+    <list default="true" id="928051f8-a6cb-4e63-a3bc-3764ea63af2a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/UNOClasses/UNOTableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/UNOClasses/UNOTableController.java" afterDir="false" />
     </list>
@@ -83,8 +83,14 @@
       <file leaf-file-name="UNOTableController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/UNOTableController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="434" column="5" lean-forward="true" selection-start-line="434" selection-start-column="5" selection-end-line="434" selection-end-column="5" />
+            <state relative-caret-position="199">
+              <caret line="91" column="38" lean-forward="true" selection-start-line="91" selection-start-column="38" selection-end-line="91" selection-end-column="38" />
+              <folding>
+                <element signature="e#9453#9454#0" expanded="true" />
+                <element signature="e#9488#9489#0" expanded="true" />
+                <element signature="e#16294#16295#0" expanded="true" />
+                <element signature="e#16332#16333#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -780,7 +786,21 @@
       <option name="project" value="LOCAL" />
       <updated>1522340194435</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add ability to make next player add two cards to their hand.">
+      <created>1524505061366</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1524505061366</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Remove comment.">
+      <created>1524505393739</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1524505393739</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -816,10 +836,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29814000" />
+    <option name="totallyTimeSpent" value="30405000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1672" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3290993" />
@@ -830,14 +851,14 @@
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="6" sideWeight="0.49947864" weight="0.32995737" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info active="true" anchor="right" id="Version Control" order="10" sideWeight="0.50052136" side_tool="true" visible="true" weight="0.18215159" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32678983" />
+      <window_info anchor="right" id="Version Control" order="10" sideWeight="0.50052136" side_tool="true" visible="true" weight="0.18215159" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32678983" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3290993" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15831296" />
       <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3290993" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3290993" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" sideWeight="0.49947864" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -940,7 +961,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Declared Game class&#10;Added Game class variables: drawPile, discardPile&#10;Added Game class method declarations: { ... }&#10;Added Game class method descriptions (comments)&#10;Added Game class TODOs" />
     <MESSAGE value="Add player functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add player functionality" />
+    <MESSAGE value="Add ability to make next player add two cards to their hand." />
+    <MESSAGE value="Remove comment." />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove comment." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1226,8 +1249,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/UNOClasses/UNOTableController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="434" column="5" lean-forward="true" selection-start-line="434" selection-start-column="5" selection-end-line="434" selection-end-column="5" />
+        <state relative-caret-position="199">
+          <caret line="91" column="38" lean-forward="true" selection-start-line="91" selection-start-column="38" selection-end-line="91" selection-end-column="38" />
+          <folding>
+            <element signature="e#9453#9454#0" expanded="true" />
+            <element signature="e#9488#9489#0" expanded="true" />
+            <element signature="e#16294#16295#0" expanded="true" />
+            <element signature="e#16332#16333#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
