@@ -90,6 +90,16 @@ public class Deck {
     //takes a vector of cards (any size) and reintroduces them to the deck, then shuffles the deck
     public void shuffleDiscardPile(Stack<UNOCard> cards) {
         this.deck.addAll(cards);
+
+        for (UNOCard unoCard : cards)
+        {
+            if(unoCard.get_type() == CardType.WILD
+                    || unoCard.get_type() == CardType.WILDDRAW4)
+            {
+                unoCard.set_color(UNOColor.WILD);
+            }
+        }
+
         shuffleDeck();
     }
 
