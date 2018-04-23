@@ -426,6 +426,9 @@ public class UNOTableController implements Initializable {
                 pts.reverseTurnOrder();
             case SKIP:
                 pts.skipNextPlayer();
+            case DRAWTWO:
+                pts.moveNextPlayer();
+                for (int i=0; i < 2; i++) { players.get(pts.getCurrentTurn()).addCardtoHand(deck.deal()); }
             default:
                 pts.moveNextPlayer();
         }
