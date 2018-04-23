@@ -454,7 +454,6 @@ public class UNOTableController implements Initializable {
                 for (int i=0; i < 2; i++) { players.get(pts.getCurrentTurn()).addCardtoHand(deck.deal()); }
             default:
                 pts.moveNextPlayer();//this should be in main loop
-                //TODO: add draw two card
         }
     }
 }
