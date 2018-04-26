@@ -121,6 +121,15 @@ public class UNOTableController implements Initializable {
         UNOCard returnedCard = null;
 
         while (!validMoveMade) {
+
+            /* Computer player's makeMove function relies on knowing how many cards
+            are in the hands of the player before them, the player after them, and the player
+            after next. However, because players are contained in vectors for the loop
+            of player moves, we need to determine where the current computer player's position
+            is and return the consequent players position that's needed to evaluate what
+            card should be played.
+             */
+
             if (totalNumberOfPlayers == 2) {
                 // there's only 2 players, including the AI
                 if (myPosition == 0) {
@@ -152,8 +161,14 @@ public class UNOTableController implements Initializable {
                     playerAfterNext = players.elementAt(myPosition + 2);
                 }
             }
+
+            // after figuring out who the previous, next, and after next players are, call makeMove until a card is returned
+
             while (returnedCard == null) {
                 returnedCard = player.makeMove(discardPile.peek(), playerBefore, playerAfter, playerAfterNext);
+
+                // if makeMove returns null, that means they need to draw a card
+
                 if (returnedCard == null) {
                     drawCard();
                 }
