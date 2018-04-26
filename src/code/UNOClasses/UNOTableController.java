@@ -92,6 +92,32 @@ public class UNOTableController implements Initializable {
         the computer players again. */
 
         //This is a pseudocode placeholder/rough outline of the main game play loop
+
+
+        /*boolean gameState = true;
+
+        while(gameState = true)
+        {
+            if(deck.isEmpty() == true)
+            {
+                deck.shuffleDeck();
+            }
+            else
+            {
+                for (Player player : players)
+                {
+                    if(!player.isHuman())
+                    {
+                        player.makeMove(discardPile.peek(),
+                                players.get(pts.peekLastTurn()),
+                                players.get(pts.peekNextTurn()),
+                                players.get(pts.peekTwoPlayers()));
+                    }
+                }
+            }
+        }*/
+
+
         /* while (gamestate is true) {
             if (deck is empty) -> reshuffle
 
@@ -152,6 +178,13 @@ public class UNOTableController implements Initializable {
     }
 
     public void playCardButtonPushed () {
+
+        /*
+        * I think this method might need to look at the option from the "choose your hand" spinner,
+        * take that card that is selected and place it in the discard pile if
+        * it is a valid card to be played, if the card is not valid some kind
+        * of exception or console error output can be displayed.
+        * */
 
         while(getHumanPlayerInt() != pts.getCurrentTurn()){
 
@@ -464,18 +497,18 @@ public class UNOTableController implements Initializable {
         }
     }
 
-    public void determineWinner()
+    public void callUNO()
     {
         for (Player player : players)
         {
-            if (player.myHand().handTotal() == 0)
+            if(player.isHuman() && player.myHand().handTotal() == 1)
             {
                 player.myHand().callUNO();
             }
             else
             {
-                System.out.println("The game ends when the first player" +
-                        "with zero cards left in their hands calls UNO!" );
+                System.out.println("You can only call UNO! when there " +
+                        "is one card left in your hand" );
             }
         }
     }

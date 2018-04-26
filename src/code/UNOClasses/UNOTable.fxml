@@ -151,7 +151,7 @@
                                 <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                             </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Call UNO!">
+                        <Button mnemonicParsing="false" onAction="#callUNO" text="Call UNO!">
                             <VBox.margin>
                                 <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                             </VBox.margin>
