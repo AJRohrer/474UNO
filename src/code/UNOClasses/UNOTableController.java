@@ -83,6 +83,21 @@ public class UNOTableController implements Initializable {
         setShowCurrentPlayerLabel();
     }
 
+    public void newDeckFromDiscard(){
+        /** When deck is empty (size == 0), then the top card of the discard pile
+         * is the only card in the discard pile, and the rest of the cards in the
+         * discard pile get shuffled and become the deck.
+         */
+
+        if (deck.isEmpty()){
+            UNOCard tempCard = discardPile.pop();
+            deck.shuffleDiscardPile(discardPile);
+            discardPile.removeAllElements();
+            discardPile.push(tempCard);
+        }
+        // else do nothing
+    }
+
     public void play () {
 
         /*Andrew's comment: I think that this should be called each time that the human player plays a card.
@@ -119,9 +134,11 @@ public class UNOTableController implements Initializable {
 
 
         /* while (gamestate is true) {
-            if (deck is empty) -> reshuffle
 
-            else (
+            if (deck.isEmpty()){ // -> reshuffle
+                restartDeckFromDiscard()
+            }
+
                 //nested loop to check if player is human
                 if (player is not human)
                     computer player makeMove
@@ -141,6 +158,7 @@ public class UNOTableController implements Initializable {
                     setShowCurrentPlayerLabel();
                     turnstate move to next player()
                     */
+        // TODO: After a move is made (regardless human or AI), need to implement a way to check gamestate in while loop
     }
 
     public void viewHumanPlayerHand () {
