@@ -98,6 +98,73 @@ public class UNOTableController implements Initializable {
         // else do nothing
     }
 
+    public void AIMove(ComputerPlayer player){
+        /** Should be called with input of the AI player object
+         * who needs to make a move. Will keep drawing cards as
+         * long as the AI player's function makeMove() returns null.
+         * As soon as the function returns an actual card to play,
+         * then check if card is playable or not by calling the checkMove()
+         * function. If checkMove() returns false, then keep trying
+         * checkMove() until returns true.
+         * Once checkMove() returns true, then we're setting the card
+         */
+
+        // initializing values utilized later on
+
+        Player playerBefore = new Player(false);
+        Player playerAfter = new Player(false);
+        Player playerAfterNext = new Player(false);
+        int myPosition = players.indexOf(player);
+        UNOCard returnedCard = null;
+        if (totalNumberOfPlayers == 2){
+            // there's only 2 players, including the AI
+            if (myPosition == 0){
+                playerBefore = players.elementAt(1);
+                playerAfter = players.elementAt(1);
+                playerAfterNext = players.elementAt(0);
+            }
+            else{
+                playerBefore = players.elementAt(myPosition-1);
+                playerAfter = players.elementAt(myPosition-1);
+                playerAfterNext = players.elementAt(myPosition);
+            }
+        }
+        if (totalNumberOfPlayers >= 3){
+            if (myPosition == 0){
+                playerBefore = players.elementAt(players.size()-1);
+                playerAfter = players.elementAt(myPosition+1);
+                playerAfterNext = players.elementAt(myPosition+2);
+            }
+            else if (myPosition == (players.size()-1)){
+                playerBefore = players.elementAt(myPosition-1);
+                playerAfter = players.elementAt(0);
+                playerAfterNext = players.elementAt(1);
+            }
+            else if (myPosition == (players.size()-2)){
+                playerBefore = players.elementAt(myPosition-1);
+                playerAfter = players.elementAt(myPosition+1);
+                playerAfterNext = players.elementAt(0);
+            }
+            else{
+                playerBefore = players.elementAt(myPosition-1);
+                playerAfter = players.elementAt(myPosition+1);
+                playerAfterNext = players.elementAt(myPosition+2);
+            }
+        }
+        while (returnedCard == null){
+            returnedCard = player.makeMove(discardPile.peek(), playerBefore,playerAfter,playerAfterNext);
+            if (returnedCard == null){
+                drawCard();
+            }
+        }
+
+        // to get to this point, player's makeMove() has returned a card to play
+
+        // TODO: validate move
+
+        // TODO: update discard pile
+    }
+
     public void play () {
 
         /*Andrew's comment: I think that this should be called each time that the human player plays a card.
@@ -136,7 +203,7 @@ public class UNOTableController implements Initializable {
         /* while (gamestate is true) {
 
             if (deck.isEmpty()){ // -> reshuffle
-                restartDeckFromDiscard()
+                newDeckFromDiscard()
             }
 
                 //nested loop to check if player is human
@@ -392,7 +459,6 @@ public class UNOTableController implements Initializable {
         /** returns the UNOCard from the top of the deck & removes that card from the deck
          * @author Darya Kiktenko
          * */
-
         return deck.deal();
     }
 

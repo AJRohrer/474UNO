@@ -12,6 +12,8 @@ public class ComputerPlayer extends Player {
         super(false);
     }
 
+    // TODO: Need to consider if total num. of players < 3, then the playerAfterNext is going to be the computerPlayer who's making the move
+
     @Override
     public UNOCard makeMove(UNOCard lastCardPlayed, Player playerBefore, Player playerAfter, Player playerAfterNext) {
         /** The implementation of the AI automated player would
