@@ -106,63 +106,70 @@ public class UNOTableController implements Initializable {
          * then check if card is playable or not by calling the checkMove()
          * function. If checkMove() returns false, then keep trying
          * checkMove() until returns true.
-         * Once checkMove() returns true, then we're setting the card
+         * Once checkMove() returns true, then we're removing the card from
+         * the computer player's hand and pushing the card to the discard pile.
+         *
+         * @author Darya Kiktenko
          */
 
         // initializing values utilized later on
-
+        boolean validMoveMade = false;
         Player playerBefore = new Player(false);
         Player playerAfter = new Player(false);
         Player playerAfterNext = new Player(false);
         int myPosition = players.indexOf(player);
         UNOCard returnedCard = null;
-        if (totalNumberOfPlayers == 2){
-            // there's only 2 players, including the AI
-            if (myPosition == 0){
-                playerBefore = players.elementAt(1);
-                playerAfter = players.elementAt(1);
-                playerAfterNext = players.elementAt(0);
+
+        while (!validMoveMade) {
+            if (totalNumberOfPlayers == 2) {
+                // there's only 2 players, including the AI
+                if (myPosition == 0) {
+                    playerBefore = players.elementAt(1);
+                    playerAfter = players.elementAt(1);
+                    playerAfterNext = players.elementAt(0);
+                } else {
+                    playerBefore = players.elementAt(myPosition - 1);
+                    playerAfter = players.elementAt(myPosition - 1);
+                    playerAfterNext = players.elementAt(myPosition);
+                }
             }
-            else{
-                playerBefore = players.elementAt(myPosition-1);
-                playerAfter = players.elementAt(myPosition-1);
-                playerAfterNext = players.elementAt(myPosition);
+            if (totalNumberOfPlayers >= 3) {
+                if (myPosition == 0) {
+                    playerBefore = players.elementAt(players.size() - 1);
+                    playerAfter = players.elementAt(myPosition + 1);
+                    playerAfterNext = players.elementAt(myPosition + 2);
+                } else if (myPosition == (players.size() - 1)) {
+                    playerBefore = players.elementAt(myPosition - 1);
+                    playerAfter = players.elementAt(0);
+                    playerAfterNext = players.elementAt(1);
+                } else if (myPosition == (players.size() - 2)) {
+                    playerBefore = players.elementAt(myPosition - 1);
+                    playerAfter = players.elementAt(myPosition + 1);
+                    playerAfterNext = players.elementAt(0);
+                } else {
+                    playerBefore = players.elementAt(myPosition - 1);
+                    playerAfter = players.elementAt(myPosition + 1);
+                    playerAfterNext = players.elementAt(myPosition + 2);
+                }
             }
-        }
-        if (totalNumberOfPlayers >= 3){
-            if (myPosition == 0){
-                playerBefore = players.elementAt(players.size()-1);
-                playerAfter = players.elementAt(myPosition+1);
-                playerAfterNext = players.elementAt(myPosition+2);
+            while (returnedCard == null) {
+                returnedCard = player.makeMove(discardPile.peek(), playerBefore, playerAfter, playerAfterNext);
+                if (returnedCard == null) {
+                    drawCard();
+                }
             }
-            else if (myPosition == (players.size()-1)){
-                playerBefore = players.elementAt(myPosition-1);
-                playerAfter = players.elementAt(0);
-                playerAfterNext = players.elementAt(1);
-            }
-            else if (myPosition == (players.size()-2)){
-                playerBefore = players.elementAt(myPosition-1);
-                playerAfter = players.elementAt(myPosition+1);
-                playerAfterNext = players.elementAt(0);
-            }
-            else{
-                playerBefore = players.elementAt(myPosition-1);
-                playerAfter = players.elementAt(myPosition+1);
-                playerAfterNext = players.elementAt(myPosition+2);
-            }
-        }
-        while (returnedCard == null){
-            returnedCard = player.makeMove(discardPile.peek(), playerBefore,playerAfter,playerAfterNext);
-            if (returnedCard == null){
-                drawCard();
-            }
+
+            // to get to this point, player's makeMove() has returned a card to play -- now we check this card
+
+            validMoveMade = validateMove(returnedCard, player);
         }
 
-        // to get to this point, player's makeMove() has returned a card to play
+        // to get to this point, the player has chosen a card that was validated
 
-        // TODO: validate move
+        // remove card from the player's hand & push the card to the discard pile
 
-        // TODO: update discard pile
+        player.myHand().removeUNOCard(returnedCard);
+        discardPile.push(returnedCard);
     }
 
     public void play () {
