@@ -119,12 +119,101 @@ public class UNOTableController implements Initializable {
         setShowCurrentPlayerLabel();
     }
 
-    public void pauseGame(int milliseconds){
+    public void pauseGame(int milliseconds) {
         try {
             Thread.sleep(milliseconds); //2000 milliseconds = 2 seconds.
         } catch (InterruptedException ex) {
             //just continue if it doesn't sleep.
         }
+    }
+
+    public void AIMove(ComputerPlayer player){
+        /** Should be called with input of the AI player object
+         * who needs to make a move. Will keep drawing cards as
+         * long as the AI player's function makeMove() returns null.
+         * As soon as the function returns an actual card to play,
+         * then check if card is playable or not by calling the checkMove()
+         * function. If checkMove() returns false, then keep trying
+         * checkMove() until returns true.
+         * Once checkMove() returns true, then we're removing the card from
+         * the computer player's hand and pushing the card to the discard pile.
+         *
+         * @author Darya Kiktenko
+         */
+
+        // initializing values utilized later on
+        boolean validMoveMade = false;
+        Player playerBefore = new Player(false);
+        Player playerAfter = new Player(false);
+        Player playerAfterNext = new Player(false);
+        int myPosition = players.indexOf(player);
+        UNOCard returnedCard = null;
+
+        while (!validMoveMade) {
+
+            /* Computer player's makeMove function relies on knowing how many cards
+            are in the hands of the player before them, the player after them, and the player
+            after next. However, because players are contained in vectors for the loop
+            of player moves, we need to determine where the current computer player's position
+            is and return the consequent players position that's needed to evaluate what
+            card should be played.
+             */
+
+            if (totalNumberOfPlayers == 2) {
+                // there's only 2 players, including the AI
+                if (myPosition == 0) {
+                    playerBefore = players.elementAt(1);
+                    playerAfter = players.elementAt(1);
+                    playerAfterNext = players.elementAt(0);
+                } else {
+                    playerBefore = players.elementAt(myPosition - 1);
+                    playerAfter = players.elementAt(myPosition - 1);
+                    playerAfterNext = players.elementAt(myPosition);
+                }
+            }
+            if (totalNumberOfPlayers >= 3) {
+                if (myPosition == 0) {
+                    playerBefore = players.elementAt(players.size() - 1);
+                    playerAfter = players.elementAt(myPosition + 1);
+                    playerAfterNext = players.elementAt(myPosition + 2);
+                } else if (myPosition == (players.size() - 1)) {
+                    playerBefore = players.elementAt(myPosition - 1);
+                    playerAfter = players.elementAt(0);
+                    playerAfterNext = players.elementAt(1);
+                } else if (myPosition == (players.size() - 2)) {
+                    playerBefore = players.elementAt(myPosition - 1);
+                    playerAfter = players.elementAt(myPosition + 1);
+                    playerAfterNext = players.elementAt(0);
+                } else {
+                    playerBefore = players.elementAt(myPosition - 1);
+                    playerAfter = players.elementAt(myPosition + 1);
+                    playerAfterNext = players.elementAt(myPosition + 2);
+                }
+            }
+
+            // after figuring out who the previous, next, and after next players are, call makeMove until a card is returned
+
+            while (returnedCard == null) {
+                returnedCard = player.makeMove(discardPile.peek(), playerBefore, playerAfter, playerAfterNext);
+
+                // if makeMove returns null, that means they need to draw a card
+
+                if (returnedCard == null) {
+                    drawCard();
+                }
+            }
+
+            // to get to this point, player's makeMove() has returned a card to play -- now we check this card
+
+            validMoveMade = validateMove(returnedCard, player);
+        }
+
+        // to get to this point, the player has chosen a card that was validated
+
+        // remove card from the player's hand & push the card to the discard pile
+
+        player.myHand().removeUNOCard(returnedCard);
+        discardPile.push(returnedCard);
     }
 
     public void play () {
@@ -186,7 +275,7 @@ public class UNOTableController implements Initializable {
         /* while (gamestate is true) {
 
             if (deck.isEmpty()){ // -> reshuffle
-                restartDeckFromDiscard()
+                newDeckFromDiscard()
             }
 
                 //nested loop to check if player is human
@@ -437,7 +526,6 @@ public class UNOTableController implements Initializable {
         /** returns the UNOCard from the top of the deck & removes that card from the deck
          * @author Darya Kiktenko
          * */
-
         return deck.deal();
     }
 
