@@ -348,8 +348,12 @@ public class UNOTableController implements Initializable {
 
         //get card from human that they want to try and play
         if(playCard(playerCard,players.get(pts.getCurrentTurn()))){
-            //TODO: Prompt user that the card was invalid and that they should try again or pass their turn.
+            play(); //if the human player makes a valid move start the game loop so computer players can play their cards.
+        } else {
+            //TODO: Tell the user that the card was invalid and that they should try again or pass their turn.
         }
+
+
 
     }
 
