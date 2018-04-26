@@ -222,8 +222,9 @@ public class UNOTableController implements Initializable {
         while((getHumanPlayerInt() != pts.getCurrentTurn()) && true /* TODO: need to add logic to see if the game is over*/){
             //check for empty deck before players start to draw cards from the deck.
             if(deck.isEmpty()){
-                deck.shuffleDeck();
+                newDeckFromDiscard();
             }
+
 
             //computer player chooses a card to play (Not removed from hand yet as far as I know)
             UNOCard computerCard = computerMakeMove();
