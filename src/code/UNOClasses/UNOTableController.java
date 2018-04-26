@@ -108,9 +108,11 @@ public class UNOTableController implements Initializable {
 
         //This is a pseudocode placeholder/rough outline of the main game play loop
         /* while (gamestate is true) {
-            if (deck is empty) -> reshuffle
+
+            if (deck.isEmpty()){ // -> reshuffle
                 restartDeckFromDiscard()
-            else (
+            }
+
                 //nested loop to check if player is human
                 if (player is not human)
                     computer player makeMove
@@ -130,6 +132,7 @@ public class UNOTableController implements Initializable {
                     setShowCurrentPlayerLabel();
                     turnstate move to next player()
                     */
+        // TODO: After a move is made (regardless human or AI), need to implement a way to check gamestate in while loop
     }
 
     public void viewHumanPlayerHand () {
