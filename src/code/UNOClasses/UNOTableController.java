@@ -219,7 +219,7 @@ public class UNOTableController implements Initializable {
     public void play () {
 
 
-        while((getHumanPlayerInt() != pts.getCurrentTurn()) && true /*need to add logic to see if the game is over*/){
+        while((getHumanPlayerInt() != pts.getCurrentTurn()) && true /* TODO: need to add logic to see if the game is over*/){
             //check for empty deck before players start to draw cards from the deck.
             if(deck.isEmpty()){
                 deck.shuffleDeck();
