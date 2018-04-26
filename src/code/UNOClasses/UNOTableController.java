@@ -15,6 +15,7 @@ import java.util.Random;
 
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class UNOTableController implements Initializable {
 
@@ -98,7 +99,56 @@ public class UNOTableController implements Initializable {
         // else do nothing
     }
 
+    public UNOCard computerMakeMove(){
+        //gets the uno card that the computer will play based on the algorithm.
+        return ((ComputerPlayer) players.get( pts.getCurrentTurn()))
+                .makeMove(discardPile.peek(),
+                        players.get(pts.peekLastTurn()),
+                        players.get(pts.peekNextTurn()),
+                        players.get(pts.peekTwoPlayers()));
+    }
+
+    public void refreshUI(){
+        //main view block, updates view at the end of each turn
+        viewHumanPlayerHand();
+        viewDiscardPile();
+        showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
+        cardsInHand();
+        setDiscardPileImage();
+        setShowPlayerHandImageView();
+        setShowCurrentPlayerLabel();
+    }
+
+    public void pauseGame(int milliseconds){
+        try {
+            Thread.sleep(milliseconds); //2000 milliseconds = 2 seconds.
+        } catch (InterruptedException ex) {
+            //just continue if it doesn't sleep.
+        }
+    }
+
     public void play () {
+
+
+        while((getHumanPlayerInt() != pts.getCurrentTurn()) && true /*need to add logic to see if the game is over*/){
+            //check for empty deck before players start to draw cards from the deck.
+            if(deck.isEmpty()){
+                deck.shuffleDeck();
+            }
+
+            //computer player chooses a card to play (Not removed from hand yet as far as I know)
+            UNOCard computerCard = computerMakeMove();
+
+            //if the playCard function returns true the card will have been played, if it returns false the computer's turn will be skipped.
+            playCard(computerCard, players.get(pts.getCurrentTurn()));
+
+            refreshUI();
+
+            //sleep for 2 seconds so the player can see what cards are being played more or less.
+            pauseGame(2000);
+        }
+
+        //Announce game winner. Restart game if the user wants to
 
         /*Andrew's comment: I think that this should be called each time that the human player plays a card.
         This will allow us to tie an event to the rythem of the game. My idea is that whenever the human player plays
@@ -204,18 +254,13 @@ public class UNOTableController implements Initializable {
         * of exception or console error output can be displayed.
         * */
 
-        while(getHumanPlayerInt() != pts.getCurrentTurn()){
+        /*4-26-2018*/
+        UNOCard playerCard = null; //null to be replaced with how we get the card from the UI.
 
-            //gets the uno card that the computer will play based on the algorithm.
-            UNOCard computerplayerUNOCard = ((ComputerPlayer) players.get( pts.getCurrentTurn()))
-                    .makeMove(discardPile.peek(),
-                            players.get(pts.peekLastTurn()),
-                            players.get(pts.peekNextTurn()),
-                            players.get(pts.peekTwoPlayers()));
-
-            playCard(computerplayerUNOCard, players.get(pts.getCurrentTurn()));
+        //get card from human that they want to try and play
+        if(playCard(playerCard,players.get(pts.getCurrentTurn()))){
+            //TODO: Prompt user that the card was invalid and that they should try again or pass their turn.
         }
-
 
     }
 
@@ -482,9 +527,17 @@ public class UNOTableController implements Initializable {
         if (validateMove(card, currentPlayer)){
             addCardToDiscardPile(card);
             performCardAction(card); //if the card isn't a skip or reverse the next player will get their turn.
+            currentPlayer.discardCard(card);
+            addCardToDiscardPile(card);
             return true;
         }
-        else { return false; }
+        else {
+            //if the player is not human then we want to skip their turn if they try to play an invalid card.
+            if (!players.get(pts.getCurrentTurn()).isHuman()) {
+                pts.moveNextPlayer(); //if the card is not valid and the player is computer they will pass their turn. If they are human they will get another try.
+            }
+            return false;
+        }
     }
 
     public UNOCard viewLastDiscardPileCard(){
