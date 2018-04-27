@@ -62,7 +62,7 @@ public class PlayerTest {
             }
         }
 
-        UNOCard playedCard = AIPlayer.makeMove(new UNOCard(CardType.EIGHT,UNOColor.BLUE), playerBefore, playerAfter, playerAfterNext);
+        UNOCard playedCard = AIPlayer.makeMove(new UNOCard(CardType.EIGHT,UNOColor.BLUE), playerBefore.myHand().handTotal(), playerAfter.myHand().handTotal(), playerAfterNext.myHand().handTotal());
         assertEquals(CardType.WILD, playedCard.get_type());
         assertEquals(UNOColor.YELLOW, playedCard.get_color());
     }

@@ -73,7 +73,7 @@ public class Player {
 
     }
 
-    public UNOCard makeMove(UNOCard lastCardPlayed, Player playerBefore, Player playerAfter, Player playerAfterNext) {
+    public UNOCard makeMove(UNOCard lastCardPlayed, int playerBeforeHandSize, int nextPlayerHandSize, int playerAfterNextHandSize) {
         /** The implementation of the AI automated player would
          * make a move based on a set of circumstances.
          *
@@ -83,12 +83,10 @@ public class Player {
          */
 
         /* First, figure out what cards are currently in our hand */
-        System.out.println("Cards in hand: ");
 
         boolean playableCardFound = false;
         Vector<UNOCard> myCards = myHand().getUnoCardsList();
-        for (int i = 0; i < myCards.size(); i++){
-            System.out.println(myCards.elementAt(i).toString());
+        for (int i = 0; i < myCards.size(); i++) {
         }
         UNOCard cardToPlay = null; // the card we will return -- if null, a card must be drawn
 
@@ -135,20 +133,9 @@ public class Player {
         }
 
         if (playableCardFound) { // if no playable card was found, then why do any additional work - just return null
-            System.out.println("Playable card found.");
             /* here is where we analyze what possible moves can be made.
             First, we consider circumstances if a special card was last played,
             then, we apply logic if a number card was played (hence the if-else) */
-
-            /* checking if UNO has been previously called & we want to know how many cards the person after
-             * us has and the person after them has, so we know circumstances if we play a special card
-             * like skip or draw */
-
-
-            int playerBeforeHandSize = playerBefore.myHand().handTotal();
-            int nextPlayerHandSize = playerAfter.myHand().handTotal();
-            int playerAfterNextHandSize = playerAfterNext.myHand().handTotal();
-
 
             /* Playing special cards should be considered first before numbered cards.
             Priority is given that the "less special" cards should be played before hand,
@@ -178,29 +165,35 @@ public class Player {
             if ((nextPlayerHandSize <= 3) &&
                     (playerAfterNextHandSize >= 3) &&
                     (SkipCardIndex != -1)) { // they actually have the Draw Two card
+
                 cardToPlay = myCards.elementAt(SkipCardIndex);
             } else if ((nextPlayerHandSize <= 3) &&
                     (playerBeforeHandSize > 3) &&
                     (ReverseCardIndex != -1)) { // they actually have the Reverse card
+
                 cardToPlay = myCards.elementAt(ReverseCardIndex);
             } else if ((nextPlayerHandSize <= 3) &&
                     (playerAfterNextHandSize >= 3) &&
                     (DrawTwoCardIndex != -1)) { // they actually have the Draw Two card
+
                 cardToPlay = myCards.elementAt(DrawTwoCardIndex);
             } else if ((colorMatchIndices.size() == 0) && // no color match found
                     (typeMatchIndices.size() == 0) && // no type match found
                     (WildCardIndex != -1)) { // they actually have the Draw Two card
+
                 cardToPlay = myCards.elementAt(WildCardIndex);
             } else if ((colorMatchIndices.size() == 0) && // mo color match found
                     (nextPlayerHandSize <= 3) &&
                     (playerAfterNextHandSize >= 3) &&
                     (WildFourIndex != -1)) { // they actually have the Wild Four card
+
                 cardToPlay = myCards.elementAt(WildFourIndex);
 
             } else {
                 // none of the criteria to play a special card was met ...
 
                 int randomIndex = -1;
+                int cardIndex = -1;
                 if ((!colorMatchIndices.isEmpty()) &&
                         (!typeMatchIndices.isEmpty())) {
 
@@ -210,27 +203,32 @@ public class Player {
                     a card pick from the available list of indices to pick the card we're
                     going to play
                      */
-
                     int randomChoice = randomNumberPick(2);
                     if (randomChoice == 0) {
+
                         randomIndex = randomNumberPick(colorMatchIndices.size());
-                        cardToPlay = myCards.elementAt(randomIndex);
+                        cardIndex = colorMatchIndices.elementAt(randomIndex);
+                        cardToPlay = myCards.elementAt(cardIndex);
                     } else {
                         randomIndex = randomNumberPick(typeMatchIndices.size());
-                        cardToPlay = myCards.elementAt(randomIndex);
+                        cardIndex = typeMatchIndices.elementAt(randomIndex);
+                        cardToPlay = myCards.elementAt(cardIndex);
                     }
                 } else if (!colorMatchIndices.isEmpty()) {
                     randomIndex = randomNumberPick(colorMatchIndices.size());
-                    cardToPlay = myCards.elementAt(randomIndex);
+                    cardIndex = colorMatchIndices.elementAt(randomIndex);
+
+                    cardToPlay = myCards.elementAt(cardIndex);
                 } else if (!typeMatchIndices.isEmpty()) {
+
                     randomIndex = randomNumberPick(typeMatchIndices.size());
-                    cardToPlay = myCards.elementAt(randomIndex);
-                }
+                    cardIndex = typeMatchIndices.elementAt(randomIndex);
+
+                    cardToPlay = myCards.elementAt(cardIndex);                }
 
             }
 
         }
-
         return cardToPlay;
     }
 
@@ -243,7 +241,7 @@ public class Player {
          * @author Darya Kiktenko
          */
         Random rand = new Random();
-        return rand.nextInt(max);
+        return (rand.nextInt(max));
     }
 
 }

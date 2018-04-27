@@ -152,9 +152,9 @@ public class UNOTableController implements Initializable {
         returnedCard = null; // in the case that playCard() returns false, we can try again
         while (returnedCard == null) {
             returnedCard = player.makeMove(discardPile.peek(),
-                    players.get(pts.peekLastTurn()),
-                    players.get(pts.peekNextTurn()),
-                    players.get(pts.peekTwoPlayers()));
+                    players.get(pts.peekLastTurn()).myHand().handTotal(),
+                    players.get(pts.peekNextTurn()).myHand().handTotal(),
+                    players.get(pts.peekTwoPlayers()).myHand().handTotal());
             // if makeMove returns null, that means they need to draw a card
 
             if (returnedCard == null) {
@@ -162,7 +162,6 @@ public class UNOTableController implements Initializable {
             }
         }
         // to get to this point, player's makeMove() has returned a card to play -- now we check this card
-
         playCard(returnedCard, player);
     }
 
