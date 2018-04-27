@@ -611,4 +611,22 @@ public class UNOTableController implements Initializable {
             }
         }
     }
+
+    public boolean isGameOver(){
+        /** For every player, checks the number of cards remaining.
+         * If any player has 0 cards remaining, the game is over, returning
+         * true.
+         * Else, returns false.
+         *
+         * @author Darya Kiktenko
+         */
+
+        for (Player player : players){
+            if (player.myHand().handTotal() == 0){
+                GameOver = true;
+                return true;
+            }
+        }
+        return false;
+    }
 }
