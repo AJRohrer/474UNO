@@ -522,7 +522,7 @@ public class UNOTableController implements Initializable {
         /* function verifies if the played card is a valid move against the game rules
          */
 
-        UNOCard discardPileCard = discardPile.pop();
+        UNOCard discardPileCard = discardPile.peek();
         if (playedCard.isWild() || playedCard.isWildDraw4()) {
             /* if the played card is a wild card, then there's nothing to check except
             to prompt the player to what color they would like to change the game play to */
