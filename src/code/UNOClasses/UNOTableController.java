@@ -101,7 +101,7 @@ public class UNOTableController implements Initializable {
 
     public UNOCard computerMakeMove(){
         //gets the uno card that the computer will play based on the algorithm.
-        return ((ComputerPlayer) players.get( pts.getCurrentTurn()))
+        return (players.get( pts.getCurrentTurn()))
                 .makeMove(discardPile.peek(),
                         players.get(pts.peekLastTurn()),
                         players.get(pts.peekNextTurn()),
@@ -127,7 +127,7 @@ public class UNOTableController implements Initializable {
         }
     }
 
-    public void AIMove(ComputerPlayer player){
+    public void AIMove(Player player){
         /** Should be called with input of the AI player object
          * who needs to make a move. Will keep drawing cards as
          * long as the AI player's function makeMove() returns null.
