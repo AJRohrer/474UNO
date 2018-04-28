@@ -279,14 +279,48 @@ public class UNOTableController implements Initializable {
         System.out.println(chooseCardFromHandChoiceBox.getItems());
     }
 
+    public void removeImageFromHand(UNOCard unoCard, Player player)
+    {
+        for (int i = 0; i < player.myHand().handTotal(); i++)
+        {
+            if (player.myHand().getUnoCardsList().contains(unoCard))
+            {
+                player.myHand().getUnoCardsList().remove(unoCard);
+            }
+        }
+
+        setShowPlayerHandImageView();
+    }
+
+    public UNOCard getCardFromChoiceBox()
+    {
+        UNOCard unoCard = (UNOCard) this.chooseCardFromHandChoiceBox.getValue();
+        //System.out.println(unoCard.get_color().toString() + unoCard.get_type().toString());
+        return  unoCard;
+    }
+
+
+
     public void playCardButtonPushed() {
 
-        /*
-         * I think this method might need to look at the option from the "choose your hand" spinner,
-         * take that card that is selected and place it in the discard pile if
-         * it is a valid card to be played, if the card is not valid some kind
-         * of exception or console error output can be displayed.
-         * */
+        try
+        {
+            if (playCard(getCardFromChoiceBox(), players.get(pts.getCurrentTurn())))
+            {
+                setDiscardPileImage();
+                removeImageFromHand(getCardFromChoiceBox(), getHumanPlayer());
+                //play();
+            }
+            else
+            {
+                throw new IllegalStateException();
+            }
+        }
+        catch (IllegalStateException exception)
+        {
+            System.out.println("The card you attempted to play is invalid " +
+                    "please try again or pass");
+        }
 
         /*4-26-2018*/
         UNOCard playerCard = null; //null to be replaced with how we get the card from the UI.
