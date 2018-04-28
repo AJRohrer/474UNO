@@ -54,7 +54,7 @@ public class UNOTableController implements Initializable {
     private Vector<Player> players;
     private Stack<UNOCard> discardPile;
     private PlayerTurnState pts = PlayerTurnState.getInstance();
-    Boolean GameOver = false;
+    Boolean GameOver;
     public int totalNumberOfPlayers = 0;
     public Deck deck;
     int aIPlayerCount = 0;
@@ -96,6 +96,8 @@ public class UNOTableController implements Initializable {
         setDiscardPileImage();
         setShowPlayerHandImageView();
         setShowCurrentPlayerLabel();
+        GameOver = false;
+        play();
     }
 
     public void newDeckFromDiscard() {
