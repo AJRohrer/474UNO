@@ -3,6 +3,7 @@ package code.UNOClasses;
 import code.UNOClasses.Card.UNOCard;
 import code.UNOClasses.Card.UNOColor;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -49,6 +50,10 @@ public class UNOTableController implements Initializable {
     private Button drawCardButton;
     @FXML
     private Label showCurrentPlayerLabel;
+    @FXML
+    private ChoiceBox chooseWildColorChoiceBox;
+    @FXML
+    private Button chooseWildColorButton;
 
     private int numberOfCompPlayers;
     private Vector<Player> players;
@@ -77,6 +82,7 @@ public class UNOTableController implements Initializable {
         showCompPlayerCardNumberLabel.setText("");
         showCurrentPlayerLabel.setText("");
         chooseCardFromHandChoiceBox.setValue("");
+        setChooseWildColorChoiceBox();
         discardPileImage.setImage(null);
     }
 
@@ -90,13 +96,6 @@ public class UNOTableController implements Initializable {
         dealHand(deck, players);
         initializeDiscardPile(deck);
         refreshUI();
-        //viewHumanPlayerHand();
-        //viewDiscardPile();
-        //showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
-        //cardsInHand();
-        //setDiscardPileImage();
-        //setShowPlayerHandImageView();
-        //setShowCurrentPlayerLabel();
         GameOver = false;
         play();
     }
@@ -171,8 +170,8 @@ public class UNOTableController implements Initializable {
 
     public void play() {
 
-
-        while ((getHumanPlayerInt() != pts.getCurrentTurn()) && true /* TODO: need to add logic to see if the game is over*/) {
+        refreshUI();
+        while ((getHumanPlayerInt() != pts.getCurrentTurn()) && GameOver == false) {
             //check for empty deck before players start to draw cards from the deck.
             if (deck.isEmpty()) {
                 newDeckFromDiscard();
@@ -183,7 +182,7 @@ public class UNOTableController implements Initializable {
             refreshUI();
 
             //sleep for 2 seconds so the player can see what cards are being played more or less.
-            pauseGame(2000);
+            //pauseGame(2000);
             refreshUI();
         }
 
@@ -238,11 +237,14 @@ public class UNOTableController implements Initializable {
     public UNOCard getCardFromChoiceBox()
     {
         UNOCard unoCard = (UNOCard) this.chooseCardFromHandChoiceBox.getValue();
-        //System.out.println(unoCard.get_color().toString() + unoCard.get_type().toString());
         return  unoCard;
     }
 
-
+    public UNOColor getWildColorFromChoiceBox()
+    {
+        UNOColor Unoocolor = (UNOColor) this.chooseWildColorChoiceBox.getValue();
+        return  Unoocolor;
+    }
 
     public void playCardButtonPushed() {
 
@@ -250,9 +252,16 @@ public class UNOTableController implements Initializable {
         {
             if (playCard(getCardFromChoiceBox(), players.get(pts.getCurrentTurn())))
             {
+                if (getCardFromChoiceBox().isWildDraw4() || getCardFromChoiceBox().isWild()) {
+                    if (this.chooseWildColorChoiceBox == null) {
+                        throw new IllegalStateException();
+                    }
+                    else
+                        getLastDiscardPileCard().set_color(getWildColorFromChoiceBox());
+                }
+                System.out.println("DISCARD PILE" + discardPile.peek());
                 setDiscardPileImage();
                 removeImageFromHand(getCardFromChoiceBox(), getHumanPlayer());
-                System.out.println("DISCARD PILE" + discardPile.peek());
                 play();
             }
             else
@@ -598,4 +607,10 @@ public class UNOTableController implements Initializable {
         }
         return false;
     }
-}
+
+    public void setChooseWildColorChoiceBox() {
+        ObservableList<UNOColor> unoColors = FXCollections.observableArrayList(UNOColor.BLUE, UNOColor.GREEN, UNOColor.YELLOW,
+        UNOColor.RED);
+        this.chooseWildColorChoiceBox.setItems(unoColors);
+    }
+    }
