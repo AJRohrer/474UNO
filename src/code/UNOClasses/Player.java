@@ -229,6 +229,7 @@ public class Player {
             }
 
         }
+        System.out.println("AI played: " + cardToPlay);
         return cardToPlay;
     }
 

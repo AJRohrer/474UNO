@@ -89,13 +89,14 @@ public class UNOTableController implements Initializable {
         deck.shuffleDeck();
         dealHand(deck, players);
         initializeDiscardPile(deck);
-        viewHumanPlayerHand();
-        viewDiscardPile();
-        showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
-        cardsInHand();
-        setDiscardPileImage();
-        setShowPlayerHandImageView();
-        setShowCurrentPlayerLabel();
+        refreshUI();
+        //viewHumanPlayerHand();
+        //viewDiscardPile();
+        //showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
+        //cardsInHand();
+        //setDiscardPileImage();
+        //setShowPlayerHandImageView();
+        //setShowCurrentPlayerLabel();
         GameOver = false;
         play();
     }
@@ -149,7 +150,7 @@ public class UNOTableController implements Initializable {
          * @author Darya Kiktenko
          */
         // initializing values utilized later on
-        UNOCard returnedCard = null;
+        UNOCard returnedCard;
 
         returnedCard = null; // in the case that playCard() returns false, we can try again
         while (returnedCard == null) {
@@ -183,74 +184,14 @@ public class UNOTableController implements Initializable {
 
             //sleep for 2 seconds so the player can see what cards are being played more or less.
             pauseGame(2000);
+            refreshUI();
         }
 
         //Announce game winner. Restart game if the user wants to
-
-        /*Andrew's comment: I think that this should be called each time that the human player plays a card.
-        This will allow us to tie an event to the rythem of the game. My idea is that whenever the human player plays
-        a card there will be a loop in play that has all the computer players play their cards until the turn points
-        to the human player again. Then the human player will decide what card to play and the game will cycle through
-        the computer players again. */
-
-        //This is a pseudocode placeholder/rough outline of the main game play loop
-
-
-        /*boolean gameState = true;
-
-        while(gameState = true)
-        {
-            if(deck.isEmpty() == true)
-            {
-                deck.shuffleDeck();
-            }
-            else
-            {
-                for (Player player : players)
-                {
-                    if(!player.isHuman())
-                    {
-                        player.makeMove(discardPile.peek(),
-                                players.get(pts.peekLastTurn()),
-                                players.get(pts.peekNextTurn()),
-                                players.get(pts.peekTwoPlayers()));
-                    }
-                }
-            }
-        }*/
-
-
-        /* while (gamestate is true) {
-
-            if (deck.isEmpty()){ // -> reshuffle
-                newDeckFromDiscard()
-            }
-
-                //nested loop to check if player is human
-                if (player is not human)
-                    computer player makeMove
-                    if (makeMove = null) -> draw card, then makeMove
-
-                else (player is human)
-                    not quite sure what goes here, the action events should push on to the next code somehow
-                    either the human player will play a card or pass after drawing a card
-                check players hand to see if they have zero cards to determine winner
-                //main view block, updates view at the end of each turn
-                    viewHumanPlayerHand();
-                    viewDiscardPile();
-                    showCompPlayerCardNumberLabel.setText(viewCompPlayerCardNumber());
-                    cardsInHand();
-                    setDiscardPileImage();
-                    setShowPlayerHandImageView();
-                    setShowCurrentPlayerLabel();
-                    turnstate move to next player()
-                    */
-        // TODO: After a move is made (regardless human or AI), need to implement a way to check gamestate in while loop
     }
 
     public void viewHumanPlayerHand() {
         this.showHandLabel.setText("Your hand:");
-        System.out.println(getHumanPlayer().myHand().toString());
     }
 
     public void viewDiscardPile() {
@@ -311,7 +252,8 @@ public class UNOTableController implements Initializable {
             {
                 setDiscardPileImage();
                 removeImageFromHand(getCardFromChoiceBox(), getHumanPlayer());
-                //play();
+                System.out.println("DISCARD PILE" + discardPile.peek());
+                play();
             }
             else
             {
@@ -324,24 +266,12 @@ public class UNOTableController implements Initializable {
                     "please try again or pass");
         }
 
-        /*4-26-2018*/
-        UNOCard playerCard = null; //null to be replaced with how we get the card from the UI.
-
-        //get card from human that they want to try and play
-        if (playCard(playerCard, players.get(pts.getCurrentTurn()))) {
-            play(); //if the human player makes a valid move start the game loop so computer players can play their cards.
-        } else {
-            //TODO: Tell the user that the card was invalid and that they should try again or pass their turn.
-        }
-
-
     }
 
     public void setDiscardPileImage() {
         String cardType = viewLastDiscardPileCard().get_type().toString();
         String cardColor = viewLastDiscardPileCard().get_color().toString();
         String path = "resources/images/" + cardColor + "_" + cardType + ".png";
-        System.out.println(path);
         Image card = new Image(path);
         this.discardPileImage.setImage(card);
     }
@@ -354,7 +284,6 @@ public class UNOTableController implements Initializable {
             String cardType = hand.get(i).get_type().toString();
             String cardColor = hand.get(i).get_color().toString();
             String path = "resources/images/" + cardColor + "_" + cardType + ".png";
-            System.out.println(path);
             Image card = new Image(path);
             cardImages.add(card);
         }
@@ -625,15 +554,19 @@ public class UNOTableController implements Initializable {
         switch (c.get_type()) {
             case REVERSE:
                 pts.reverseTurnOrder();
+                break;
             case SKIP:
                 pts.skipNextPlayer();
+                break;
             case DRAWTWO:
                 pts.moveNextPlayer();
                 for (int i = 0; i < 2; i++) {
                     players.get(pts.getCurrentTurn()).addCardtoHand(deck.deal());
                 }
+                break;
             default:
-                pts.moveNextPlayer();//this should be in main loop
+                pts.moveNextPlayer();
+                break;
         }
     }
 
