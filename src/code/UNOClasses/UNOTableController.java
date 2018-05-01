@@ -54,6 +54,8 @@ public class UNOTableController implements Initializable {
     private ChoiceBox chooseWildColorChoiceBox;
     @FXML
     private Button chooseWildColorButton;
+    @FXML
+    private Button passButton;
 
     private int numberOfCompPlayers;
     private Vector<Player> players;
@@ -576,13 +578,16 @@ public class UNOTableController implements Initializable {
     }
 
     public void callUNO() {
-        for (Player player : players) {
-            if (player.isHuman() && player.myHand().handTotal() == 1) {
-                player.myHand().callUNO();
-            } else {
-                System.out.println("You can only call UNO! when there " +
-                        "is one card left in your hand");
-            }
+        Player player = new Player(true);
+
+        if (pts.getCurrentTurn() == getHumanPlayerInt() && player.myHand().handTotal() == 1)
+        {
+            player.myHand().callUNO();
+        }
+        else
+        {
+            System.out.println("You can only call UNO! when there " +
+                    "is one card left in your hand");
         }
     }
 
@@ -609,4 +614,14 @@ public class UNOTableController implements Initializable {
         UNOColor.RED);
         this.chooseWildColorChoiceBox.setItems(unoColors);
     }
+
+    public void passButtonPushed()
+    {
+        if (pts.getCurrentTurn() == getHumanPlayerInt())
+        {
+            pts.moveNextPlayer();
+        }
+        play();
     }
+
+}
