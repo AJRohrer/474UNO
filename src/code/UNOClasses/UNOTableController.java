@@ -180,10 +180,6 @@ public class UNOTableController implements Initializable {
             AIMove(players.get(pts.getCurrentTurn()));
 
             refreshUI();
-
-            //sleep for 2 seconds so the player can see what cards are being played more or less.
-            //pauseGame(2000);
-            refreshUI();
         }
 
         //Announce game winner. Restart game if the user wants to
