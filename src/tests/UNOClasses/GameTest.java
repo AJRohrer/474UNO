@@ -1,25 +1,10 @@
 package tests.UNOClasses;
 
-import code.UNOClasses.Card.CardType;
-import code.UNOClasses.Card.UNOCard;
-import code.UNOClasses.Card.UNOColor;
-import code.UNOClasses.Deck;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-
-import java.util.Stack;
-import java.util.Vector;
-
-
-import code.UNOClasses.Game;
-import code.UNOClasses.Player;
 
 public class GameTest {
 
-	@Test
+	/*@Test
 	public void testDrawCard(){
 		Game testGame = new Game(2);
 		int fullDeckSize = testGame.deck.deckTotal();
@@ -92,6 +77,6 @@ public class GameTest {
 		Deck testDeck = new Deck();
 		Stack<UNOCard> testStack = new Stack<UNOCard>();
 		assertFalse(testGame.initializeDiscardPile(testDeck).empty());
-	}
+	}*/
 
 }

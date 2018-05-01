@@ -53,6 +53,58 @@ public class PlayerTurnState {
 
     public int getCurrentTurn(){ return currentPlayerTurn; }
 
+    public int peekNextTurn() {
+        if(nextPlayer){
+            if(currentPlayerTurn < numberOfPlayers - 1){
+                return currentPlayerTurn + 1;
+            } else {
+                return 0;
+            }
+        } else {
+            if(currentPlayerTurn > 0){
+                return currentPlayerTurn - 1;
+            } else {
+                return numberOfPlayers -1;
+            }
+        }
+    }
+
+    public int peekLastTurn() {
+        if (nextPlayer){
+            if (currentPlayerTurn > 0){
+                return currentPlayerTurn - 1;
+            } else {
+                return numberOfPlayers - 1;
+            }
+        } else {
+            if (currentPlayerTurn < numberOfPlayers - 1){
+                return currentPlayerTurn + 1;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    public int peekTwoPlayers(){
+        int tempPosition = getCurrentTurn();
+        for (int i = 0; i < 2; i++){
+            if (nextPlayer) {
+                if (tempPosition < numberOfPlayers - 1){
+                    tempPosition = tempPosition + 1;
+                } else {
+                    tempPosition = 0;
+                }
+            } else  {
+                if (tempPosition > 0){
+                    tempPosition = tempPosition - 1;
+                } else {
+                    tempPosition = numberOfPlayers - 1;
+                }
+            }
+        }
+        return tempPosition;
+    }
+
     public void reverseTurnOrder(){ nextPlayer = !nextPlayer; }
 
     public void skipNextPlayer(){
