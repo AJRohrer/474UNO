@@ -27,8 +27,16 @@ public class PlayerTest {
     }
 
     @Test
-    void discardCard() {
-        //TODO: figure out how we want to create a hand to test this.
+    void discardCard()
+    {
+        UNOCard unoCard1 = new UNOCard(CardType.THREE, UNOColor.BLUE);
+        UNOCard unoCard2 = new UNOCard(CardType.THREE, UNOColor.BLUE);
+
+        p.addCardtoHand(unoCard1);
+        p.addCardtoHand(unoCard2);
+        p.discardCard(unoCard2);
+
+        assertFalse(p.myHand().getUnoCardsList().contains(unoCard2));
     }
 
     @Test
@@ -37,8 +45,15 @@ public class PlayerTest {
     }
 
     @Test
-    void myHand() {
-        //TODO: figure out how we want to create a hand to test this.
+    void myHand()
+    {
+        UNOCard unoCard1 = new UNOCard(CardType.THREE, UNOColor.BLUE);
+        UNOCard unoCard2 = new UNOCard(CardType.THREE, UNOColor.BLUE);
+
+        p.addCardtoHand(unoCard1);
+        p.addCardtoHand(unoCard2);
+
+        assertTrue(p.myHand().getUnoCardsList().contains(unoCard2));
     }
 
     @Test
