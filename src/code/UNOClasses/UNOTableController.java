@@ -184,7 +184,7 @@ public class UNOTableController implements Initializable {
             refreshUI();
         }
 
-        //Announce game winner. Restart game if the user wants to
+        isGameOver(); //Announce game winner. Restart game if the user wants to
     }
 
     public void viewHumanPlayerHand() {
